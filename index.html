@@ -1067,7 +1067,11 @@
     }
     .review {
       flex: 0 0 auto;
+      width: calc((min(1280px, 92vw) - 40px) / 2.5);
       display: flex;
+    }
+    @media (max-width: 640px) {
+      .review { width: calc((92vw - 20px) / 1.15); }
     }
     .review-card {
       background: var(--white-warm);
@@ -1832,7 +1836,7 @@
 
       <!-- Carrusel principal de habitaciones + baños -->
       <div class="strip-wrap">
-        <div class="carousel strip" id="carousel-rooms" data-gallery="rooms">
+        <div class="carousel strip reveal" data-delay="2" id="carousel-rooms" data-gallery="rooms">
           <div class="carousel-track"></div>
           <div class="carousel-counter"><span class="cur">0</span> / <span class="tot">0</span></div>
           <button class="carousel-btn prev" aria-label="Anterior">
@@ -2473,7 +2477,7 @@
         'platja.cat':'Platja','platja.text':'La platja principal del poble: àmplia, amb passeig marítim just darrere.','passeig.cat':'Passeig','passeig.text':"Recorre tota la façana marítima del poble, amb palmeres, terrasses i vistes a la Mediterrània d'un extrem a l'altre.",'iglesia.cat':'Cultura','iglesia.text':'El cor del casc antic. Una església neoclàssica que presideix la plaça més cèntrica de Calella.','roca.cat':'Costa','roca.text':'Roca emblemàtica, amb cales i miradors pel trajecte.','torretes.cat':'Mirador','torretes.text':'La pujada és bonica i, dalt, una de les millors panoràmiques de tota la costa.','placa.cat':'Centre','placa.text':"La plaça del poble, amb l'edifici de l'ajuntament, terrasses i el bullici del dia a dia de Calella.",
         'dist.3walk':'3 min · a peu','dist.4walk':'4 min · a peu','dist.5walk':'5 min · a peu','dist.8walk':'8 min · a peu','dist.12walk':'12 min · a peu','dist.20walk':'20 min · a peu','dist.25walk':'25 min · a peu','dist.30walk':'30 min · a peu','dist.60train':'60 min · en tren',
         's06.label':'Ressenyes','s06.title':'El que diuen <em>els qui ja han vingut</em>.','s06.lead':'Setanta-cinc anys donen per a moltes històries. Aquestes són algunes de les que ens deixen els nostres hostes a Google.','s06.rating.meta':'<strong>38 ressenyes</strong> verificades a Google','s06.cta':'Podeu llegir les <strong>38 ressenyes completes</strong> a','s06.cta.link':"el perfil de l'hostal a Google",
-        's07.label':'Ubicació','s07.title':'Al cor de Calella, <em>a un pas del mar</em>.','s07.lead':'Estem al Carrer de Sant Isidre, 54, en plena Calella de la Costa (Maresme), a 50 km al nord de Barcelona i a 15km de la Costa Brava. Ben situat al cor de Calella: Rodalies i la N-II a mà, i tot l'essencial a un passeig tranquil.','s07.loc1.name':'Platja gran de Calella','s07.loc2.name':'Estació de tren','s07.loc3.name':'Casc antic i Església','s07.loc4.name':'Far de Calella','s07.loc5.name':'Barcelona centre',
+        's07.label':'Ubicació','s07.title':'Al cor de Calella, <em>a un pas del mar</em>.','s07.lead':'Estem al Carrer de Sant Isidre, 54, en plena Calella de la Costa (Maresme), a 50 km al nord de Barcelona i a 15km de la Costa Brava. Ben situat al cor de Calella: Rodalies i la N-II a mà, i tot l\'essencial a un passeig tranquil.','s07.loc1.name':'Platja gran de Calella','s07.loc2.name':'Estació de tren','s07.loc3.name':'Casc antic i Església','s07.loc4.name':'Far de Calella','s07.loc5.name':'Barcelona centre',
         'faq.label':'Preguntes freqüents','faq.title':"Tot clar, <em>abans d'arribar</em>.",'faq.q1':'Totes les habitacions tenen bany propi?','faq.a1':'Sí, totes les habitacions disposen de bany privat.','faq.q2':'Hi ha cuina disponible?','faq.a2':"No disposem de cuina pròpia, però tenim nevera i microones a disposició dels hostes.",'faq.q3':"Quant de temps puc quedar-me?",'faq.a3':"Normalment fins a 1 o 2 mesos com a màxim. Contacta'ns i ho parlem.",'faq.q5':"Hi ha aparcament a prop?",'faq.a5':"Hi ha aparcament al voltant de l'hostal: zona blava i verda de pagament, i zona blanca gratuïta a poca distància.",
         's08.label':'Reserva','s08.title':"Una trucada, <em>i tot a punt</em>.",'s08.lead':"Truca'ns o escriu-nos per WhatsApp i triem junts l'habitació que millor s'adapta a les teves dates, hostes i si viatges amb mascota.",'s08.directions':"Com arribar-hi",'wa.pill':"Escriu-nos →",
         'r1.text':"Excel·lent hostal, molt còmoda i molt ben equipada l'habitació, accepten mascotes, el lloc és súper tranquil i ben situat, súper càlida l'atenció, excel·lent servei de neteja. Sens dubte una bella experiència.",'r1.when':'Maig 2026',
@@ -2531,7 +2535,7 @@
         'platja.cat':'Plage','platja.text':'La plage principale du village : large, avec une promenade maritime juste derrière.','passeig.cat':'Promenade','passeig.text':'Elle longe toute la façade maritime du village, avec des palmiers, des terrasses et des vues sur la Méditerranée d\'un bout à l\'autre.','iglesia.cat':'Culture','iglesia.text':'Le cœur du vieux centre. Une église néoclassique qui préside la place la plus centrale de Calella.','roca.cat':'Côte','roca.text':'Rocher emblématique, avec des criques et des belvédères sur le trajet.','torretes.cat':'Belvédère','torretes.text':'La montée est belle et la vue, l\'une des plus belles de la côte.','placa.cat':'Centre','placa.text':'La place du village, avec la mairie, des terrasses et l\'animation quotidienne de Calella.',
         'dist.3walk':'3 min · à pied','dist.4walk':'4 min · à pied','dist.5walk':'5 min · à pied','dist.8walk':'8 min · à pied','dist.12walk':'12 min · à pied','dist.20walk':'20 min · à pied','dist.25walk':'25 min · à pied','dist.30walk':'30 min · à pied','dist.60train':'60 min · en train',
         's06.label':'Avis','s06.title':'Ce que disent <em>ceux qui sont déjà venus</em>.','s06.lead':'Soixante-quinze ans font beaucoup d\'histoires. Voici quelques-uns des avis que nos hôtes nous laissent sur Google.','s06.rating.meta':'<strong>38 avis</strong> vérifiés sur Google','s06.cta':'Vous pouvez lire les <strong>38 avis complets</strong> sur','s06.cta.link':"le profil de l'hostal sur Google",
-        's07.label':'Situation','s07.title':'Au cœur de Calella, <em>à deux pas de la mer</em>.','s07.lead':'Nous sommes au Carrer de Sant Isidre, 54, en plein Calella de la Costa (Maresme), à 50 km au nord de Barcelone et à 15 km de la Costa Brava. Bien situé au cœur de Calella : Rodalies et la N-II à portée de main, et tout l'essentiel à une agréable promenade.','s07.loc1.name':'Grande plage de Calella','s07.loc2.name':'Gare de train','s07.loc3.name':'Vieux centre et Église','s07.loc4.name':'Phare de Calella','s07.loc5.name':'Barcelone centre',
+        's07.label':'Situation','s07.title':'Au cœur de Calella, <em>à deux pas de la mer</em>.','s07.lead':'Nous sommes au Carrer de Sant Isidre, 54, en plein Calella de la Costa (Maresme), à 50 km au nord de Barcelone et à 15 km de la Costa Brava. Bien situé au cœur de Calella : Rodalies et la N-II à portée de main, et tout l\'essentiel à une agréable promenade.','s07.loc1.name':'Grande plage de Calella','s07.loc2.name':'Gare de train','s07.loc3.name':'Vieux centre et Église','s07.loc4.name':'Phare de Calella','s07.loc5.name':'Barcelone centre',
         'faq.label':'Questions fréquentes','faq.title':'Tout clair, <em>avant d\'arriver</em>.','faq.q1':'Toutes les chambres ont-elles une salle de bains privée ?','faq.a1':"Oui, toutes les chambres disposent d'une salle de bains privée.",'faq.q2':'Y a-t-il une cuisine disponible ?','faq.a2':"Nous n'avons pas de cuisine, mais un réfrigérateur et un micro-ondes sont à la disposition des clients.",'faq.q3':'Quelle est la durée de séjour maximale ?','faq.a3':"En général jusqu'à 1 ou 2 mois maximum. Pour des séjours plus longs, contactez-nous et nous trouverons ensemble la meilleure solution.",'faq.q5':'Y a-t-il un parking à proximité ?','faq.a5':"Il y a du stationnement autour de l'hostal : zones bleues et vertes payantes, et zone blanche gratuite à deux pas.",
         's08.label':'Réservation','s08.title':'Un appel, <em>et tout est prêt</em>.','s08.lead':'Appelez-nous ou écrivez-nous sur WhatsApp et nous choisissons ensemble la chambre qui vous convient le mieux selon les dates, le nombre de personnes et si vous voyagez avec un animal.','s08.directions':'Comment venir','wa.pill':'Écrivez-nous →',
         'r1.text':"Excellent hostal, chambre très confortable et bien équipée, ils acceptent les animaux, l'endroit est super calme et bien situé, l'accueil est très chaleureux, excellent service de nettoyage. Une belle expérience sans aucun doute.",'r1.when':'Mai 2026',
@@ -2678,7 +2682,7 @@
       track.innerHTML = slides.map((s, i) => `
         <div class="carousel-slide" data-index="${i}">
           <div class="bg" style="background-image: url('${s.src}')"></div>
-          <img src="${s.src}" alt="${s.alt}" loading="${isStrip ? 'eager' : (i === 0 ? 'eager' : 'lazy')}" />
+          <img src="${s.src}" alt="${s.alt}" loading="${i === 0 ? 'eager' : 'lazy'}" />
           ${s.caption ? `<div class="carousel-cap">${s.caption}</div>` : ''}
         </div>
       `).join('');
@@ -2758,7 +2762,7 @@
         let pending = imgs.length;
         const done = () => { if (--pending === 0) activate(); };
         imgs.forEach((im) => {
-          if (im.complete) done();
+          if (im.complete && im.naturalWidth) done();
           else { im.addEventListener('load', done); im.addEventListener('error', done); }
         });
 
@@ -2767,7 +2771,6 @@
           clearTimeout(resizeTimer);
           resizeTimer = setTimeout(activate, 150);
         });
-        window.addEventListener('load', activate);
         return;
       }
 
@@ -2867,25 +2870,27 @@
 
 
     // ───────── Inicialización ─────────
-    (function initRooms() {
-      const indiv  = ['img/habitaciones/individual-01.png'];
-      const dobles = ['img/habitaciones/doble-01.png','img/habitaciones/doble-02.png','img/habitaciones/doble-03.jpg','img/habitaciones/doble-04.png'];
-      const banos  = ['img/banos/01.jpg','img/banos/02.png','img/banos/03.png'];
+    (async function init() {
+      // HABITACIONES: individuales + dobles + baños mezclados
+      const [indiv, dobles, banos] = await Promise.all([
+        discover('img/habitaciones', 'individual'),
+        discover('img/habitaciones', 'doble'),
+        discover('img/banos', null),
+      ]);
 
+      // Camas (individuales + dobles) y baños, alternados: cama-baño-cama-baño…
       const camas = [
-        ...indiv.map((src, i)  => ({ src, caption: `Individual · ${String(i+1).padStart(2,'0')}`, alt: `Habitación individual ${i+1}` })),
+        ...indiv.map((src, i) => ({ src, caption: `Individual · ${String(i+1).padStart(2,'0')}`, alt: `Habitación individual ${i+1}` })),
         ...dobles.map((src, i) => ({ src, caption: `Doble · ${String(i+1).padStart(2,'0')}`, alt: `Habitación doble ${i+1}` })),
       ];
       const banyos = banos.map((src, i) => ({ src, caption: `Baño privado · ${String(i+1).padStart(2,'0')}`, alt: `Baño ${i+1}` }));
 
-      // Patrón: habitación, habitación, baño, habitación, habitación, baño…
       const roomSlides = [];
-      let bIdx = 0;
-      for (let i = 0; i < camas.length; i++) {
-        roomSlides.push(camas[i]);
-        if ((i + 1) % 2 === 0 && bIdx < banyos.length) roomSlides.push(banyos[bIdx++]);
+      const maxLen = Math.max(camas.length, banyos.length);
+      for (let i = 0; i < maxLen; i++) {
+        if (i < camas.length) roomSlides.push(camas[i]);
+        if (i < banyos.length) roomSlides.push(banyos[i]);
       }
-      while (bIdx < banyos.length) roomSlides.push(banyos[bIdx++]);
       buildCarousel(document.getElementById('carousel-rooms'), roomSlides);
     })();
 
@@ -2902,16 +2907,9 @@
       const GAP = 20;
       let current = 0;
 
-      // Cuántas tarjetas se ven: 2 completas + ~30% de la 3ª como peek
-      function visibleCards() { return window.innerWidth <= 640 ? 1.15 : 2.3; }
-      function totalPages()   { return reviews.length - Math.floor(visibleCards()) + 1; }
-
-      function setWidths() {
-        const vpW = viewport.offsetWidth;
-        const vc  = visibleCards();
-        const w   = (vpW - GAP * Math.floor(vc)) / vc;
-        reviews.forEach(r => { r.style.width = w + 'px'; });
-      }
+      // Cuántas tarjetas se ven: 2 completas + media como peek
+      function visibleCards() { return window.innerWidth <= 640 ? 1.15 : 2.5; }
+      function totalPages()   { return Math.max(1, reviews.length - Math.floor(visibleCards()) + 1); }
 
       function buildDots() {
         dotsEl.innerHTML = '';
@@ -2927,26 +2925,39 @@
       function goTo(idx) {
         const n = totalPages();
         current = ((idx % n) + n) % n;
-        const step = reviews[0].offsetWidth + GAP;
+        const step = reviews[0].getBoundingClientRect().width + GAP;
         track.style.transform = `translateX(-${current * step}px)`;
         dotsEl.querySelectorAll('button').forEach((b, i) =>
           b.classList.toggle('active', i === current)
         );
-        prevBtn.disabled = false;
-        nextBtn.disabled = false;
       }
 
       function init() {
-        setWidths();
         buildDots();
-        goTo(0);
+        goTo(current);
       }
 
-      prevBtn.addEventListener('click', () => goTo(current - 1));
-      nextBtn.addEventListener('click', () => goTo(current + 1));
+      let autoTimer = null;
+      function autoStart() {
+        if (totalPages() <= 1) return;
+        autoStop();
+        autoTimer = setInterval(() => goTo(current + 1), 5000);
+      }
+      function autoStop() {
+        if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+      }
+
+      prevBtn.addEventListener('click', () => { goTo(current - 1); autoStart(); });
+      nextBtn.addEventListener('click', () => { goTo(current + 1); autoStart(); });
       window.addEventListener('resize', init);
-      init();
       window.addEventListener('load', init);
+
+      const section = document.getElementById('testimonials');
+      section.addEventListener('mouseenter', autoStop);
+      section.addEventListener('mouseleave', autoStart);
+
+      init();
+      autoStart();
     })();
 
     // ───────── Ver más · Calella ─────────
@@ -2956,7 +2967,7 @@
       btn.addEventListener('click', () => {
         document.querySelectorAll('.cm-card.cm-hidden').forEach((card) => {
           card.classList.remove('cm-hidden');
-          requestAnimationFrame(() => card.classList.add('in'));
+          io.observe(card);
         });
         btn.closest('.calella-more').remove();
       });
