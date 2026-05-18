@@ -1832,7 +1832,7 @@
 
       <!-- Carrusel principal de habitaciones + baños -->
       <div class="strip-wrap">
-        <div class="carousel strip reveal" data-delay="2" id="carousel-rooms" data-gallery="rooms">
+        <div class="carousel strip" id="carousel-rooms" data-gallery="rooms">
           <div class="carousel-track"></div>
           <div class="carousel-counter"><span class="cur">0</span> / <span class="tot">0</span></div>
           <button class="carousel-btn prev" aria-label="Anterior">
@@ -2758,7 +2758,7 @@
         let pending = imgs.length;
         const done = () => { if (--pending === 0) activate(); };
         imgs.forEach((im) => {
-          if (im.complete && im.naturalWidth) done();
+          if (im.complete) done();
           else { im.addEventListener('load', done); im.addEventListener('error', done); }
         });
 
@@ -2767,6 +2767,7 @@
           clearTimeout(resizeTimer);
           resizeTimer = setTimeout(activate, 150);
         });
+        window.addEventListener('load', activate);
         return;
       }
 
