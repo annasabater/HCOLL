@@ -2872,18 +2872,29 @@
         velocity = -BASE;
 
         // Imatges: pausar en hover
-        el.addEventListener('mouseenter', () => { velocity = 0; });
+        el.addEventListener('mouseenter', () => { if (!boostDir) velocity = 0; });
         el.addEventListener('mouseleave', (e) => {
+          if (boostDir) return;
           if (!leftBtn.contains(e.relatedTarget) && !rightBtn.contains(e.relatedTarget)) {
             velocity = -BASE;
           }
         });
 
-        // Fletxes: hover canvia direcció/velocitat
-        rightBtn.addEventListener('mouseenter', () => { velocity = -FAST; });
-        rightBtn.addEventListener('mouseleave', () => { velocity = el.matches(':hover') ? 0 : -BASE; });
-        leftBtn.addEventListener('mouseenter', () => { velocity = FAST; });
-        leftBtn.addEventListener('mouseleave', () => { velocity = el.matches(':hover') ? 0 : -BASE; });
+        // Fletxes: click alterna entre rapid i ritme normal
+        let boostDir = null; // 'left' | 'right' | null
+        function applyVel() {
+          if (boostDir === 'right') velocity = -FAST;
+          else if (boostDir === 'left') velocity = FAST;
+          else velocity = el.matches(':hover') ? 0 : -BASE;
+        }
+        rightBtn.addEventListener('click', () => {
+          boostDir = boostDir === 'right' ? null : 'right';
+          applyVel();
+        });
+        leftBtn.addEventListener('click', () => {
+          boostDir = boostDir === 'left' ? null : 'left';
+          applyVel();
+        });
 
         function activate() {
           half = 0;
