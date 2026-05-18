@@ -197,16 +197,15 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      padding: 22px 0;
-      transition: background 0.5s var(--ease), padding 0.5s var(--ease), border-color 0.5s var(--ease);
-      border-bottom: 1px solid transparent;
-    }
-    nav.scrolled {
-      background: rgba(248, 248, 248, 0.95);
+      padding: 16px 0;
+      background: rgba(248, 248, 248, 0.97);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      padding: 14px 0;
-      border-bottom-color: var(--line-soft);
+      border-bottom: 1px solid var(--line-soft);
+      transition: padding 0.3s var(--ease);
+    }
+    nav.scrolled {
+      padding: 12px 0;
     }
     nav .inner {
       display: flex;
@@ -232,16 +231,11 @@
       letter-spacing: 0.12em;
       font-weight: 400;
     }
-    nav:not(.scrolled) .brand-name { color: var(--cream); }
-    nav:not(.scrolled) .brand-mark { filter: brightness(0) invert(1); }
-
     .nav-divider {
       width: 1px; height: 28px;
       background: var(--line);
       flex-shrink: 0;
-      transition: background 0.4s var(--ease);
     }
-    nav:not(.scrolled) .nav-divider { background: rgba(255,255,255,0.28); }
 
     .menu {
       display: flex;
@@ -256,8 +250,6 @@
     }
     .menu a { color: var(--ink); position: relative; padding: 5px 0; transition: color 0.3s; }
     .menu a:hover { color: var(--granate); }
-    nav:not(.scrolled) .menu a { color: rgba(255,255,255,0.88); }
-    nav:not(.scrolled) .menu a:hover { color: #fff; }
     .menu a::after {
       content: "";
       position: absolute;
@@ -290,8 +282,6 @@
     .btn:hover { background: var(--granate-deep); border-color: var(--granate-deep); }
     .btn--ghost { background: transparent; color: var(--granate); border-color: var(--granate); }
     .btn--ghost:hover { background: var(--granate); color: var(--cream); }
-    nav:not(.scrolled) .btn--ghost { border-color: rgba(255,255,255,0.7); color: var(--cream); }
-    nav:not(.scrolled) .btn--ghost:hover { background: rgba(255,255,255,0.15); border-color: #fff; }
 
     .menu-toggle {
       display: none;
