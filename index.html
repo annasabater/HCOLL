@@ -577,14 +577,16 @@
     ───────────────────────────────────────────────── */
     #habitaciones { background: var(--cream); }
     .rooms-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-bottom: 25px;
-      gap: 40px;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      align-items: end;
+      margin-bottom: 48px;
+      gap: 60px;
     }
-    .rooms-head .right { max-width: 460px; }
+    .rooms-head .right { max-width: none; }
+    @media (max-width: 768px) {
+      .rooms-head { grid-template-columns: 1fr; gap: 20px; }
+    }
 
     /* Tipos de habitación (no son fichas, son descripciones cortas) */
     .room-types {
