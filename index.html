@@ -1632,9 +1632,6 @@
       font-size: 0.78rem;
       color: var(--mute);
     }
-    .foot-legal-links { display: flex; gap: 16px; flex-wrap: wrap; }
-    .foot-legal-links a { color: var(--ink-soft); text-decoration: none; transition: color 0.2s; }
-    .foot-legal-links a:hover { color: var(--granate); }
 
     /* Decoración de números gigantes detrás del head */
     .big-num {
@@ -2416,14 +2413,17 @@
             </li>
           </ul>
         </div>
+        <div class="foot-col">
+          <h5 data-i18n="foot.h.legal">Legal</h5>
+          <ul>
+            <li><a href="aviso-legal.html" data-i18n="foot.legal1">Aviso legal</a></li>
+            <li><a href="privacidad.html" data-i18n="foot.legal2">Política de privacidad</a></li>
+            <li><a href="cookies.html" data-i18n="foot.legal3">Política de cookies</a></li>
+          </ul>
+        </div>
       </div>
       <div class="foot-bottom">
         <span data-i18n="foot.rights">© 2026 Hostal Coll · Todos los derechos reservados</span>
-        <span class="foot-legal-links">
-          <a href="aviso-legal.html" data-i18n="foot.legal1">Aviso legal</a>
-          <a href="privacidad.html" data-i18n="foot.legal2">Política de privacidad</a>
-          <a href="cookies.html" data-i18n="foot.legal3">Política de cookies</a>
-        </span>
         <span data-i18n="foot.tagline">Hecho con calma en Calella</span>
       </div>
     </div>
