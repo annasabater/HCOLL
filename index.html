@@ -197,20 +197,16 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      padding: 16px 0;
-      background: rgba(20, 12, 10, 0.88);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      transition: background 0.5s var(--ease), padding 0.5s var(--ease), border-color 0.5s var(--ease), box-shadow 0.5s var(--ease);
+      padding: 22px 0;
+      transition: background 0.5s var(--ease), padding 0.5s var(--ease), border-color 0.5s var(--ease);
       border-bottom: 1px solid transparent;
     }
     nav.scrolled {
-      background: rgba(252, 251, 249, 0.97);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      padding: 10px 0;
-      border-bottom-color: var(--line);
-      box-shadow: 0 1px 20px rgba(0,0,0,0.06);
+      background: rgba(248, 248, 248, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 14px 0;
+      border-bottom-color: var(--line-soft);
     }
     nav .inner {
       display: flex;
@@ -232,21 +228,20 @@
     .brand-name {
       font-family: var(--serif);
       font-size: 1.1rem;
-      color: var(--cream);
+      color: var(--ink);
       letter-spacing: 0.12em;
       font-weight: 400;
     }
-    .brand-mark { filter: brightness(0) invert(1); }
-    nav.scrolled .brand-name { color: var(--ink); }
-    nav.scrolled .brand-mark { filter: none; }
+    nav:not(.scrolled) .brand-name { color: var(--cream); }
+    nav:not(.scrolled) .brand-mark { filter: brightness(0) invert(1); }
 
     .nav-divider {
       width: 1px; height: 28px;
-      background: rgba(255,255,255,0.28);
+      background: var(--line);
       flex-shrink: 0;
       transition: background 0.4s var(--ease);
     }
-    nav.scrolled .nav-divider { background: var(--line); }
+    nav:not(.scrolled) .nav-divider { background: rgba(255,255,255,0.28); }
 
     .menu {
       display: flex;
@@ -259,10 +254,10 @@
       flex: 1;
       justify-content: center;
     }
-    .menu a { color: rgba(255,255,255,0.88); position: relative; padding: 5px 0; transition: color 0.3s; }
-    .menu a:hover { color: #fff; }
-    nav.scrolled .menu a { color: var(--ink); }
-    nav.scrolled .menu a:hover { color: var(--granate); }
+    .menu a { color: var(--ink); position: relative; padding: 5px 0; transition: color 0.3s; }
+    .menu a:hover { color: var(--granate); }
+    nav:not(.scrolled) .menu a { color: rgba(255,255,255,0.88); }
+    nav:not(.scrolled) .menu a:hover { color: #fff; }
     .menu a::after {
       content: "";
       position: absolute;
@@ -293,12 +288,10 @@
       flex-shrink: 0;
     }
     .btn:hover { background: var(--granate-deep); border-color: var(--granate-deep); }
-    .btn--ghost { background: var(--granate); color: var(--cream); border-color: var(--granate); }
-    .btn--ghost:hover { background: var(--granate-deep); border-color: var(--granate-deep); }
-    .btn--ghost { background: transparent; border-color: rgba(255,255,255,0.7); color: var(--cream); }
-    .btn--ghost:hover { background: rgba(255,255,255,0.15); border-color: #fff; }
-    nav.scrolled .btn--ghost { background: var(--granate); border-color: var(--granate); color: var(--cream); }
-    nav.scrolled .btn--ghost:hover { background: var(--granate-deep); border-color: var(--granate-deep); }
+    .btn--ghost { background: transparent; color: var(--granate); border-color: var(--granate); }
+    .btn--ghost:hover { background: var(--granate); color: var(--cream); }
+    nav:not(.scrolled) .btn--ghost { border-color: rgba(255,255,255,0.7); color: var(--cream); }
+    nav:not(.scrolled) .btn--ghost:hover { background: rgba(255,255,255,0.15); border-color: #fff; }
 
     .menu-toggle {
       display: none;
@@ -2883,17 +2876,13 @@
 
 
     // ───────── Inicialización ─────────
-    (async function init() {
-      // HABITACIONES: individuales + dobles + baños mezclados
-      const [indiv, dobles, banos] = await Promise.all([
-        discover('img/habitaciones', 'individual'),
-        discover('img/habitaciones', 'doble'),
-        discover('img/banos', null),
-      ]);
+    (function initRooms() {
+      const indiv  = ['img/habitaciones/individual-01.png'];
+      const dobles = ['img/habitaciones/doble-01.png','img/habitaciones/doble-02.png','img/habitaciones/doble-03.jpg','img/habitaciones/doble-04.png'];
+      const banos  = ['img/banos/01.jpg','img/banos/02.png','img/banos/03.png'];
 
-      // Camas (individuales + dobles) y baños, alternados: cama-baño-cama-baño…
       const camas = [
-        ...indiv.map((src, i) => ({ src, caption: `Individual · ${String(i+1).padStart(2,'0')}`, alt: `Habitación individual ${i+1}` })),
+        ...indiv.map((src, i)  => ({ src, caption: `Individual · ${String(i+1).padStart(2,'0')}`, alt: `Habitación individual ${i+1}` })),
         ...dobles.map((src, i) => ({ src, caption: `Doble · ${String(i+1).padStart(2,'0')}`, alt: `Habitación doble ${i+1}` })),
       ];
       const banyos = banos.map((src, i) => ({ src, caption: `Baño privado · ${String(i+1).padStart(2,'0')}`, alt: `Baño ${i+1}` }));
@@ -2965,7 +2954,8 @@
       prevBtn.addEventListener('click', () => goTo(current - 1));
       nextBtn.addEventListener('click', () => goTo(current + 1));
       window.addEventListener('resize', init);
-      init();
+      requestAnimationFrame(() => init());
+      window.addEventListener('load', init);
     })();
 
     // ───────── Ver más · Calella ─────────
