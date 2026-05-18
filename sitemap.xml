@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://hostalcoll.com/</loc>
+    <lastmod>2026-05-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hostalcoll.com/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://hostalcoll.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hostalcoll.com/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://hostalcoll.com/"/>
+  </url>
+  <url>
+    <loc>https://hostalcoll.com/aviso-legal.html</loc>
+    <lastmod>2026-05-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://hostalcoll.com/privacidad.html</loc>
+    <lastmod>2026-05-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://hostalcoll.com/cookies.html</loc>
+    <lastmod>2026-05-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+</urlset>
