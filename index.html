@@ -1066,12 +1066,12 @@
       will-change: transform;
     }
     .review {
-      flex: 0 0 calc((min(1280px, 92vw) - 40px) / 2.3);
-      min-width: 0;
+      flex: 0 0 auto;
+      width: calc((min(1280px, 92vw) - 40px) / 2.3);
       display: flex;
     }
     @media (max-width: 640px) {
-      .review { flex: 0 0 calc((92vw - 20px) / 1.15); }
+      .review { width: calc((92vw - 20px) / 1.15); }
     }
     .review-card {
       background: var(--white-warm);
@@ -2924,7 +2924,8 @@
       function goTo(idx) {
         const n = totalPages();
         current = ((idx % n) + n) % n;
-        const step = reviews[0].offsetWidth + GAP;
+        const w = reviews[0].getBoundingClientRect().width || reviews[0].offsetWidth;
+        const step = w + GAP;
         track.style.transform = `translateX(-${current * step}px)`;
         dotsEl.querySelectorAll('button').forEach((b, i) =>
           b.classList.toggle('active', i === current)
@@ -2941,7 +2942,7 @@
       prevBtn.addEventListener('click', () => goTo(current - 1));
       nextBtn.addEventListener('click', () => goTo(current + 1));
       window.addEventListener('resize', init);
-      init();
+      requestAnimationFrame(() => init());
     })();
 
     // ───────── Ver más · Calella ─────────
