@@ -306,12 +306,10 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(15, 10, 8, 0.45);
-      z-index: 150;
-      opacity: 0;
-      transition: opacity 0.3s var(--ease);
+      background: rgba(15, 10, 8, 0.38);
+      z-index: 180;
     }
-    body.nav-open .nav-backdrop { display: block; opacity: 1; }
+    body.nav-open .nav-backdrop { display: block; }
     body.nav-open { overflow: hidden; }
 
     /* ─────────────────────────────────────────────────
@@ -1684,23 +1682,24 @@
         display: none !important;
         position: fixed;
         top: 0;
-        left: 0;
         right: 0;
         bottom: 0;
-        width: 100vw;
+        width: 78vw;
+        max-width: 340px;
         height: 100vh;
-        background: var(--cream);
+        background: #ffffff;
         flex-direction: column !important;
         align-items: stretch !important;
         justify-content: flex-start !important;
         gap: 0 !important;
-        padding: 80px 24px 32px;
+        padding: 72px 26px 32px;
         font-size: 1rem;
         letter-spacing: 0.14em;
         z-index: 200;
         overflow-y: auto;
         margin: 0;
         flex: none !important;
+        box-shadow: -16px 0 40px rgba(0,0,0,0.18);
       }
       body.nav-open .menu { display: flex !important; }
       .menu a {
@@ -1713,7 +1712,7 @@
       }
       .menu a::after { display: none !important; }
       .menu .nav-cta {
-        margin-top: 20px;
+        margin-top: 24px;
         display: block !important;
         padding: 16px 22px !important;
         border: 1px solid var(--granate);
@@ -1722,6 +1721,23 @@
         letter-spacing: 0.18em;
         background: transparent;
       }
+      .menu-close {
+        display: none;
+        position: fixed;
+        top: 16px;
+        right: 18px;
+        width: 40px;
+        height: 40px;
+        border: none;
+        background: transparent;
+        color: var(--ink);
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        z-index: 220;
+      }
+      body.nav-open .menu-close { display: inline-flex; }
+      body.nav-open .menu-toggle { visibility: hidden; }
     }
     @media (max-width: 560px) {
       .brand-name { font-size: 0.82rem; letter-spacing: 0.06em; }
@@ -1804,6 +1820,11 @@
     </div>
   </nav>
   <div class="nav-backdrop" id="nav-backdrop" aria-hidden="true"></div>
+  <button class="menu-close" id="menu-close" aria-label="Cerrar menú">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+      <line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/>
+    </svg>
+  </button>
 
   <!-- ─── HERO ────────────────────────────────────── -->
   <header class="hero" id="top">
@@ -2698,6 +2719,7 @@
     // Mobile nav drawer
     (function initMobileNav() {
       const toggle = document.getElementById('menu-toggle');
+      const closeBtn = document.getElementById('menu-close');
       const menu = document.getElementById('nav-menu');
       const backdrop = document.getElementById('nav-backdrop');
       if (!toggle || !menu || !backdrop) return;
@@ -2715,6 +2737,7 @@
         if (document.body.classList.contains('nav-open')) close();
         else open();
       });
+      if (closeBtn) closeBtn.addEventListener('click', close);
       backdrop.addEventListener('click', close);
       menu.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
       document.addEventListener('keydown', (e) => {
