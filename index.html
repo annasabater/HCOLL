@@ -148,8 +148,8 @@
     }
     nav.scrolled .lang-trigger:hover { background: var(--cream-warm); }
     nav:not(.scrolled) .lang-trigger:hover { background: rgba(255,255,255,0.1); }
-    .lang-chevron { opacity: 0.6; transition: transform 0.2s var(--ease); color: var(--ink); flex-shrink: 0; }
-    nav:not(.scrolled) .lang-chevron { color: var(--cream); }
+    .lang-chevron { opacity: 0.6; transition: transform 0.2s var(--ease); color: var(--cream); flex-shrink: 0; }
+    nav.scrolled .lang-chevron { color: var(--ink); }
     .lang-selector.open .lang-chevron { transform: rotate(180deg); }
 
     .lang-dropdown {
@@ -198,6 +198,9 @@
       top: 0; left: 0; right: 0;
       z-index: 100;
       padding: 16px 0;
+      background: rgba(20, 12, 10, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       transition: background 0.5s var(--ease), padding 0.5s var(--ease), border-color 0.5s var(--ease), box-shadow 0.5s var(--ease);
       border-bottom: 1px solid transparent;
     }
@@ -229,12 +232,13 @@
     .brand-name {
       font-family: var(--serif);
       font-size: 1.1rem;
-      color: var(--ink);
+      color: var(--cream);
       letter-spacing: 0.12em;
       font-weight: 400;
     }
-    nav:not(.scrolled) .brand-name { color: var(--cream); }
-    nav:not(.scrolled) .brand-mark { filter: brightness(0) invert(1); }
+    .brand-mark { filter: brightness(0) invert(1); }
+    nav.scrolled .brand-name { color: var(--ink); }
+    nav.scrolled .brand-mark { filter: none; }
 
     .nav-divider {
       width: 1px; height: 28px;
@@ -255,9 +259,10 @@
       flex: 1;
       justify-content: center;
     }
-    .menu a { color: var(--ink); position: relative; padding: 5px 0; transition: color 0.3s; }
-    nav:not(.scrolled) .menu a { color: rgba(255,255,255,0.88); }
-    nav:not(.scrolled) .menu a:hover { color: #fff; }
+    .menu a { color: rgba(255,255,255,0.88); position: relative; padding: 5px 0; transition: color 0.3s; }
+    .menu a:hover { color: #fff; }
+    nav.scrolled .menu a { color: var(--ink); }
+    nav.scrolled .menu a:hover { color: var(--granate); }
     .menu a::after {
       content: "";
       position: absolute;
@@ -290,8 +295,10 @@
     .btn:hover { background: var(--granate-deep); border-color: var(--granate-deep); }
     .btn--ghost { background: var(--granate); color: var(--cream); border-color: var(--granate); }
     .btn--ghost:hover { background: var(--granate-deep); border-color: var(--granate-deep); }
-    nav:not(.scrolled) .btn--ghost { background: transparent; border-color: rgba(255,255,255,0.7); color: var(--cream); }
-    nav:not(.scrolled) .btn--ghost:hover { background: rgba(255,255,255,0.15); border-color: #fff; }
+    .btn--ghost { background: transparent; border-color: rgba(255,255,255,0.7); color: var(--cream); }
+    .btn--ghost:hover { background: rgba(255,255,255,0.15); border-color: #fff; }
+    nav.scrolled .btn--ghost { background: var(--granate); border-color: var(--granate); color: var(--cream); }
+    nav.scrolled .btn--ghost:hover { background: var(--granate-deep); border-color: var(--granate-deep); }
 
     .menu-toggle {
       display: none;
