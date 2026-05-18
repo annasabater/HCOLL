@@ -2891,12 +2891,14 @@
       ];
       const banyos = banos.map((src, i) => ({ src, caption: `Baño privado · ${String(i+1).padStart(2,'0')}`, alt: `Baño ${i+1}` }));
 
+      // Patrón: habitación, habitación, baño, habitación, habitación, baño…
       const roomSlides = [];
-      const maxLen = Math.max(camas.length, banyos.length);
-      for (let i = 0; i < maxLen; i++) {
-        if (i < camas.length) roomSlides.push(camas[i]);
-        if (i < banyos.length) roomSlides.push(banyos[i]);
+      let bIdx = 0;
+      for (let i = 0; i < camas.length; i++) {
+        roomSlides.push(camas[i]);
+        if ((i + 1) % 2 === 0 && bIdx < banyos.length) roomSlides.push(banyos[bIdx++]);
       }
+      while (bIdx < banyos.length) roomSlides.push(banyos[bIdx++]);
       buildCarousel(document.getElementById('carousel-rooms'), roomSlides);
     })();
 
