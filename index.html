@@ -259,6 +259,7 @@
       transition: width 0.35s var(--ease);
     }
     .menu a:hover::after { width: 100%; }
+    .menu .nav-cta { display: none; }
 
     .btn {
       display: inline-flex;
@@ -292,6 +293,18 @@
       padding: 6px;
     }
 
+    .nav-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 10, 8, 0.45);
+      z-index: 150;
+      opacity: 0;
+      transition: opacity 0.3s var(--ease);
+    }
+    body.nav-open .nav-backdrop { display: block; opacity: 1; }
+    body.nav-open { overflow: hidden; }
+
     /* ─────────────────────────────────────────────────
        HERO
     ───────────────────────────────────────────────── */
@@ -307,9 +320,9 @@
       position: absolute; inset: 0;
       background-image:
         linear-gradient(rgba(20, 12, 10, 0.45), rgba(20, 12, 10, 0.55)),
-        url("img/calella/roca grossa.png");
+        url("img/calella/calella.png");
       background-size: cover;
-      background-position: center;
+      background-position: center 20%;
       transform: scale(1.08);
       animation: heroZoom 18s var(--ease) forwards;
     }
@@ -1656,16 +1669,64 @@
       .nav-divider { display: none; }
       section { padding: 60px 0; }
     }
+    @media (max-width: 860px) {
+      nav { padding: 12px 0; }
+      nav .inner { gap: 12px; }
+      .menu-toggle { display: inline-flex; align-items: center; justify-content: center; color: var(--ink); }
+      .lang-selector { margin-left: auto; }
+      .menu {
+        position: fixed;
+        top: 0; right: 0; bottom: 0;
+        width: min(320px, 84vw);
+        background: var(--cream);
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        gap: 4px;
+        padding: 84px 28px 32px;
+        font-size: 0.9rem;
+        letter-spacing: 0.12em;
+        transform: translateX(105%);
+        transition: transform 0.38s var(--ease);
+        z-index: 200;
+        box-shadow: -12px 0 32px rgba(0,0,0,0.12);
+        border-left: 1px solid var(--line-soft);
+        overflow-y: auto;
+      }
+      body.nav-open .menu { transform: translateX(0); }
+      .menu a { padding: 14px 4px; border-bottom: 1px solid var(--line-soft); width: 100%; }
+      .menu a::after { display: none; }
+      .menu .nav-cta {
+        margin-top: 16px;
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        padding: 14px 22px;
+        border: 1px solid var(--granate);
+        color: var(--granate);
+        text-align: center;
+        letter-spacing: 0.18em;
+      }
+      .menu .nav-cta:hover { background: var(--granate); color: var(--cream); }
+    }
     @media (max-width: 560px) {
       .services-grid { grid-template-columns: 1fr; }
       .foot-grid { grid-template-columns: 1fr; }
-      .hero { min-height: 360px; }
+      .hero { min-height: 360px; height: 70vh; }
+      .hero h1 { font-size: clamp(2rem, 8vw, 2.8rem); }
+      .hero-sub { font-size: 0.95rem; }
       .hero-eyebrow { font-size: 0.62rem; gap: 12px; }
       .hero-eyebrow .line { width: 24px; }
+      h2.display { font-size: clamp(1.7rem, 7vw, 2.2rem); }
+      .lead { font-size: 0.98rem; }
       .room-meta { font-size: 0.66rem; gap: 12px; }
       .contact-strip { gap: 12px; flex-direction: column; align-items: stretch; }
       .contact-strip a { justify-content: center; }
-      section { padding: 80px 0 52px; }
+      section { padding: 64px 0 48px; }
+      .big-num { font-size: clamp(8rem, 28vw, 14rem) !important; right: 2vw; }
+      .pull-quote { font-size: 1.15rem; padding-left: 16px; margin-top: 24px; }
+      .reviews-summary { padding: 18px 20px; gap: 18px; }
+      .reviews-summary .big-rating { font-size: 2.4rem; }
     }
 
     /* Reducir motion */
@@ -1684,7 +1745,7 @@
         <span class="brand-name">HOSTAL COLL</span>
       </a>
       <div class="nav-divider" aria-hidden="true"></div>
-      <div class="menu">
+      <div class="menu" id="nav-menu">
         <a href="#galeria" data-i18n="nav.hostal">El hostal</a>
         <a href="#habitaciones" data-i18n="nav.rooms">Habitaciones</a>
         <a href="#servicios" data-i18n="nav.services">Servicios</a>
@@ -1692,6 +1753,7 @@
         <a href="#resenas" data-i18n="nav.reviews">Reseñas</a>
         <a href="#ubicacion" data-i18n="nav.location">Ubicación</a>
         <a href="#faq" data-i18n="nav.faq">FAQ</a>
+        <a href="#reserva" class="nav-cta" data-i18n="nav.book">Reservar</a>
       </div>
       <div class="lang-selector" id="lang-selector">
         <button class="lang-trigger" id="lang-trigger" aria-haspopup="true" aria-expanded="false" title="Idioma / Language">
@@ -1718,13 +1780,14 @@
         </div>
       </div>
       <a href="#reserva" class="btn btn--ghost" data-i18n="nav.book">Reservar</a>
-      <button class="menu-toggle" aria-label="Abrir menú">
+      <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú" aria-controls="nav-menu" aria-expanded="false">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
           <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
         </svg>
       </button>
     </div>
   </nav>
+  <div class="nav-backdrop" id="nav-backdrop" aria-hidden="true"></div>
 
   <!-- ─── HERO ────────────────────────────────────── -->
   <header class="hero" id="top">
@@ -1788,10 +1851,10 @@
 
       <div class="hostal-grid two reveal" data-delay="2">
         <figure>
-          <img src="img/comunes/02.png" alt="Pasillo del hostal, entrada a las habitaciones" loading="lazy" />
+          <img src="img/comunes/03.png" alt="Pasillo con cómoda y sala de estar" loading="lazy" />
         </figure>
         <figure>
-          <img src="img/comunes/03.png" alt="Pasillo con cómoda y sala de estar" loading="lazy" />
+          <img src="img/comunes/02.png" alt="Pasillo del hostal, entrada a las habitaciones" loading="lazy" />
         </figure>
       </div>
     </div>
@@ -2615,6 +2678,36 @@
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
+
+    // Mobile nav drawer
+    (function initMobileNav() {
+      const toggle = document.getElementById('menu-toggle');
+      const menu = document.getElementById('nav-menu');
+      const backdrop = document.getElementById('nav-backdrop');
+      if (!toggle || !menu || !backdrop) return;
+
+      function open() {
+        document.body.classList.add('nav-open');
+        toggle.setAttribute('aria-expanded', 'true');
+      }
+      function close() {
+        document.body.classList.remove('nav-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+
+      toggle.addEventListener('click', () => {
+        if (document.body.classList.contains('nav-open')) close();
+        else open();
+      });
+      backdrop.addEventListener('click', close);
+      menu.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && document.body.classList.contains('nav-open')) close();
+      });
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 860 && document.body.classList.contains('nav-open')) close();
+      });
+    })();
 
     // Reveal on scroll
     const io = new IntersectionObserver((entries) => {
