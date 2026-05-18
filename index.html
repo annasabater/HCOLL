@@ -1067,11 +1067,7 @@
     }
     .review {
       flex: 0 0 auto;
-      width: calc((min(1280px, 92vw) - 40px) / 2.3);
       display: flex;
-    }
-    @media (max-width: 640px) {
-      .review { width: calc((92vw - 20px) / 1.15); }
     }
     .review-card {
       background: var(--white-warm);
@@ -2910,6 +2906,13 @@
       function visibleCards() { return window.innerWidth <= 640 ? 1.15 : 2.3; }
       function totalPages()   { return reviews.length - Math.floor(visibleCards()) + 1; }
 
+      function setWidths() {
+        const vpW = viewport.offsetWidth;
+        const vc  = visibleCards();
+        const w   = (vpW - GAP * Math.floor(vc)) / vc;
+        reviews.forEach(r => { r.style.width = w + 'px'; });
+      }
+
       function buildDots() {
         dotsEl.innerHTML = '';
         const n = totalPages();
@@ -2924,8 +2927,7 @@
       function goTo(idx) {
         const n = totalPages();
         current = ((idx % n) + n) % n;
-        const w = reviews[0].getBoundingClientRect().width || reviews[0].offsetWidth;
-        const step = w + GAP;
+        const step = reviews[0].offsetWidth + GAP;
         track.style.transform = `translateX(-${current * step}px)`;
         dotsEl.querySelectorAll('button').forEach((b, i) =>
           b.classList.toggle('active', i === current)
@@ -2935,6 +2937,7 @@
       }
 
       function init() {
+        setWidths();
         buildDots();
         goTo(0);
       }
@@ -2942,7 +2945,8 @@
       prevBtn.addEventListener('click', () => goTo(current - 1));
       nextBtn.addEventListener('click', () => goTo(current + 1));
       window.addEventListener('resize', init);
-      requestAnimationFrame(() => init());
+      init();
+      window.addEventListener('load', init);
     })();
 
     // ───────── Ver más · Calella ─────────
@@ -2952,7 +2956,7 @@
       btn.addEventListener('click', () => {
         document.querySelectorAll('.cm-card.cm-hidden').forEach((card) => {
           card.classList.remove('cm-hidden');
-          io.observe(card);
+          requestAnimationFrame(() => card.classList.add('in'));
         });
         btn.closest('.calella-more').remove();
       });
