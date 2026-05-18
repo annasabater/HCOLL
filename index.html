@@ -2678,7 +2678,7 @@
       track.innerHTML = slides.map((s, i) => `
         <div class="carousel-slide" data-index="${i}">
           <div class="bg" style="background-image: url('${s.src}')"></div>
-          <img src="${s.src}" alt="${s.alt}" loading="${i === 0 ? 'eager' : 'lazy'}" />
+          <img src="${s.src}" alt="${s.alt}" loading="${isStrip ? 'eager' : (i === 0 ? 'eager' : 'lazy')}" />
           ${s.caption ? `<div class="carousel-cap">${s.caption}</div>` : ''}
         </div>
       `).join('');
