@@ -106,7 +106,11 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      width: 100%;
+    }
     body {
       font-family: var(--sans);
       font-weight: 400;
@@ -116,6 +120,8 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       overflow-x: hidden;
+      width: 100%;
+      position: relative;
     }
     img { display: block; max-width: 100%; }
     a { color: inherit; text-decoration: none; }
@@ -1630,19 +1636,7 @@
     }
 
     /* Decoración de números gigantes detrás del head */
-    .big-num {
-      position: absolute;
-      font-family: var(--serif);
-      font-weight: 300;
-      font-style: italic;
-      font-size: clamp(10rem, 22vw, 22rem);
-      color: var(--bone);
-      opacity: 0.45;
-      line-height: 0.8;
-      pointer-events: none;
-      z-index: 0;
-      user-select: none;
-    }
+    .big-num { display: none; }
     .big-num.tl { top: -65px; right: 4vw; }
     .big-num.tr { top: -65px; right: 4vw; }
     section .wrap { position: relative; z-index: 2; }
@@ -1686,14 +1680,21 @@
         padding: 84px 28px 32px;
         font-size: 0.9rem;
         letter-spacing: 0.12em;
-        transform: translateX(105%);
-        transition: transform 0.38s var(--ease);
+        transform: translate3d(100%, 0, 0);
+        transition: transform 0.38s var(--ease), visibility 0s linear 0.38s;
         z-index: 200;
         box-shadow: -12px 0 32px rgba(0,0,0,0.12);
         border-left: 1px solid var(--line-soft);
         overflow-y: auto;
+        visibility: hidden;
+        pointer-events: none;
       }
-      body.nav-open .menu { transform: translateX(0); }
+      body.nav-open .menu {
+        transform: translate3d(0, 0, 0);
+        visibility: visible;
+        pointer-events: auto;
+        transition: transform 0.38s var(--ease);
+      }
       .menu a { padding: 14px 4px; border-bottom: 1px solid var(--line-soft); width: 100%; }
       .menu a::after { display: none; }
       .menu .nav-cta {
