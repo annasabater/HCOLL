@@ -301,59 +301,6 @@
       cursor: pointer;
       padding: 6px;
     }
-    nav:not(.scrolled) .menu-toggle { color: rgba(255,255,255,0.9); }
-
-    /* ── Mobile drawer ── */
-    .mobile-overlay {
-      display: none;
-      position: fixed; inset: 0;
-      background: rgba(26,15,10,0.45);
-      z-index: 150;
-      opacity: 0;
-      transition: opacity 0.35s;
-    }
-    .mobile-overlay.open { opacity: 1; }
-    .mobile-nav {
-      position: fixed;
-      top: 0; right: 0; bottom: 0;
-      width: min(320px, 85vw);
-      background: var(--cream);
-      z-index: 200;
-      transform: translateX(110%);
-      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-      display: flex;
-      flex-direction: column;
-      padding: 68px 32px 48px;
-      overflow-y: auto;
-      box-shadow: -16px 0 48px rgba(0,0,0,0.12);
-    }
-    .mobile-nav.open { transform: translateX(0); }
-    .mobile-nav-close {
-      position: absolute;
-      top: 18px; right: 18px;
-      background: none; border: none;
-      cursor: pointer; color: var(--ink);
-      padding: 8px; line-height: 0;
-    }
-    .mnav-links { border-top: 1px solid var(--line); margin-bottom: 28px; }
-    .mnav-link {
-      display: block;
-      font-family: var(--serif);
-      font-size: 1.22rem;
-      color: var(--ink);
-      text-decoration: none;
-      padding: 17px 0;
-      border-bottom: 1px solid var(--line);
-      letter-spacing: 0.04em;
-      transition: color 0.2s;
-    }
-    .mnav-link:hover { color: var(--granate); }
-    .mobile-nav .btn {
-      width: 100%;
-      justify-content: center;
-      font-size: 0.82rem;
-      margin-bottom: 32px;
-    }
 
     /* ─────────────────────────────────────────────────
        HERO
@@ -1709,8 +1656,8 @@
       .g5 { grid-column: span 2; grid-row: span 2; }
       .g6 { grid-column: span 2; grid-row: span 2; }
       .foot-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
-      .menu { display: none; }
-      .menu-toggle { display: inline-flex; }
+      .menu { gap: 16px; font-size: 0.65rem; letter-spacing: 0.13em; }
+      .brand-name { display: none; }
       nav .btn--ghost { display: none; }
       .nav-divider { display: none; }
       section { padding: 60px 0; }
@@ -1783,24 +1730,6 @@
         </svg>
       </button>
     </div>
-  </nav>
-
-  <!-- ─── MOBILE NAV ──────────────────────────────── -->
-  <div class="mobile-overlay" id="mobile-overlay"></div>
-  <nav class="mobile-nav" id="mobile-nav" aria-label="Menú móvil">
-    <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Cerrar menú">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
-    </button>
-    <div class="mnav-links">
-      <a href="#galeria"       class="mnav-link" data-i18n="nav.hostal">El hostal</a>
-      <a href="#habitaciones"  class="mnav-link" data-i18n="nav.rooms">Habitaciones</a>
-      <a href="#servicios"     class="mnav-link" data-i18n="nav.services">Servicios</a>
-      <a href="#calella"       class="mnav-link">Calella</a>
-      <a href="#resenas"       class="mnav-link" data-i18n="nav.reviews">Reseñas</a>
-      <a href="#ubicacion"     class="mnav-link" data-i18n="nav.location">Ubicación</a>
-      <a href="#faq"           class="mnav-link" data-i18n="nav.faq">FAQ</a>
-    </div>
-    <a href="#reserva" class="btn" data-i18n="nav.book">Reservar</a>
   </nav>
 
   <!-- ─── HERO ────────────────────────────────────── -->
@@ -2706,14 +2635,15 @@
 
     // ───────── Auto-detect imágenes en disco ─────────
     // Carga img/<folder>/<prefix>-NN.<ext> hasta el primer fallo.
-    const EXTS = ['jpg', 'jpeg', 'png', 'webp', 'JPG', 'JPEG', 'PNG', 'WEBP'];
+    const EXTS = ['jpg', 'png', 'webp', 'jpeg'];
     const MAX  = 40;
 
     function imgExists(url) {
       return new Promise((resolve) => {
         const im = new Image();
-        im.onload = () => resolve(true);
-        im.onerror = () => resolve(false);
+        const t = setTimeout(() => resolve(false), 4000);
+        im.onload  = () => { clearTimeout(t); resolve(true);  };
+        im.onerror = () => { clearTimeout(t); resolve(false); };
         im.src = url;
       });
     }
@@ -3040,39 +2970,6 @@
         });
         btn.closest('.calella-more').remove();
       });
-    })();
-
-    // ───────── Menú mòbil ─────────
-    (function initMobileMenu() {
-      const toggle   = document.querySelector('.menu-toggle');
-      const drawer   = document.getElementById('mobile-nav');
-      const overlay  = document.getElementById('mobile-overlay');
-      const closeBtn = document.getElementById('mobile-nav-close');
-      if (!toggle || !drawer || !overlay) return;
-
-      function open() {
-        overlay.style.display = 'block';
-        requestAnimationFrame(() => {
-          overlay.classList.add('open');
-          drawer.classList.add('open');
-        });
-        document.body.style.overflow = 'hidden';
-        toggle.setAttribute('aria-expanded', 'true');
-      }
-
-      function close() {
-        overlay.classList.remove('open');
-        drawer.classList.remove('open');
-        document.body.style.overflow = '';
-        toggle.setAttribute('aria-expanded', 'false');
-        overlay.addEventListener('transitionend', () => { overlay.style.display = 'none'; }, { once: true });
-      }
-
-      toggle.addEventListener('click', open);
-      if (closeBtn) closeBtn.addEventListener('click', close);
-      overlay.addEventListener('click', close);
-      drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
-      document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
     })();
 
     // ───────── FAQ acordió (un sol obert) ─────────
