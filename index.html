@@ -7,6 +7,8 @@
   <meta name="description" content="Hostal Coll, alojamiento familiar en Calella de la Costa (Maresme) desde 1950. Habitaciones individuales y dobles con baño privado, WiFi, calefacción y opción pet friendly. A 50 m de la playa." />
   <meta name="keywords" content="hostal calella, hostal coll, alojamiento calella de la costa, hostal maresme, hostal familiar calella, hostal barato calella, hostal calella barcelona" />
   <link rel="canonical" href="https://hostalcoll.com/" />
+  <link rel="icon" type="image/png" href="img/logo/logobreusinfondo.png" />
+  <link rel="apple-touch-icon" href="img/logo/logobreusinfondo.png" />
 
   <!-- Hreflang multilingüe -->
   <link rel="alternate" hreflang="es" href="https://hostalcoll.com/" />
@@ -2790,37 +2792,25 @@
     }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
     document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
 
-    // ───────── Auto-detect imágenes en disco ─────────
-    // Carga img/<folder>/<prefix>-NN.<ext> hasta el primer fallo.
-    const EXTS = ['jpg', 'png', 'webp', 'jpeg'];
-    const MAX  = 40;
-
-    function imgExists(url) {
-      return new Promise((resolve) => {
-        const im = new Image();
-        const t = setTimeout(() => resolve(false), 4000);
-        im.onload  = () => { clearTimeout(t); resolve(true);  };
-        im.onerror = () => { clearTimeout(t); resolve(false); };
-        im.src = url;
-      });
-    }
-
-    async function discover(folder, prefix) {
-      const found = [];
-      for (let i = 1; i <= MAX; i++) {
-        const num = String(i).padStart(2, '0');
-        let hit = null;
-        for (const ext of EXTS) {
-          const url = prefix
-            ? `${folder}/${prefix}-${num}.${ext}`
-            : `${folder}/${num}.${ext}`;
-          if (await imgExists(url)) { hit = url; break; }
-        }
-        if (hit) found.push(hit);
-        else break;
-      }
-      return found;
-    }
+    // ───────── Listado de imágenes del carrusel ─────────
+    // Para añadir fotos: déjalas en img/<carpeta>/ y añade su ruta a la lista
+    // correspondiente. El orden de la lista es el orden en el carrusel.
+    const ROOM_IMAGES = {
+      individual: [
+        'img/habitaciones/individual-01.png',
+      ],
+      doble: [
+        'img/habitaciones/doble-01.png',
+        'img/habitaciones/doble-02.png',
+        'img/habitaciones/doble-03.jpg',
+        'img/habitaciones/doble-04.png',
+      ],
+      banos: [
+        'img/banos/01.jpg',
+        'img/banos/02.png',
+        'img/banos/03.png',
+      ],
+    };
 
     // ───────── Carrusel ─────────
     function buildCarousel(el, slides) {
@@ -3044,20 +3034,13 @@
 
 
     // ───────── Inicialización ─────────
-    (async function init() {
-      // HABITACIONES: individuales + dobles + baños mezclados
-      const [indiv, dobles, banos] = await Promise.all([
-        discover('img/habitaciones', 'individual'),
-        discover('img/habitaciones', 'doble'),
-        discover('img/banos', null),
-      ]);
-
-      // Camas (individuales + dobles) y baños, alternados: cama-baño-cama-baño…
+    (function init() {
+      // HABITACIONES: individuales + dobles + baños alternados (cama-baño-cama-baño…)
       const camas = [
-        ...indiv.map((src, i) => ({ src, caption: `Individual · ${String(i+1).padStart(2,'0')}`, alt: `Habitación individual ${i+1}` })),
-        ...dobles.map((src, i) => ({ src, caption: `Doble · ${String(i+1).padStart(2,'0')}`, alt: `Habitación doble ${i+1}` })),
+        ...ROOM_IMAGES.individual.map((src, i) => ({ src, caption: `Individual · ${String(i+1).padStart(2,'0')}`, alt: `Habitación individual ${i+1}` })),
+        ...ROOM_IMAGES.doble.map((src, i)      => ({ src, caption: `Doble · ${String(i+1).padStart(2,'0')}`,      alt: `Habitación doble ${i+1}` })),
       ];
-      const banyos = banos.map((src, i) => ({ src, caption: `Baño privado · ${String(i+1).padStart(2,'0')}`, alt: `Baño ${i+1}` }));
+      const banyos = ROOM_IMAGES.banos.map((src, i) => ({ src, caption: `Baño privado · ${String(i+1).padStart(2,'0')}`, alt: `Baño ${i+1}` }));
 
       const roomSlides = [];
       const maxLen = Math.max(camas.length, banyos.length);
