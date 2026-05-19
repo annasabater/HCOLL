@@ -174,12 +174,11 @@
 
     // No selector here on purpose: legal pages just follow whatever the
     // visitor picked on the home (shared localStorage key 'lang').
-    let initialLang = 'es';
-    try { initialLang = localStorage.getItem('lang') || initialLang; } catch (e) {}
-    if (!T[initialLang] && initialLang !== 'es') {
-      initialLang = (navigator.language || 'es').slice(0, 2);
-    }
-    if (initialLang !== 'es' && !T[initialLang]) initialLang = 'es';
+    // Detection order: stored choice > browser locale > English. Unsupported
+    // locales (de, it, pt…) fall back to English, not Spanish.
+    let stored; try { stored = localStorage.getItem('lang'); } catch (e) {}
+    let initialLang = stored || (navigator.language || 'en').slice(0, 2);
+    if (initialLang !== 'es' && !T[initialLang]) initialLang = 'en';
     applyLang(initialLang);
   </script>
 </body>

@@ -2804,8 +2804,10 @@
     };
 
     let _storedLang; try { _storedLang = localStorage.getItem('lang'); } catch(e) {}
-    let currentLang = _storedLang || (navigator.language || 'es').slice(0,2);
-    if (!TRANSLATIONS[currentLang]) currentLang = 'es';
+    let currentLang = _storedLang || (navigator.language || 'en').slice(0,2);
+    // Unsupported browser locale (de, it, pt…) falls back to English, not Spanish:
+    // a German visitor is far more likely to read English than Spanish.
+    if (!TRANSLATIONS[currentLang]) currentLang = 'en';
 
     const FLAG_SVGS = {
       es: '<svg viewBox="0 0 20 14" width="20" height="14"><rect width="20" height="14" fill="#AA151B"/><rect y="3.5" width="20" height="7" fill="#F1BF00"/></svg>',
