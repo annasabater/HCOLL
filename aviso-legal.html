@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Aviso Legal · Hostal Coll</title>
+  <title data-i18n="doc.title">Aviso Legal · Hostal Coll</title>
+  <link rel="icon" type="image/png" href="img/logo/logobreusinfondo.png"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
@@ -25,12 +26,23 @@
     }
     header .inner {
       max-width: 760px; margin: 0 auto; padding: 0 24px;
-      display: flex; align-items: center; justify-content: space-between;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
     }
     header a.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
     header .brand-name { font-family: var(--serif); font-size: 1.1rem; letter-spacing: 0.12em; color: var(--ink); font-weight: 400; }
-    header a.back { font-size: 0.8rem; color: var(--granate); text-decoration: none; letter-spacing: 0.06em; }
+    header a.back { font-size: 0.8rem; color: var(--granate); text-decoration: none; letter-spacing: 0.06em; white-space: nowrap; }
     header a.back:hover { text-decoration: underline; }
+    .header-actions { display: flex; align-items: center; gap: 14px; }
+    .lang-selector { display: flex; gap: 2px; }
+    .lang-btn {
+      background: none; border: 1px solid transparent;
+      padding: 4px 5px; cursor: pointer; border-radius: 3px;
+      opacity: 0.5; transition: opacity 0.2s, border-color 0.2s;
+      display: inline-flex; align-items: center;
+    }
+    .lang-btn:hover { opacity: 0.9; }
+    .lang-btn.active { opacity: 1; border-color: var(--line); }
+    .lang-btn svg { display: block; }
     main { max-width: 760px; margin: 0 auto; padding: 56px 24px 80px; }
     h1 { font-family: var(--serif); font-size: 2.2rem; font-weight: 400; margin-bottom: 8px; }
     .updated { font-size: 0.78rem; color: var(--ink-soft); margin-bottom: 48px; }
@@ -38,46 +50,173 @@
     p { font-size: 0.92rem; color: var(--ink-soft); margin-bottom: 14px; }
     a { color: var(--granate); }
     footer-note { display: block; margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 0.78rem; color: var(--ink-soft); text-align: center; }
+    @media (max-width: 560px) {
+      header .inner { flex-wrap: wrap; row-gap: 12px; }
+      header a.back { font-size: 0.72rem; }
+      .header-actions { gap: 10px; }
+      .brand-name { font-size: 1rem; }
+    }
   </style>
 </head>
 <body>
   <header>
     <div class="inner">
-      <a href="index.html" class="brand">
+      <a href="index.html" class="brand" aria-label="Hostal Coll · inicio">
         <img src="img/logo/logobreusinfondo.png" alt="Hostal Coll" width="46" height="46" style="object-fit:contain"/>
         <span class="brand-name">HOSTAL COLL</span>
       </a>
-      <a href="index.html" class="back">← Volver al inicio</a>
+      <div class="header-actions">
+        <div class="lang-selector" id="lang-selector">
+          <button class="lang-btn" data-lang="es" aria-label="Castellano" title="Castellano">
+            <svg viewBox="0 0 20 14" width="22" height="15"><rect width="20" height="14" fill="#AA151B"/><rect y="3.5" width="20" height="7" fill="#F1BF00"/></svg>
+          </button>
+          <button class="lang-btn" data-lang="ca" aria-label="Català" title="Català">
+            <svg viewBox="0 0 20 14" width="22" height="15"><rect width="20" height="14" fill="#FCDD09"/><rect y="0" width="20" height="1.55" fill="#DA121A"/><rect y="3.11" width="20" height="1.55" fill="#DA121A"/><rect y="6.22" width="20" height="1.55" fill="#DA121A"/><rect y="9.33" width="20" height="1.55" fill="#DA121A"/><rect y="12.44" width="20" height="1.55" fill="#DA121A"/></svg>
+          </button>
+          <button class="lang-btn" data-lang="en" aria-label="English" title="English">
+            <svg viewBox="0 0 20 14" width="22" height="15"><rect width="20" height="14" fill="#012169"/><path d="M0 0 L20 14 M20 0 L0 14" stroke="#fff" stroke-width="3.5"/><path d="M0 0 L20 14 M20 0 L0 14" stroke="#C8102E" stroke-width="2"/><rect x="8.5" width="3" height="14" fill="#fff"/><rect y="5.5" width="20" height="3" fill="#fff"/><rect x="9" width="2" height="14" fill="#C8102E"/><rect y="6" width="20" height="2" fill="#C8102E"/></svg>
+          </button>
+          <button class="lang-btn" data-lang="fr" aria-label="Français" title="Français">
+            <svg viewBox="0 0 20 14" width="22" height="15"><rect width="20" height="14" fill="#fff"/><rect width="6.67" height="14" fill="#002395"/><rect x="13.33" width="6.67" height="14" fill="#ED2939"/></svg>
+          </button>
+        </div>
+        <a href="index.html" class="back" data-i18n="back">← Volver al inicio</a>
+      </div>
     </div>
   </header>
   <main>
-    <h1>Aviso Legal</h1>
-    <p class="updated">Última actualización: mayo de 2026</p>
+    <h1 data-i18n="title">Aviso Legal</h1>
+    <p class="updated" data-i18n="updated">Última actualización: mayo de 2026</p>
 
-    <h2>1. Datos identificativos</h2>
-    <p>En cumplimiento de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y del Comercio Electrónico (LSSI-CE), se facilitan los siguientes datos:</p>
-    <p><strong>Titular:</strong> Elisabeth Nualart Coll<br/>
+    <h2 data-i18n="s1.h">1. Datos identificativos</h2>
+    <p data-i18n="s1.p">En cumplimiento de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y del Comercio Electrónico (LSSI-CE), se facilitan los siguientes datos:</p>
+    <p data-i18n="s1.identity"><strong>Titular:</strong> Elisabeth Nualart Coll<br/>
     <strong>NIF:</strong> 38835174L<br/>
     <strong>Nombre comercial:</strong> Hostal Coll<br/>
     <strong>Domicilio:</strong> Carrer de Sant Isidre, 54, 08370 Calella, Barcelona, España<br/>
     <strong>Correo electrónico:</strong> <a href="mailto:hostalcoll@gmail.com">hostalcoll@gmail.com</a><br/>
     <strong>Actividad:</strong> Alojamiento turístico</p>
 
-    <h2>2. Objeto y ámbito de aplicación</h2>
-    <p>El presente aviso legal regula el uso del sitio web <strong>hostalcoll.com</strong>, del que es titular Elisabeth Nualart Coll. El acceso y uso de este sitio web implica la aceptación de las condiciones recogidas en este aviso legal.</p>
+    <h2 data-i18n="s2.h">2. Objeto y ámbito de aplicación</h2>
+    <p data-i18n="s2.p">El presente aviso legal regula el uso del sitio web <strong>hostalcoll.com</strong>, del que es titular Elisabeth Nualart Coll. El acceso y uso de este sitio web implica la aceptación de las condiciones recogidas en este aviso legal.</p>
 
-    <h2>3. Propiedad intelectual e industrial</h2>
-    <p>Todos los contenidos del sitio web —textos, fotografías, logotipos, diseño gráfico y cualquier otro elemento— son propiedad de Elisabeth Nualart Coll o se utilizan con autorización de sus titulares. Queda prohibida su reproducción, distribución o modificación total o parcial sin autorización expresa.</p>
-    <p>Las fotografías de las instalaciones son propiedad de Hostal Coll. Las reseñas de huéspedes son contenido generado por terceros y se publican con su consentimiento.</p>
+    <h2 data-i18n="s3.h">3. Propiedad intelectual e industrial</h2>
+    <p data-i18n="s3.p1">Todos los contenidos del sitio web —textos, fotografías, logotipos, diseño gráfico y cualquier otro elemento— son propiedad de Elisabeth Nualart Coll o se utilizan con autorización de sus titulares. Queda prohibida su reproducción, distribución o modificación total o parcial sin autorización expresa.</p>
+    <p data-i18n="s3.p2">Las fotografías de las instalaciones son propiedad de Hostal Coll. Las reseñas de huéspedes son contenido generado por terceros y se publican con su consentimiento.</p>
 
-    <h2>4. Responsabilidad</h2>
-    <p>El titular no se responsabiliza de los daños que pudieran derivarse del uso incorrecto de este sitio web, de posibles errores tipográficos o de la desactualización temporal de los contenidos. Se reserva el derecho de modificar, sin previo aviso, los contenidos del sitio web.</p>
-    <p>Este sitio web puede contener enlaces a sitios de terceros (Google Maps, WhatsApp). El titular no controla ni se responsabiliza del contenido de dichos sitios.</p>
+    <h2 data-i18n="s4.h">4. Responsabilidad</h2>
+    <p data-i18n="s4.p1">El titular no se responsabiliza de los daños que pudieran derivarse del uso incorrecto de este sitio web, de posibles errores tipográficos o de la desactualización temporal de los contenidos. Se reserva el derecho de modificar, sin previo aviso, los contenidos del sitio web.</p>
+    <p data-i18n="s4.p2">Este sitio web puede contener enlaces a sitios de terceros (Google Maps, WhatsApp). El titular no controla ni se responsabiliza del contenido de dichos sitios.</p>
 
-    <h2>5. Legislación aplicable y jurisdicción</h2>
-    <p>Las presentes condiciones se rigen por la legislación española. Para cualquier controversia derivada del uso de este sitio web, las partes se someten a los Juzgados y Tribunales de Barcelona, salvo que la normativa aplicable establezca otro fuero.</p>
+    <h2 data-i18n="s5.h">5. Legislación aplicable y jurisdicción</h2>
+    <p data-i18n="s5.p">Las presentes condiciones se rigen por la legislación española. Para cualquier controversia derivada del uso de este sitio web, las partes se someten a los Juzgados y Tribunales de Barcelona, salvo que la normativa aplicable establezca otro fuero.</p>
 
-    <footer-note>© 2026 Hostal Coll · <a href="privacidad.html">Política de privacidad</a> · <a href="cookies.html">Política de cookies</a></footer-note>
+    <footer-note data-i18n="foot">© 2026 Hostal Coll · <a href="privacidad.html">Política de privacidad</a> · <a href="cookies.html">Política de cookies</a></footer-note>
   </main>
+  <script>
+    const T = {
+      ca: {
+        'doc.title': 'Avís Legal · Hostal Coll',
+        'back': '← Tornar a l\'inici',
+        'title': 'Avís Legal',
+        'updated': 'Última actualització: maig de 2026',
+        's1.h': '1. Dades identificatives',
+        's1.p': 'En compliment de la Llei 34/2002, d\'11 de juliol, de Serveis de la Societat de la Informació i del Comerç Electrònic (LSSI-CE), es faciliten les següents dades:',
+        's1.identity': '<strong>Titular:</strong> Elisabeth Nualart Coll<br/><strong>NIF:</strong> 38835174L<br/><strong>Nom comercial:</strong> Hostal Coll<br/><strong>Domicili:</strong> Carrer de Sant Isidre, 54, 08370 Calella, Barcelona, Espanya<br/><strong>Correu electrònic:</strong> <a href="mailto:hostalcoll@gmail.com">hostalcoll@gmail.com</a><br/><strong>Activitat:</strong> Allotjament turístic',
+        's2.h': '2. Objecte i àmbit d\'aplicació',
+        's2.p': 'Aquest avís legal regula l\'ús del lloc web <strong>hostalcoll.com</strong>, del qual és titular Elisabeth Nualart Coll. L\'accés i ús d\'aquest lloc web implica l\'acceptació de les condicions recollides en aquest avís legal.',
+        's3.h': '3. Propietat intel·lectual i industrial',
+        's3.p1': 'Tots els continguts del lloc web —textos, fotografies, logotips, disseny gràfic i qualsevol altre element— són propietat d\'Elisabeth Nualart Coll o s\'utilitzen amb l\'autorització dels seus titulars. Queda prohibida la seva reproducció, distribució o modificació total o parcial sense autorització expressa.',
+        's3.p2': 'Les fotografies de les instal·lacions són propietat de Hostal Coll. Les ressenyes d\'hostes són contingut generat per tercers i es publiquen amb el seu consentiment.',
+        's4.h': '4. Responsabilitat',
+        's4.p1': 'El titular no es responsabilitza dels danys que es puguin derivar de l\'ús incorrecte d\'aquest lloc web, de possibles errors tipogràfics o de la desactualització temporal dels continguts. Es reserva el dret a modificar, sense avís previ, els continguts del lloc web.',
+        's4.p2': 'Aquest lloc web pot contenir enllaços a llocs de tercers (Google Maps, WhatsApp). El titular no controla ni es responsabilitza del contingut d\'aquests llocs.',
+        's5.h': '5. Legislació aplicable i jurisdicció',
+        's5.p': 'Aquestes condicions es regeixen per la legislació espanyola. Per a qualsevol controvèrsia derivada de l\'ús d\'aquest lloc web, les parts se sotmeten als Jutjats i Tribunals de Barcelona, llevat que la normativa aplicable estableixi un altre fur.',
+        'foot': '© 2026 Hostal Coll · <a href="privacidad.html">Política de privacitat</a> · <a href="cookies.html">Política de cookies</a>'
+      },
+      en: {
+        'doc.title': 'Legal Notice · Hostal Coll',
+        'back': '← Back to home',
+        'title': 'Legal Notice',
+        'updated': 'Last updated: May 2026',
+        's1.h': '1. Identification details',
+        's1.p': 'In accordance with Spanish Law 34/2002, of 11 July, on Information Society Services and Electronic Commerce (LSSI-CE), the following details are provided:',
+        's1.identity': '<strong>Owner:</strong> Elisabeth Nualart Coll<br/><strong>Tax ID (NIF):</strong> 38835174L<br/><strong>Trade name:</strong> Hostal Coll<br/><strong>Address:</strong> Carrer de Sant Isidre, 54, 08370 Calella, Barcelona, Spain<br/><strong>Email:</strong> <a href="mailto:hostalcoll@gmail.com">hostalcoll@gmail.com</a><br/><strong>Activity:</strong> Tourist accommodation',
+        's2.h': '2. Purpose and scope',
+        's2.p': 'This legal notice governs the use of the website <strong>hostalcoll.com</strong>, owned by Elisabeth Nualart Coll. Accessing and using this website implies acceptance of the conditions set out in this notice.',
+        's3.h': '3. Intellectual and industrial property',
+        's3.p1': 'All contents of the website — texts, photographs, logos, graphic design and any other element — are the property of Elisabeth Nualart Coll or are used with the authorisation of their owners. Their reproduction, distribution or modification, in whole or in part, without express authorisation is prohibited.',
+        's3.p2': 'Photographs of the premises are the property of Hostal Coll. Guest reviews are content generated by third parties and are published with their consent.',
+        's4.h': '4. Liability',
+        's4.p1': 'The owner accepts no liability for any damages arising from improper use of this website, possible typographical errors or temporarily outdated content. The owner reserves the right to modify the contents of the website without prior notice.',
+        's4.p2': 'This website may contain links to third-party sites (Google Maps, WhatsApp). The owner does not control or accept any liability for the content of those sites.',
+        's5.h': '5. Applicable law and jurisdiction',
+        's5.p': 'These terms are governed by Spanish law. For any dispute arising from the use of this website, the parties submit to the Courts and Tribunals of Barcelona, unless applicable law establishes another jurisdiction.',
+        'foot': '© 2026 Hostal Coll · <a href="privacidad.html">Privacy policy</a> · <a href="cookies.html">Cookie policy</a>'
+      },
+      fr: {
+        'doc.title': 'Mentions Légales · Hostal Coll',
+        'back': '← Retour à l\'accueil',
+        'title': 'Mentions Légales',
+        'updated': 'Dernière mise à jour : mai 2026',
+        's1.h': '1. Données d\'identification',
+        's1.p': 'Conformément à la loi espagnole 34/2002, du 11 juillet, relative aux services de la société de l\'information et du commerce électronique (LSSI-CE), les informations suivantes sont fournies :',
+        's1.identity': '<strong>Titulaire :</strong> Elisabeth Nualart Coll<br/><strong>NIF :</strong> 38835174L<br/><strong>Nom commercial :</strong> Hostal Coll<br/><strong>Adresse :</strong> Carrer de Sant Isidre, 54, 08370 Calella, Barcelona, Espagne<br/><strong>Email :</strong> <a href="mailto:hostalcoll@gmail.com">hostalcoll@gmail.com</a><br/><strong>Activité :</strong> Hébergement touristique',
+        's2.h': '2. Objet et champ d\'application',
+        's2.p': 'Les présentes mentions légales régissent l\'utilisation du site web <strong>hostalcoll.com</strong>, dont Elisabeth Nualart Coll est titulaire. L\'accès et l\'utilisation de ce site web impliquent l\'acceptation des conditions énoncées dans les présentes mentions.',
+        's3.h': '3. Propriété intellectuelle et industrielle',
+        's3.p1': 'Tous les contenus du site web — textes, photographies, logos, conception graphique et tout autre élément — sont la propriété d\'Elisabeth Nualart Coll ou sont utilisés avec l\'autorisation de leurs titulaires. Toute reproduction, distribution ou modification totale ou partielle sans autorisation expresse est interdite.',
+        's3.p2': 'Les photographies des installations sont la propriété de Hostal Coll. Les avis des clients sont du contenu généré par des tiers et sont publiés avec leur consentement.',
+        's4.h': '4. Responsabilité',
+        's4.p1': 'Le titulaire décline toute responsabilité pour les dommages pouvant résulter d\'une utilisation incorrecte de ce site web, d\'éventuelles erreurs typographiques ou d\'une mise à jour temporairement obsolète des contenus. Il se réserve le droit de modifier sans préavis les contenus du site web.',
+        's4.p2': 'Ce site web peut contenir des liens vers des sites tiers (Google Maps, WhatsApp). Le titulaire ne contrôle pas et n\'assume aucune responsabilité quant au contenu de ces sites.',
+        's5.h': '5. Législation applicable et juridiction',
+        's5.p': 'Les présentes conditions sont régies par la législation espagnole. Pour tout litige découlant de l\'utilisation de ce site web, les parties se soumettent aux tribunaux de Barcelone, sauf si la législation applicable établit une autre juridiction.',
+        'foot': '© 2026 Hostal Coll · <a href="privacidad.html">Politique de confidentialité</a> · <a href="cookies.html">Politique de cookies</a>'
+      }
+    };
+
+    // Snapshot the Spanish defaults so we can restore them when switching back to ES.
+    const ES_DEFAULTS = new Map();
+    document.querySelectorAll('[data-i18n]').forEach((el) => {
+      ES_DEFAULTS.set(el, el.innerHTML);
+    });
+    const ES_TITLE = document.title;
+
+    function applyLang(lang) {
+      // Always rebase from Spanish first so partial translation tables don't leak.
+      ES_DEFAULTS.forEach((html, el) => { el.innerHTML = html; });
+      document.title = ES_TITLE;
+      if (lang !== 'es' && T[lang]) {
+        const t = T[lang];
+        document.querySelectorAll('[data-i18n]').forEach((el) => {
+          const key = el.getAttribute('data-i18n');
+          if (t[key] !== undefined) {
+            if (el.tagName === 'TITLE') document.title = t[key];
+            else el.innerHTML = t[key];
+          }
+        });
+      }
+      document.documentElement.lang = lang;
+      try { localStorage.setItem('lang', lang); } catch (e) {}
+      document.querySelectorAll('.lang-btn').forEach((b) => {
+        b.classList.toggle('active', b.dataset.lang === lang);
+      });
+    }
+
+    document.querySelectorAll('.lang-btn').forEach((b) => {
+      b.addEventListener('click', () => applyLang(b.dataset.lang));
+    });
+
+    // Initial language: localStorage > navigator.language > 'es'
+    let initialLang = 'es';
+    try { initialLang = localStorage.getItem('lang') || initialLang; } catch (e) {}
+    if (!T[initialLang] && initialLang !== 'es') {
+      initialLang = (navigator.language || 'es').slice(0, 2);
+    }
+    if (initialLang !== 'es' && !T[initialLang]) initialLang = 'es';
+    applyLang(initialLang);
+  </script>
 </body>
 </html>

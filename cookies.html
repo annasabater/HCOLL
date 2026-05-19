@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Política de Cookies · Hostal Coll</title>
+  <title data-i18n="doc.title">Política de Cookies · Hostal Coll</title>
+  <link rel="icon" type="image/png" href="img/logo/logobreusinfondo.png"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
@@ -25,12 +26,23 @@
     }
     header .inner {
       max-width: 760px; margin: 0 auto; padding: 0 24px;
-      display: flex; align-items: center; justify-content: space-between;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
     }
     header a.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
     header .brand-name { font-family: var(--serif); font-size: 1.1rem; letter-spacing: 0.12em; color: var(--ink); font-weight: 400; }
-    header a.back { font-size: 0.8rem; color: var(--granate); text-decoration: none; letter-spacing: 0.06em; }
+    header a.back { font-size: 0.8rem; color: var(--granate); text-decoration: none; letter-spacing: 0.06em; white-space: nowrap; }
     header a.back:hover { text-decoration: underline; }
+    .header-actions { display: flex; align-items: center; gap: 14px; }
+    .lang-selector { display: flex; gap: 2px; }
+    .lang-btn {
+      background: none; border: 1px solid transparent;
+      padding: 4px 5px; cursor: pointer; border-radius: 3px;
+      opacity: 0.5; transition: opacity 0.2s, border-color 0.2s;
+      display: inline-flex; align-items: center;
+    }
+    .lang-btn:hover { opacity: 0.9; }
+    .lang-btn.active { opacity: 1; border-color: var(--line); }
+    .lang-btn svg { display: block; }
     main { max-width: 760px; margin: 0 auto; padding: 56px 24px 80px; }
     h1 { font-family: var(--serif); font-size: 2.2rem; font-weight: 400; margin-bottom: 8px; }
     .updated { font-size: 0.78rem; color: var(--ink-soft); margin-bottom: 48px; }
@@ -42,76 +54,241 @@
     td { border: 1px solid var(--line); padding: 10px 14px; color: var(--ink-soft); vertical-align: top; }
     tr:nth-child(even) td { background: #fff; }
     footer-note { display: block; margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 0.78rem; color: var(--ink-soft); text-align: center; }
+    @media (max-width: 560px) {
+      header .inner { flex-wrap: wrap; row-gap: 12px; }
+      header a.back { font-size: 0.72rem; }
+      .header-actions { gap: 10px; }
+      .brand-name { font-size: 1rem; }
+      table { font-size: 0.78rem; }
+      th, td { padding: 8px 10px; }
+    }
   </style>
 </head>
 <body>
   <header>
     <div class="inner">
-      <a href="index.html" class="brand">
+      <a href="index.html" class="brand" aria-label="Hostal Coll · inicio">
         <img src="img/logo/logobreusinfondo.png" alt="Hostal Coll" width="46" height="46" style="object-fit:contain"/>
         <span class="brand-name">HOSTAL COLL</span>
       </a>
-      <a href="index.html" class="back">← Volver al inicio</a>
+      <div class="header-actions">
+        <div class="lang-selector" id="lang-selector">
+          <button class="lang-btn" data-lang="es" aria-label="Castellano" title="Castellano">
+            <svg viewBox="0 0 20 14" width="22" height="15"><rect width="20" height="14" fill="#AA151B"/><rect y="3.5" width="20" height="7" fill="#F1BF00"/></svg>
+          </button>
+          <button class="lang-btn" data-lang="ca" aria-label="Català" title="Català">
+            <svg viewBox="0 0 20 14" width="22" height="15"><rect width="20" height="14" fill="#FCDD09"/><rect y="0" width="20" height="1.55" fill="#DA121A"/><rect y="3.11" width="20" height="1.55" fill="#DA121A"/><rect y="6.22" width="20" height="1.55" fill="#DA121A"/><rect y="9.33" width="20" height="1.55" fill="#DA121A"/><rect y="12.44" width="20" height="1.55" fill="#DA121A"/></svg>
+          </button>
+          <button class="lang-btn" data-lang="en" aria-label="English" title="English">
+            <svg viewBox="0 0 20 14" width="22" height="15"><rect width="20" height="14" fill="#012169"/><path d="M0 0 L20 14 M20 0 L0 14" stroke="#fff" stroke-width="3.5"/><path d="M0 0 L20 14 M20 0 L0 14" stroke="#C8102E" stroke-width="2"/><rect x="8.5" width="3" height="14" fill="#fff"/><rect y="5.5" width="20" height="3" fill="#fff"/><rect x="9" width="2" height="14" fill="#C8102E"/><rect y="6" width="20" height="2" fill="#C8102E"/></svg>
+          </button>
+          <button class="lang-btn" data-lang="fr" aria-label="Français" title="Français">
+            <svg viewBox="0 0 20 14" width="22" height="15"><rect width="20" height="14" fill="#fff"/><rect width="6.67" height="14" fill="#002395"/><rect x="13.33" width="6.67" height="14" fill="#ED2939"/></svg>
+          </button>
+        </div>
+        <a href="index.html" class="back" data-i18n="back">← Volver al inicio</a>
+      </div>
     </div>
   </header>
   <main>
-    <h1>Política de Cookies</h1>
-    <p class="updated">Última actualización: mayo de 2026</p>
+    <h1 data-i18n="title">Política de Cookies</h1>
+    <p class="updated" data-i18n="updated">Última actualización: mayo de 2026</p>
 
-    <h2>1. ¿Qué son las cookies?</h2>
-    <p>Las cookies son pequeños archivos de texto que los sitios web almacenan en tu dispositivo cuando los visitas. Sirven para recordar preferencias, analizar el tráfico o activar funcionalidades de terceros.</p>
+    <h2 data-i18n="s1.h">1. ¿Qué son las cookies?</h2>
+    <p data-i18n="s1.p">Las cookies son pequeños archivos de texto que los sitios web almacenan en tu dispositivo cuando los visitas. Sirven para recordar preferencias, analizar el tráfico o activar funcionalidades de terceros.</p>
 
-    <h2>2. Cookies que utiliza este sitio web</h2>
-    <p>El sitio web <strong>hostalcoll.com</strong> utiliza un número muy reducido de cookies, todas ellas relacionadas con servicios de terceros:</p>
+    <h2 data-i18n="s2.h">2. Cookies que utiliza este sitio web</h2>
+    <p data-i18n="s2.p">El sitio web <strong>hostalcoll.com</strong> utiliza un número muy reducido de cookies, todas ellas relacionadas con servicios de terceros:</p>
 
     <table>
       <thead>
         <tr>
-          <th>Cookie</th>
-          <th>Proveedor</th>
-          <th>Tipo</th>
-          <th>Finalidad</th>
-          <th>Duración</th>
+          <th data-i18n="th.cookie">Cookie</th>
+          <th data-i18n="th.provider">Proveedor</th>
+          <th data-i18n="th.type">Tipo</th>
+          <th data-i18n="th.purpose">Finalidad</th>
+          <th data-i18n="th.duration">Duración</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>Cookies de Google Maps</td>
+          <td data-i18n="r1.cookie">Cookies de Google Maps</td>
           <td>Google LLC</td>
-          <td>Terceros · Funcional</td>
-          <td>Mostrar el mapa interactivo de ubicación del hostal integrado en la web</td>
-          <td>Según política de Google</td>
+          <td data-i18n="r1.type">Terceros · Funcional</td>
+          <td data-i18n="r1.purpose">Mostrar el mapa interactivo de ubicación del hostal integrado en la web</td>
+          <td data-i18n="r1.duration">Según política de Google</td>
         </tr>
         <tr>
           <td>lang</td>
           <td>hostalcoll.com</td>
-          <td>Propia · Funcional</td>
-          <td>Recordar el idioma seleccionado por el visitante (español, catalán, inglés o francés)</td>
-          <td>Persistente (localStorage)</td>
+          <td data-i18n="r2.type">Propia · Funcional</td>
+          <td data-i18n="r2.purpose">Recordar el idioma seleccionado por el visitante (español, catalán, inglés o francés)</td>
+          <td data-i18n="r2.duration">Persistente (localStorage)</td>
         </tr>
       </tbody>
     </table>
 
-    <p>Este sitio web <strong>no utiliza</strong> cookies de analítica, publicidad ni rastreo.</p>
+    <p data-i18n="s2.p2">Este sitio web <strong>no utiliza</strong> cookies de analítica, publicidad ni rastreo.</p>
 
-    <h2>3. Cookies de Google Maps</h2>
-    <p>El mapa de localización del hostal está integrado mediante un iframe de Google Maps. Al cargar el mapa, Google puede instalar sus propias cookies en tu dispositivo para el correcto funcionamiento del servicio. Hostal Coll no tiene acceso ni control sobre estas cookies.</p>
-    <p>Para más información sobre las cookies de Google, consulta: <a href="https://policies.google.com/technologies/cookies" target="_blank" rel="noopener">policies.google.com/technologies/cookies</a></p>
+    <h2 data-i18n="s3.h">3. Cookies de Google Maps</h2>
+    <p data-i18n="s3.p1">El mapa de localización del hostal está integrado mediante un iframe de Google Maps. Al cargar el mapa, Google puede instalar sus propias cookies en tu dispositivo para el correcto funcionamiento del servicio. Hostal Coll no tiene acceso ni control sobre estas cookies.</p>
+    <p data-i18n="s3.p2">Para más información sobre las cookies de Google, consulta: <a href="https://policies.google.com/technologies/cookies" target="_blank" rel="noopener">policies.google.com/technologies/cookies</a></p>
 
-    <h2>4. Cómo gestionar o desactivar las cookies</h2>
-    <p>Puedes configurar tu navegador para rechazar o eliminar cookies. A continuación, los enlaces de ayuda de los principales navegadores:</p>
-    <p>
+    <h2 data-i18n="s4.h">4. Cómo gestionar o desactivar las cookies</h2>
+    <p data-i18n="s4.p1">Puedes configurar tu navegador para rechazar o eliminar cookies. A continuación, los enlaces de ayuda de los principales navegadores:</p>
+    <p data-i18n="s4.browsers">
       <a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener">Google Chrome</a> ·
       <a href="https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias" target="_blank" rel="noopener">Mozilla Firefox</a> ·
       <a href="https://support.apple.com/es-es/guide/safari/sfri11471/mac" target="_blank" rel="noopener">Safari</a> ·
       <a href="https://support.microsoft.com/es-es/microsoft-edge/eliminar-las-cookies-en-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" rel="noopener">Microsoft Edge</a>
     </p>
-    <p>Ten en cuenta que deshabilitar las cookies puede afectar al funcionamiento de algunas partes del sitio web, como el mapa de localización.</p>
+    <p data-i18n="s4.p2">Ten en cuenta que deshabilitar las cookies puede afectar al funcionamiento de algunas partes del sitio web, como el mapa de localización.</p>
 
-    <h2>5. Actualización de esta política</h2>
-    <p>Podemos actualizar esta política en cualquier momento. La fecha de última actualización figura al inicio de la página.</p>
+    <h2 data-i18n="s5.h">5. Actualización de esta política</h2>
+    <p data-i18n="s5.p">Podemos actualizar esta política en cualquier momento. La fecha de última actualización figura al inicio de la página.</p>
 
-    <footer-note>© 2026 Hostal Coll · <a href="aviso-legal.html">Aviso legal</a> · <a href="privacidad.html">Política de privacidad</a></footer-note>
+    <footer-note data-i18n="foot">© 2026 Hostal Coll · <a href="aviso-legal.html">Aviso legal</a> · <a href="privacidad.html">Política de privacidad</a></footer-note>
   </main>
+  <script>
+    const T = {
+      ca: {
+        'doc.title': 'Política de Cookies · Hostal Coll',
+        'back': '← Tornar a l\'inici',
+        'title': 'Política de Cookies',
+        'updated': 'Última actualització: maig de 2026',
+        's1.h': '1. Què són les cookies?',
+        's1.p': 'Les cookies són petits arxius de text que els llocs web emmagatzemen al teu dispositiu quan els visites. Serveixen per recordar preferències, analitzar el trànsit o activar funcionalitats de tercers.',
+        's2.h': '2. Cookies que utilitza aquest lloc web',
+        's2.p': 'El lloc web <strong>hostalcoll.com</strong> utilitza un nombre molt reduït de cookies, totes relacionades amb serveis de tercers:',
+        'th.cookie': 'Cookie',
+        'th.provider': 'Proveïdor',
+        'th.type': 'Tipus',
+        'th.purpose': 'Finalitat',
+        'th.duration': 'Durada',
+        'r1.cookie': 'Cookies de Google Maps',
+        'r1.type': 'Tercers · Funcional',
+        'r1.purpose': 'Mostrar el mapa interactiu d\'ubicació de l\'hostal integrat al web',
+        'r1.duration': 'Segons política de Google',
+        'r2.type': 'Pròpia · Funcional',
+        'r2.purpose': 'Recordar l\'idioma seleccionat pel visitant (espanyol, català, anglès o francès)',
+        'r2.duration': 'Persistent (localStorage)',
+        's2.p2': 'Aquest lloc web <strong>no utilitza</strong> cookies d\'analítica, publicitat ni rastreig.',
+        's3.h': '3. Cookies de Google Maps',
+        's3.p1': 'El mapa de localització de l\'hostal està integrat mitjançant un iframe de Google Maps. En carregar el mapa, Google pot instal·lar les seves pròpies cookies al teu dispositiu per al correcte funcionament del servei. Hostal Coll no té accés ni control sobre aquestes cookies.',
+        's3.p2': 'Per a més informació sobre les cookies de Google, consulta: <a href="https://policies.google.com/technologies/cookies" target="_blank" rel="noopener">policies.google.com/technologies/cookies</a>',
+        's4.h': '4. Com gestionar o desactivar les cookies',
+        's4.p1': 'Pots configurar el teu navegador per rebutjar o eliminar cookies. A continuació, els enllaços d\'ajuda dels principals navegadors:',
+        's4.browsers': '<a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener">Google Chrome</a> · <a href="https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias" target="_blank" rel="noopener">Mozilla Firefox</a> · <a href="https://support.apple.com/es-es/guide/safari/sfri11471/mac" target="_blank" rel="noopener">Safari</a> · <a href="https://support.microsoft.com/es-es/microsoft-edge/eliminar-las-cookies-en-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" rel="noopener">Microsoft Edge</a>',
+        's4.p2': 'Tingues en compte que deshabilitar les cookies pot afectar el funcionament d\'algunes parts del lloc web, com el mapa de localització.',
+        's5.h': '5. Actualització d\'aquesta política',
+        's5.p': 'Podem actualitzar aquesta política en qualsevol moment. La data d\'última actualització figura a l\'inici de la pàgina.',
+        'foot': '© 2026 Hostal Coll · <a href="aviso-legal.html">Avís legal</a> · <a href="privacidad.html">Política de privacitat</a>'
+      },
+      en: {
+        'doc.title': 'Cookie Policy · Hostal Coll',
+        'back': '← Back to home',
+        'title': 'Cookie Policy',
+        'updated': 'Last updated: May 2026',
+        's1.h': '1. What are cookies?',
+        's1.p': 'Cookies are small text files that websites store on your device when you visit them. They are used to remember preferences, analyse traffic or enable third-party functionality.',
+        's2.h': '2. Cookies used on this website',
+        's2.p': 'The website <strong>hostalcoll.com</strong> uses a very small number of cookies, all related to third-party services:',
+        'th.cookie': 'Cookie',
+        'th.provider': 'Provider',
+        'th.type': 'Type',
+        'th.purpose': 'Purpose',
+        'th.duration': 'Duration',
+        'r1.cookie': 'Google Maps cookies',
+        'r1.type': 'Third-party · Functional',
+        'r1.purpose': 'Display the interactive map showing the hostal\'s location embedded on the website',
+        'r1.duration': 'Per Google\'s policy',
+        'r2.type': 'Own · Functional',
+        'r2.purpose': 'Remember the language selected by the visitor (Spanish, Catalan, English or French)',
+        'r2.duration': 'Persistent (localStorage)',
+        's2.p2': 'This website <strong>does not use</strong> analytics, advertising or tracking cookies.',
+        's3.h': '3. Google Maps cookies',
+        's3.p1': 'The hostal\'s location map is embedded via a Google Maps iframe. When the map loads, Google may install its own cookies on your device for the proper operation of the service. Hostal Coll has no access to or control over these cookies.',
+        's3.p2': 'For more information about Google\'s cookies, see: <a href="https://policies.google.com/technologies/cookies" target="_blank" rel="noopener">policies.google.com/technologies/cookies</a>',
+        's4.h': '4. How to manage or disable cookies',
+        's4.p1': 'You can configure your browser to reject or delete cookies. Below are help links for the main browsers:',
+        's4.browsers': '<a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener">Google Chrome</a> · <a href="https://support.mozilla.org/en-US/kb/enhanced-tracking-protection-firefox-desktop" target="_blank" rel="noopener">Mozilla Firefox</a> · <a href="https://support.apple.com/en-gb/guide/safari/sfri11471/mac" target="_blank" rel="noopener">Safari</a> · <a href="https://support.microsoft.com/en-us/microsoft-edge/delete-cookies-in-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" rel="noopener">Microsoft Edge</a>',
+        's4.p2': 'Note that disabling cookies may affect the functioning of certain parts of the website, such as the location map.',
+        's5.h': '5. Updates to this policy',
+        's5.p': 'We may update this policy at any time. The date of the latest update appears at the beginning of the page.',
+        'foot': '© 2026 Hostal Coll · <a href="aviso-legal.html">Legal notice</a> · <a href="privacidad.html">Privacy policy</a>'
+      },
+      fr: {
+        'doc.title': 'Politique de Cookies · Hostal Coll',
+        'back': '← Retour à l\'accueil',
+        'title': 'Politique de Cookies',
+        'updated': 'Dernière mise à jour : mai 2026',
+        's1.h': '1. Que sont les cookies ?',
+        's1.p': 'Les cookies sont de petits fichiers texte que les sites web enregistrent sur votre appareil lorsque vous les visitez. Ils servent à mémoriser des préférences, analyser le trafic ou activer des fonctionnalités tierces.',
+        's2.h': '2. Cookies utilisés sur ce site web',
+        's2.p': 'Le site web <strong>hostalcoll.com</strong> utilise un très petit nombre de cookies, tous liés à des services tiers :',
+        'th.cookie': 'Cookie',
+        'th.provider': 'Fournisseur',
+        'th.type': 'Type',
+        'th.purpose': 'Finalité',
+        'th.duration': 'Durée',
+        'r1.cookie': 'Cookies Google Maps',
+        'r1.type': 'Tiers · Fonctionnel',
+        'r1.purpose': 'Afficher la carte interactive de la localisation de l\'hôtel intégrée au site web',
+        'r1.duration': 'Selon la politique de Google',
+        'r2.type': 'Propre · Fonctionnel',
+        'r2.purpose': 'Mémoriser la langue sélectionnée par le visiteur (espagnol, catalan, anglais ou français)',
+        'r2.duration': 'Persistant (localStorage)',
+        's2.p2': 'Ce site web <strong>n\'utilise pas</strong> de cookies d\'analyse, de publicité ni de suivi.',
+        's3.h': '3. Cookies Google Maps',
+        's3.p1': 'La carte de localisation de l\'hôtel est intégrée via un iframe Google Maps. Lors du chargement de la carte, Google peut installer ses propres cookies sur votre appareil pour le bon fonctionnement du service. Hostal Coll n\'a ni accès ni contrôle sur ces cookies.',
+        's3.p2': 'Pour plus d\'informations sur les cookies de Google, consultez : <a href="https://policies.google.com/technologies/cookies" target="_blank" rel="noopener">policies.google.com/technologies/cookies</a>',
+        's4.h': '4. Comment gérer ou désactiver les cookies',
+        's4.p1': 'Vous pouvez configurer votre navigateur pour refuser ou supprimer les cookies. Voici les liens d\'aide des principaux navigateurs :',
+        's4.browsers': '<a href="https://support.google.com/chrome/answer/95647?hl=fr" target="_blank" rel="noopener">Google Chrome</a> · <a href="https://support.mozilla.org/fr/kb/activer-desactiver-cookies-preferences" target="_blank" rel="noopener">Mozilla Firefox</a> · <a href="https://support.apple.com/fr-fr/guide/safari/sfri11471/mac" target="_blank" rel="noopener">Safari</a> · <a href="https://support.microsoft.com/fr-fr/microsoft-edge/supprimer-les-cookies-dans-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" rel="noopener">Microsoft Edge</a>',
+        's4.p2': 'Notez que la désactivation des cookies peut affecter le fonctionnement de certaines parties du site web, comme la carte de localisation.',
+        's5.h': '5. Mises à jour de cette politique',
+        's5.p': 'Nous pouvons mettre à jour cette politique à tout moment. La date de la dernière mise à jour figure au début de la page.',
+        'foot': '© 2026 Hostal Coll · <a href="aviso-legal.html">Mentions légales</a> · <a href="privacidad.html">Politique de confidentialité</a>'
+      }
+    };
+
+    const ES_DEFAULTS = new Map();
+    document.querySelectorAll('[data-i18n]').forEach((el) => {
+      ES_DEFAULTS.set(el, el.innerHTML);
+    });
+    const ES_TITLE = document.title;
+
+    function applyLang(lang) {
+      ES_DEFAULTS.forEach((html, el) => { el.innerHTML = html; });
+      document.title = ES_TITLE;
+      if (lang !== 'es' && T[lang]) {
+        const t = T[lang];
+        document.querySelectorAll('[data-i18n]').forEach((el) => {
+          const key = el.getAttribute('data-i18n');
+          if (t[key] !== undefined) {
+            if (el.tagName === 'TITLE') document.title = t[key];
+            else el.innerHTML = t[key];
+          }
+        });
+      }
+      document.documentElement.lang = lang;
+      try { localStorage.setItem('lang', lang); } catch (e) {}
+      document.querySelectorAll('.lang-btn').forEach((b) => {
+        b.classList.toggle('active', b.dataset.lang === lang);
+      });
+    }
+
+    document.querySelectorAll('.lang-btn').forEach((b) => {
+      b.addEventListener('click', () => applyLang(b.dataset.lang));
+    });
+
+    let initialLang = 'es';
+    try { initialLang = localStorage.getItem('lang') || initialLang; } catch (e) {}
+    if (!T[initialLang] && initialLang !== 'es') {
+      initialLang = (navigator.language || 'es').slice(0, 2);
+    }
+    if (initialLang !== 'es' && !T[initialLang]) initialLang = 'es';
+    applyLang(initialLang);
+  </script>
 </body>
 </html>

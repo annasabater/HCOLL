@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Política de Privacidad · Hostal Coll</title>
+  <title data-i18n="doc.title">Política de Privacidad · Hostal Coll</title>
+  <link rel="icon" type="image/png" href="img/logo/logobreusinfondo.png"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
@@ -25,12 +26,23 @@
     }
     header .inner {
       max-width: 760px; margin: 0 auto; padding: 0 24px;
-      display: flex; align-items: center; justify-content: space-between;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
     }
     header a.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
     header .brand-name { font-family: var(--serif); font-size: 1.1rem; letter-spacing: 0.12em; color: var(--ink); font-weight: 400; }
-    header a.back { font-size: 0.8rem; color: var(--granate); text-decoration: none; letter-spacing: 0.06em; }
+    header a.back { font-size: 0.8rem; color: var(--granate); text-decoration: none; letter-spacing: 0.06em; white-space: nowrap; }
     header a.back:hover { text-decoration: underline; }
+    .header-actions { display: flex; align-items: center; gap: 14px; }
+    .lang-selector { display: flex; gap: 2px; }
+    .lang-btn {
+      background: none; border: 1px solid transparent;
+      padding: 4px 5px; cursor: pointer; border-radius: 3px;
+      opacity: 0.5; transition: opacity 0.2s, border-color 0.2s;
+      display: inline-flex; align-items: center;
+    }
+    .lang-btn:hover { opacity: 0.9; }
+    .lang-btn.active { opacity: 1; border-color: var(--line); }
+    .lang-btn svg { display: block; }
     main { max-width: 760px; margin: 0 auto; padding: 56px 24px 80px; }
     h1 { font-family: var(--serif); font-size: 2.2rem; font-weight: 400; margin-bottom: 8px; }
     .updated { font-size: 0.78rem; color: var(--ink-soft); margin-bottom: 48px; }
@@ -42,59 +54,81 @@
     .highlight { background: #fff; border: 1px solid var(--line); border-left: 3px solid var(--granate); border-radius: 4px; padding: 16px 20px; margin: 20px 0; }
     .highlight p { margin: 0; font-size: 0.88rem; }
     footer-note { display: block; margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 0.78rem; color: var(--ink-soft); text-align: center; }
+    @media (max-width: 560px) {
+      header .inner { flex-wrap: wrap; row-gap: 12px; }
+      header a.back { font-size: 0.72rem; }
+      .header-actions { gap: 10px; }
+      .brand-name { font-size: 1rem; }
+    }
   </style>
 </head>
 <body>
   <header>
     <div class="inner">
-      <a href="index.html" class="brand">
+      <a href="index.html" class="brand" aria-label="Hostal Coll · inicio">
         <img src="img/logo/logobreusinfondo.png" alt="Hostal Coll" width="46" height="46" style="object-fit:contain"/>
         <span class="brand-name">HOSTAL COLL</span>
       </a>
-      <a href="index.html" class="back">← Volver al inicio</a>
+      <div class="header-actions">
+        <div class="lang-selector" id="lang-selector">
+          <button class="lang-btn" data-lang="es" aria-label="Castellano" title="Castellano">
+            <svg viewBox="0 0 20 14" width="22" height="15"><rect width="20" height="14" fill="#AA151B"/><rect y="3.5" width="20" height="7" fill="#F1BF00"/></svg>
+          </button>
+          <button class="lang-btn" data-lang="ca" aria-label="Català" title="Català">
+            <svg viewBox="0 0 20 14" width="22" height="15"><rect width="20" height="14" fill="#FCDD09"/><rect y="0" width="20" height="1.55" fill="#DA121A"/><rect y="3.11" width="20" height="1.55" fill="#DA121A"/><rect y="6.22" width="20" height="1.55" fill="#DA121A"/><rect y="9.33" width="20" height="1.55" fill="#DA121A"/><rect y="12.44" width="20" height="1.55" fill="#DA121A"/></svg>
+          </button>
+          <button class="lang-btn" data-lang="en" aria-label="English" title="English">
+            <svg viewBox="0 0 20 14" width="22" height="15"><rect width="20" height="14" fill="#012169"/><path d="M0 0 L20 14 M20 0 L0 14" stroke="#fff" stroke-width="3.5"/><path d="M0 0 L20 14 M20 0 L0 14" stroke="#C8102E" stroke-width="2"/><rect x="8.5" width="3" height="14" fill="#fff"/><rect y="5.5" width="20" height="3" fill="#fff"/><rect x="9" width="2" height="14" fill="#C8102E"/><rect y="6" width="20" height="2" fill="#C8102E"/></svg>
+          </button>
+          <button class="lang-btn" data-lang="fr" aria-label="Français" title="Français">
+            <svg viewBox="0 0 20 14" width="22" height="15"><rect width="20" height="14" fill="#fff"/><rect width="6.67" height="14" fill="#002395"/><rect x="13.33" width="6.67" height="14" fill="#ED2939"/></svg>
+          </button>
+        </div>
+        <a href="index.html" class="back" data-i18n="back">← Volver al inicio</a>
+      </div>
     </div>
   </header>
   <main>
-    <h1>Política de Privacidad</h1>
-    <p class="updated">Última actualización: mayo de 2026</p>
+    <h1 data-i18n="title">Política de Privacidad</h1>
+    <p class="updated" data-i18n="updated">Última actualización: mayo de 2026</p>
 
     <div class="highlight">
-      <p>En Hostal Coll respetamos tu privacidad. Esta política explica qué datos personales tratamos, con qué finalidad y cuáles son tus derechos.</p>
+      <p data-i18n="intro">En Hostal Coll respetamos tu privacidad. Esta política explica qué datos personales tratamos, con qué finalidad y cuáles son tus derechos.</p>
     </div>
 
-    <h2>1. Responsable del tratamiento</h2>
-    <p><strong>Titular:</strong> Elisabeth Nualart Coll<br/>
+    <h2 data-i18n="s1.h">1. Responsable del tratamiento</h2>
+    <p data-i18n="s1.identity"><strong>Titular:</strong> Elisabeth Nualart Coll<br/>
     <strong>NIF:</strong> 38835174L<br/>
     <strong>Nombre comercial:</strong> Hostal Coll<br/>
     <strong>Domicilio:</strong> Carrer de Sant Isidre, 54, 08370 Calella, Barcelona, España<br/>
     <strong>Contacto:</strong> <a href="mailto:hostalcoll@gmail.com">hostalcoll@gmail.com</a></p>
 
-    <h2>2. Datos que tratamos y finalidades</h2>
+    <h2 data-i18n="s2.h">2. Datos que tratamos y finalidades</h2>
 
-    <p><strong>a) Reseñas de huéspedes</strong></p>
-    <p>Publicamos en nuestra web reseñas de clientes que han utilizado nuestros servicios. Estos datos (nombre del huésped y texto de la reseña) provienen de Google Maps y se reproducen en el sitio web con la finalidad de informar a los visitantes sobre la experiencia de otros huéspedes.</p>
-    <ul>
+    <p data-i18n="s2.a.h"><strong>a) Reseñas de huéspedes</strong></p>
+    <p data-i18n="s2.a.p">Publicamos en nuestra web reseñas de clientes que han utilizado nuestros servicios. Estos datos (nombre del huésped y texto de la reseña) provienen de Google Maps y se reproducen en el sitio web con la finalidad de informar a los visitantes sobre la experiencia de otros huéspedes.</p>
+    <ul data-i18n="s2.a.ul">
       <li><strong>Datos tratados:</strong> nombre público de Google, texto de la reseña y fecha.</li>
       <li><strong>Base jurídica:</strong> interés legítimo del responsable (art. 6.1.f RGPD) en dar a conocer la calidad del servicio, y consentimiento implícito del huésped al publicar la reseña en Google de forma pública.</li>
       <li><strong>Plazo de conservación:</strong> mientras la reseña permanezca publicada en el sitio web. Puedes solicitar su retirada en cualquier momento.</li>
     </ul>
 
-    <p><strong>b) Comunicaciones por email o WhatsApp</strong></p>
-    <p>Cuando nos contactas a través de hostalcoll@gmail.com o WhatsApp para realizar una reserva o consulta, tratamos los datos que tú mismo nos facilitas (nombre, número de teléfono, correo electrónico, fechas de estancia).</p>
-    <ul>
+    <p data-i18n="s2.b.h"><strong>b) Comunicaciones por email o WhatsApp</strong></p>
+    <p data-i18n="s2.b.p">Cuando nos contactas a través de hostalcoll@gmail.com o WhatsApp para realizar una reserva o consulta, tratamos los datos que tú mismo nos facilitas (nombre, número de teléfono, correo electrónico, fechas de estancia).</p>
+    <ul data-i18n="s2.b.ul">
       <li><strong>Base jurídica:</strong> ejecución de un contrato o precontrato (art. 6.1.b RGPD).</li>
       <li><strong>Plazo de conservación:</strong> durante la relación contractual y el tiempo necesario para cumplir obligaciones legales (mínimo 5 años por obligaciones fiscales).</li>
     </ul>
 
-    <p><strong>c) Datos de navegación (Google Maps)</strong></p>
-    <p>Este sitio web incorpora un mapa de Google Maps mediante un iframe. Cuando el mapa se carga, Google puede recibir datos técnicos del dispositivo del visitante. Para más información, consulta la <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">política de privacidad de Google</a>.</p>
+    <p data-i18n="s2.c.h"><strong>c) Datos de navegación (Google Maps)</strong></p>
+    <p data-i18n="s2.c.p">Este sitio web incorpora un mapa de Google Maps mediante un iframe. Cuando el mapa se carga, Google puede recibir datos técnicos del dispositivo del visitante. Para más información, consulta la <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">política de privacidad de Google</a>.</p>
 
-    <h2>3. No cedemos datos a terceros</h2>
-    <p>No vendemos ni cedemos datos personales a terceros, salvo obligación legal o necesidad contractual (por ejemplo, gestorías para cumplir con el registro obligatorio de viajeros según la normativa de seguridad ciudadana).</p>
+    <h2 data-i18n="s3.h">3. No cedemos datos a terceros</h2>
+    <p data-i18n="s3.p">No vendemos ni cedemos datos personales a terceros, salvo obligación legal o necesidad contractual (por ejemplo, gestorías para cumplir con el registro obligatorio de viajeros según la normativa de seguridad ciudadana).</p>
 
-    <h2>4. Tus derechos</h2>
-    <p>Tienes derecho a:</p>
-    <ul>
+    <h2 data-i18n="s4.h">4. Tus derechos</h2>
+    <p data-i18n="s4.p1">Tienes derecho a:</p>
+    <ul data-i18n="s4.ul">
       <li><strong>Acceso:</strong> saber qué datos tuyos tratamos.</li>
       <li><strong>Rectificación:</strong> corregir datos inexactos.</li>
       <li><strong>Supresión:</strong> solicitar la eliminación de tus datos (incluida la retirada de tu reseña de nuestra web).</li>
@@ -102,13 +136,139 @@
       <li><strong>Portabilidad:</strong> recibir tus datos en formato estructurado.</li>
       <li><strong>Limitación:</strong> solicitar que suspendamos el tratamiento en determinados casos.</li>
     </ul>
-    <p>Para ejercer estos derechos, envíanos un email a <a href="mailto:hostalcoll@gmail.com">hostalcoll@gmail.com</a> indicando tu solicitud. Responderemos en un plazo máximo de un mes.</p>
-    <p>También tienes derecho a presentar una reclamación ante la <strong>Agencia Española de Protección de Datos (AEPD)</strong>: <a href="https://www.aepd.es" target="_blank" rel="noopener">www.aepd.es</a>.</p>
+    <p data-i18n="s4.p2">Para ejercer estos derechos, envíanos un email a <a href="mailto:hostalcoll@gmail.com">hostalcoll@gmail.com</a> indicando tu solicitud. Responderemos en un plazo máximo de un mes.</p>
+    <p data-i18n="s4.p3">También tienes derecho a presentar una reclamación ante la <strong>Agencia Española de Protección de Datos (AEPD)</strong>: <a href="https://www.aepd.es" target="_blank" rel="noopener">www.aepd.es</a>.</p>
 
-    <h2>5. Seguridad</h2>
-    <p>Adoptamos medidas técnicas y organizativas adecuadas para proteger los datos personales frente a accesos no autorizados, pérdida o destrucción accidental.</p>
+    <h2 data-i18n="s5.h">5. Seguridad</h2>
+    <p data-i18n="s5.p">Adoptamos medidas técnicas y organizativas adecuadas para proteger los datos personales frente a accesos no autorizados, pérdida o destrucción accidental.</p>
 
-    <footer-note>© 2026 Hostal Coll · <a href="aviso-legal.html">Aviso legal</a> · <a href="cookies.html">Política de cookies</a></footer-note>
+    <footer-note data-i18n="foot">© 2026 Hostal Coll · <a href="aviso-legal.html">Aviso legal</a> · <a href="cookies.html">Política de cookies</a></footer-note>
   </main>
+  <script>
+    const T = {
+      ca: {
+        'doc.title': 'Política de Privacitat · Hostal Coll',
+        'back': '← Tornar a l\'inici',
+        'title': 'Política de Privacitat',
+        'updated': 'Última actualització: maig de 2026',
+        'intro': 'A Hostal Coll respectem la teva privacitat. Aquesta política explica quines dades personals tractem, amb quina finalitat i quins són els teus drets.',
+        's1.h': '1. Responsable del tractament',
+        's1.identity': '<strong>Titular:</strong> Elisabeth Nualart Coll<br/><strong>NIF:</strong> 38835174L<br/><strong>Nom comercial:</strong> Hostal Coll<br/><strong>Domicili:</strong> Carrer de Sant Isidre, 54, 08370 Calella, Barcelona, Espanya<br/><strong>Contacte:</strong> <a href="mailto:hostalcoll@gmail.com">hostalcoll@gmail.com</a>',
+        's2.h': '2. Dades que tractem i finalitats',
+        's2.a.h': '<strong>a) Ressenyes d\'hostes</strong>',
+        's2.a.p': 'Publiquem al nostre web ressenyes de clients que han utilitzat els nostres serveis. Aquestes dades (nom de l\'hoste i text de la ressenya) provenen de Google Maps i es reprodueixen al lloc web amb la finalitat d\'informar els visitants sobre l\'experiència d\'altres hostes.',
+        's2.a.ul': '<li><strong>Dades tractades:</strong> nom públic de Google, text de la ressenya i data.</li><li><strong>Base jurídica:</strong> interès legítim del responsable (art. 6.1.f RGPD) a donar a conèixer la qualitat del servei, i consentiment implícit de l\'hoste en publicar la ressenya a Google de forma pública.</li><li><strong>Termini de conservació:</strong> mentre la ressenya romangui publicada al lloc web. Pots sol·licitar-ne la retirada en qualsevol moment.</li>',
+        's2.b.h': '<strong>b) Comunicacions per email o WhatsApp</strong>',
+        's2.b.p': 'Quan ens contactes a través de hostalcoll@gmail.com o WhatsApp per fer una reserva o consulta, tractem les dades que tu mateix ens facilites (nom, número de telèfon, correu electrònic, dates d\'estada).',
+        's2.b.ul': '<li><strong>Base jurídica:</strong> execució d\'un contracte o precontracte (art. 6.1.b RGPD).</li><li><strong>Termini de conservació:</strong> durant la relació contractual i el temps necessari per complir obligacions legals (mínim 5 anys per obligacions fiscals).</li>',
+        's2.c.h': '<strong>c) Dades de navegació (Google Maps)</strong>',
+        's2.c.p': 'Aquest lloc web incorpora un mapa de Google Maps mitjançant un iframe. Quan el mapa es carrega, Google pot rebre dades tècniques del dispositiu del visitant. Per a més informació, consulta la <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">política de privacitat de Google</a>.',
+        's3.h': '3. No cedim dades a tercers',
+        's3.p': 'No venem ni cedim dades personals a tercers, llevat d\'obligació legal o necessitat contractual (per exemple, gestories per complir amb el registre obligatori de viatgers segons la normativa de seguretat ciutadana).',
+        's4.h': '4. Els teus drets',
+        's4.p1': 'Tens dret a:',
+        's4.ul': '<li><strong>Accés:</strong> saber quines dades teves tractem.</li><li><strong>Rectificació:</strong> corregir dades inexactes.</li><li><strong>Supressió:</strong> sol·licitar l\'eliminació de les teves dades (inclosa la retirada de la teva ressenya del nostre web).</li><li><strong>Oposició:</strong> oposar-te al tractament basat en interès legítim.</li><li><strong>Portabilitat:</strong> rebre les teves dades en format estructurat.</li><li><strong>Limitació:</strong> sol·licitar que suspenguem el tractament en determinats casos.</li>',
+        's4.p2': 'Per exercir aquests drets, envia\'ns un email a <a href="mailto:hostalcoll@gmail.com">hostalcoll@gmail.com</a> indicant la teva sol·licitud. Respondrem en un termini màxim d\'un mes.',
+        's4.p3': 'També tens dret a presentar una reclamació davant l\'<strong>Agència Espanyola de Protecció de Dades (AEPD)</strong>: <a href="https://www.aepd.es" target="_blank" rel="noopener">www.aepd.es</a>.',
+        's5.h': '5. Seguretat',
+        's5.p': 'Adoptem mesures tècniques i organitzatives adequades per protegir les dades personals davant accessos no autoritzats, pèrdua o destrucció accidental.',
+        'foot': '© 2026 Hostal Coll · <a href="aviso-legal.html">Avís legal</a> · <a href="cookies.html">Política de cookies</a>'
+      },
+      en: {
+        'doc.title': 'Privacy Policy · Hostal Coll',
+        'back': '← Back to home',
+        'title': 'Privacy Policy',
+        'updated': 'Last updated: May 2026',
+        'intro': 'At Hostal Coll we respect your privacy. This policy explains what personal data we process, for what purpose and what your rights are.',
+        's1.h': '1. Data controller',
+        's1.identity': '<strong>Owner:</strong> Elisabeth Nualart Coll<br/><strong>Tax ID (NIF):</strong> 38835174L<br/><strong>Trade name:</strong> Hostal Coll<br/><strong>Address:</strong> Carrer de Sant Isidre, 54, 08370 Calella, Barcelona, Spain<br/><strong>Contact:</strong> <a href="mailto:hostalcoll@gmail.com">hostalcoll@gmail.com</a>',
+        's2.h': '2. Data we process and purposes',
+        's2.a.h': '<strong>a) Guest reviews</strong>',
+        's2.a.p': 'We publish on our website reviews from guests who have used our services. This data (guest name and review text) comes from Google Maps and is reproduced on the website to inform visitors about other guests\' experiences.',
+        's2.a.ul': '<li><strong>Data processed:</strong> public Google name, review text and date.</li><li><strong>Legal basis:</strong> legitimate interest of the controller (Art. 6(1)(f) GDPR) in promoting the quality of the service, and implicit consent of the guest when publishing the review publicly on Google.</li><li><strong>Retention period:</strong> as long as the review remains published on the website. You may request its removal at any time.</li>',
+        's2.b.h': '<strong>b) Communications by email or WhatsApp</strong>',
+        's2.b.p': 'When you contact us via hostalcoll@gmail.com or WhatsApp to make a reservation or enquiry, we process the data you provide (name, phone number, email, dates of stay).',
+        's2.b.ul': '<li><strong>Legal basis:</strong> performance of a contract or pre-contract (Art. 6(1)(b) GDPR).</li><li><strong>Retention period:</strong> for the duration of the contractual relationship and for as long as necessary to comply with legal obligations (minimum 5 years for tax obligations).</li>',
+        's2.c.h': '<strong>c) Browsing data (Google Maps)</strong>',
+        's2.c.p': 'This website embeds a Google Maps map via iframe. When the map loads, Google may receive technical data about the visitor\'s device. For more information, see <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google\'s privacy policy</a>.',
+        's3.h': '3. We do not share data with third parties',
+        's3.p': 'We do not sell or share personal data with third parties, except where required by law or by contractual necessity (for example, administrative agencies to comply with the mandatory traveller registration under Spanish public security regulations).',
+        's4.h': '4. Your rights',
+        's4.p1': 'You have the right to:',
+        's4.ul': '<li><strong>Access:</strong> know what data we process about you.</li><li><strong>Rectification:</strong> correct inaccurate data.</li><li><strong>Erasure:</strong> request deletion of your data (including removal of your review from our website).</li><li><strong>Objection:</strong> object to processing based on legitimate interest.</li><li><strong>Portability:</strong> receive your data in a structured format.</li><li><strong>Restriction:</strong> request that we suspend processing in certain cases.</li>',
+        's4.p2': 'To exercise these rights, send us an email at <a href="mailto:hostalcoll@gmail.com">hostalcoll@gmail.com</a> stating your request. We will respond within a maximum of one month.',
+        's4.p3': 'You also have the right to lodge a complaint with the <strong>Spanish Data Protection Agency (AEPD)</strong>: <a href="https://www.aepd.es" target="_blank" rel="noopener">www.aepd.es</a>.',
+        's5.h': '5. Security',
+        's5.p': 'We adopt appropriate technical and organisational measures to protect personal data against unauthorised access, loss or accidental destruction.',
+        'foot': '© 2026 Hostal Coll · <a href="aviso-legal.html">Legal notice</a> · <a href="cookies.html">Cookie policy</a>'
+      },
+      fr: {
+        'doc.title': 'Politique de Confidentialité · Hostal Coll',
+        'back': '← Retour à l\'accueil',
+        'title': 'Politique de Confidentialité',
+        'updated': 'Dernière mise à jour : mai 2026',
+        'intro': 'Chez Hostal Coll, nous respectons votre vie privée. La présente politique explique quelles données personnelles nous traitons, à quelles fins et quels sont vos droits.',
+        's1.h': '1. Responsable du traitement',
+        's1.identity': '<strong>Titulaire :</strong> Elisabeth Nualart Coll<br/><strong>NIF :</strong> 38835174L<br/><strong>Nom commercial :</strong> Hostal Coll<br/><strong>Adresse :</strong> Carrer de Sant Isidre, 54, 08370 Calella, Barcelona, Espagne<br/><strong>Contact :</strong> <a href="mailto:hostalcoll@gmail.com">hostalcoll@gmail.com</a>',
+        's2.h': '2. Données traitées et finalités',
+        's2.a.h': '<strong>a) Avis des clients</strong>',
+        's2.a.p': 'Nous publions sur notre site web les avis de clients ayant utilisé nos services. Ces données (nom du client et texte de l\'avis) proviennent de Google Maps et sont reproduites sur le site web afin d\'informer les visiteurs sur l\'expérience d\'autres clients.',
+        's2.a.ul': '<li><strong>Données traitées :</strong> nom public Google, texte de l\'avis et date.</li><li><strong>Base juridique :</strong> intérêt légitime du responsable (art. 6.1.f RGPD) à faire connaître la qualité du service, et consentement implicite du client lors de la publication publique de l\'avis sur Google.</li><li><strong>Durée de conservation :</strong> tant que l\'avis reste publié sur le site web. Vous pouvez demander son retrait à tout moment.</li>',
+        's2.b.h': '<strong>b) Communications par email ou WhatsApp</strong>',
+        's2.b.p': 'Lorsque vous nous contactez via hostalcoll@gmail.com ou WhatsApp pour effectuer une réservation ou une demande, nous traitons les données que vous nous fournissez (nom, numéro de téléphone, email, dates de séjour).',
+        's2.b.ul': '<li><strong>Base juridique :</strong> exécution d\'un contrat ou précontrat (art. 6.1.b RGPD).</li><li><strong>Durée de conservation :</strong> pendant la relation contractuelle et pendant la durée nécessaire au respect des obligations légales (minimum 5 ans pour obligations fiscales).</li>',
+        's2.c.h': '<strong>c) Données de navigation (Google Maps)</strong>',
+        's2.c.p': 'Ce site web intègre une carte Google Maps via un iframe. Lorsque la carte se charge, Google peut recevoir des données techniques sur l\'appareil du visiteur. Pour plus d\'informations, consultez la <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">politique de confidentialité de Google</a>.',
+        's3.h': '3. Nous ne cédons pas de données à des tiers',
+        's3.p': 'Nous ne vendons ni ne cédons de données personnelles à des tiers, sauf obligation légale ou nécessité contractuelle (par exemple, cabinets de gestion pour respecter l\'inscription obligatoire des voyageurs selon la réglementation espagnole de sécurité publique).',
+        's4.h': '4. Vos droits',
+        's4.p1': 'Vous avez le droit de :',
+        's4.ul': '<li><strong>Accès :</strong> savoir quelles données vous concernant nous traitons.</li><li><strong>Rectification :</strong> corriger des données inexactes.</li><li><strong>Effacement :</strong> demander la suppression de vos données (y compris le retrait de votre avis de notre site web).</li><li><strong>Opposition :</strong> vous opposer au traitement fondé sur l\'intérêt légitime.</li><li><strong>Portabilité :</strong> recevoir vos données dans un format structuré.</li><li><strong>Limitation :</strong> demander que nous suspendions le traitement dans certains cas.</li>',
+        's4.p2': 'Pour exercer ces droits, envoyez-nous un email à <a href="mailto:hostalcoll@gmail.com">hostalcoll@gmail.com</a> en indiquant votre demande. Nous répondrons dans un délai maximum d\'un mois.',
+        's4.p3': 'Vous avez également le droit d\'introduire une réclamation auprès de l\'<strong>Agence Espagnole de Protection des Données (AEPD)</strong> : <a href="https://www.aepd.es" target="_blank" rel="noopener">www.aepd.es</a>.',
+        's5.h': '5. Sécurité',
+        's5.p': 'Nous adoptons des mesures techniques et organisationnelles appropriées pour protéger les données personnelles contre les accès non autorisés, la perte ou la destruction accidentelle.',
+        'foot': '© 2026 Hostal Coll · <a href="aviso-legal.html">Mentions légales</a> · <a href="cookies.html">Politique de cookies</a>'
+      }
+    };
+
+    const ES_DEFAULTS = new Map();
+    document.querySelectorAll('[data-i18n]').forEach((el) => {
+      ES_DEFAULTS.set(el, el.innerHTML);
+    });
+    const ES_TITLE = document.title;
+
+    function applyLang(lang) {
+      ES_DEFAULTS.forEach((html, el) => { el.innerHTML = html; });
+      document.title = ES_TITLE;
+      if (lang !== 'es' && T[lang]) {
+        const t = T[lang];
+        document.querySelectorAll('[data-i18n]').forEach((el) => {
+          const key = el.getAttribute('data-i18n');
+          if (t[key] !== undefined) {
+            if (el.tagName === 'TITLE') document.title = t[key];
+            else el.innerHTML = t[key];
+          }
+        });
+      }
+      document.documentElement.lang = lang;
+      try { localStorage.setItem('lang', lang); } catch (e) {}
+      document.querySelectorAll('.lang-btn').forEach((b) => {
+        b.classList.toggle('active', b.dataset.lang === lang);
+      });
+    }
+
+    document.querySelectorAll('.lang-btn').forEach((b) => {
+      b.addEventListener('click', () => applyLang(b.dataset.lang));
+    });
+
+    let initialLang = 'es';
+    try { initialLang = localStorage.getItem('lang') || initialLang; } catch (e) {}
+    if (!T[initialLang] && initialLang !== 'es') {
+      initialLang = (navigator.language || 'es').slice(0, 2);
+    }
+    if (initialLang !== 'es' && !T[initialLang]) initialLang = 'es';
+    applyLang(initialLang);
+  </script>
 </body>
 </html>
