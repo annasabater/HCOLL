@@ -2752,10 +2752,35 @@
       });
       if (closeBtn) closeBtn.addEventListener('click', close);
       backdrop.addEventListener('click', close);
-      menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-        // Just close the drawer — let the native anchor navigation handle the scroll.
-        // html.scroll-padding-top accounts for the fixed nav offset.
+      menu.querySelectorAll('a').forEach(a => a.addEventListener('click', (e) => {
+        // Only act when the mobile drawer is actually open. On desktop the
+        // native click → anchor scroll already works and we shouldn't touch it.
+        if (!document.body.classList.contains('nav-open')) return;
+        const href = a.getAttribute('href') || '';
+        if (!href.startsWith('#') || href.length < 2) { close(); return; }
+        const target = document.querySelector(href);
+        if (!target) { close(); return; }
+        // Take full control: prevent the native anchor jump, close the drawer,
+        // then on the next frame scroll the page ourselves. Using
+        // documentElement.scrollTop directly works even on iOS Safari where
+        // html/body overflow-x:hidden can confuse window.scrollTo.
+        e.preventDefault();
         close();
+        const navH = (nav && nav.offsetHeight) || 80;
+        const targetY = target.getBoundingClientRect().top + window.pageYOffset - navH - 8;
+        requestAnimationFrame(() => {
+          // Smooth scroll across both roots so whichever the browser uses, it moves.
+          try {
+            window.scrollTo({ top: targetY, behavior: 'smooth' });
+          } catch (_) {
+            window.scrollTo(0, targetY);
+          }
+          document.documentElement.scrollTop = targetY;
+          // history.replaceState throws on file:// (unique opaque origin), so
+          // guard it. Without this the rest of the page would still scroll fine,
+          // but the URL hash just won't update when opened as a local file.
+          try { history.replaceState(null, '', href); } catch (_) {}
+        });
       }));
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && document.body.classList.contains('nav-open')) close();
