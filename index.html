@@ -111,6 +111,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: 80px;
       overflow-x: hidden;
       width: 100%;
     }
@@ -326,7 +327,7 @@
     .hero-bg {
       position: absolute; inset: 0;
       background-image:
-        linear-gradient(rgba(20, 12, 10, 0.08), rgba(20, 12, 10, 0.16)),
+        linear-gradient(rgba(20, 12, 10, 0.18), rgba(20, 12, 10, 0.42)),
         url("img/calella/calella.png");
       background-size: cover;
       background-position: center 20%;
@@ -361,6 +362,7 @@
       animation: fadeUp 1.2s var(--ease) 0.4s forwards;
     }
     .hero-eyebrow .line { width: 40px; height: 1px; background: var(--cream); opacity: 0.7; }
+    .hero-eyebrow { text-shadow: 0 1px 8px rgba(20, 12, 10, 0.6); }
     .hero h1 {
       font-family: var(--serif);
       font-weight: 400;
@@ -371,6 +373,7 @@
       margin-bottom: 28px;
       opacity: 0;
       animation: fadeUp 1.2s var(--ease) 0.7s forwards;
+      text-shadow: 0 2px 18px rgba(20, 12, 10, 0.55), 0 1px 3px rgba(20, 12, 10, 0.4);
     }
     .hero h1 em {
       font-style: italic;
@@ -2749,22 +2752,9 @@
       });
       if (closeBtn) closeBtn.addEventListener('click', close);
       backdrop.addEventListener('click', close);
-      menu.querySelectorAll('a').forEach(a => a.addEventListener('click', (e) => {
-        const href = a.getAttribute('href') || '';
-        if (href.startsWith('#') && href.length > 1) {
-          const target = document.querySelector(href);
-          if (target) {
-            e.preventDefault();
-            close();
-            // Wait two frames so body.overflow returns to scrollable before scrolling (iOS Safari).
-            requestAnimationFrame(() => requestAnimationFrame(() => {
-              const navH = nav ? nav.offsetHeight : 0;
-              const y = target.getBoundingClientRect().top + window.pageYOffset - navH - 8;
-              window.scrollTo({ top: y, behavior: 'smooth' });
-            }));
-            return;
-          }
-        }
+      menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+        // Just close the drawer — let the native anchor navigation handle the scroll.
+        // html.scroll-padding-top accounts for the fixed nav offset.
         close();
       }));
       document.addEventListener('keydown', (e) => {
