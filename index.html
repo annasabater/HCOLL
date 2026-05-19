@@ -1516,10 +1516,10 @@
       flex-wrap: wrap;
     }
     .contact-strip a {
-      display: inline-flex;
+      display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 13px 22px;
+      justify-content: center;
+      padding: 13px 52px;
       border-radius: 8px;
       border: 1px solid rgba(255,255,255,0.1);
       background: rgba(255,255,255,0.04);
@@ -1536,7 +1536,15 @@
       color: #fff;
       transform: translateY(-2px);
     }
-    .contact-strip svg { width: 20px; height: 20px; flex-shrink: 0; }
+    .contact-strip svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      position: absolute;
+      left: 22px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
 
     /* brand accent per card */
     .cs-wa   { border-color: rgba(37,211,102,0.3) !important; }
