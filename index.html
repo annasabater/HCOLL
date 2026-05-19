@@ -2791,25 +2791,29 @@
     }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
     document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
 
-    // ───────── Listado de imágenes del carrusel ─────────
-    // Para añadir fotos: déjalas en img/<carpeta>/ y añade su ruta a la lista
-    // correspondiente. El orden de la lista es el orden en el carrusel.
-    const ROOM_IMAGES = {
-      individual: [
-        'img/habitaciones/individual-01.png',
-      ],
-      doble: [
-        'img/habitaciones/doble-01.png',
-        'img/habitaciones/doble-02.png',
-        'img/habitaciones/doble-03.jpg',
-        'img/habitaciones/doble-04.png',
-      ],
-      banos: [
-        'img/banos/01.jpg',
-        'img/banos/02.png',
-        'img/banos/03.png',
-      ],
-    };
+    // ───────── Carrusel de habitaciones y baños ─────────
+    // Lista ORDENADA. El primer elemento es el primer slide, etc.
+    // Para añadir fotos: déjalas en img/<carpeta>/ y añade su ruta donde
+    // quieras que aparezcan. El caption se deriva del nombre del fichero
+    // (doble-03.jpg → "Doble · 03", banos/02.png → "Baño privado · 02").
+    const ROOM_CAROUSEL = [
+      'img/banos/01.jpg',
+      'img/habitaciones/doble-01.png',
+      'img/habitaciones/doble-03.jpg',
+      'img/banos/02.png',
+      'img/habitaciones/doble-04.png',
+      'img/habitaciones/individual-01.png',
+      'img/banos/03.png',
+      'img/habitaciones/doble-02.png',
+    ];
+
+    function roomCaptionFor(path) {
+      const file = path.split('/').pop().replace(/\.[^.]+$/, '');
+      if (path.includes('/banos/'))      return `Baño privado · ${file}`;
+      if (file.startsWith('individual-')) return `Individual · ${file.slice(11)}`;
+      if (file.startsWith('doble-'))      return `Doble · ${file.slice(6)}`;
+      return file;
+    }
 
     // ───────── Carrusel ─────────
     function buildCarousel(el, slides) {
@@ -3034,19 +3038,10 @@
 
     // ───────── Inicialización ─────────
     (function init() {
-      // HABITACIONES: individuales + dobles + baños alternados (cama-baño-cama-baño…)
-      const camas = [
-        ...ROOM_IMAGES.individual.map((src, i) => ({ src, caption: `Individual · ${String(i+1).padStart(2,'0')}`, alt: `Habitación individual ${i+1}` })),
-        ...ROOM_IMAGES.doble.map((src, i)      => ({ src, caption: `Doble · ${String(i+1).padStart(2,'0')}`,      alt: `Habitación doble ${i+1}` })),
-      ];
-      const banyos = ROOM_IMAGES.banos.map((src, i) => ({ src, caption: `Baño privado · ${String(i+1).padStart(2,'0')}`, alt: `Baño ${i+1}` }));
-
-      const roomSlides = [];
-      const maxLen = Math.max(camas.length, banyos.length);
-      for (let i = 0; i < maxLen; i++) {
-        if (i < camas.length) roomSlides.push(camas[i]);
-        if (i < banyos.length) roomSlides.push(banyos[i]);
-      }
+      const roomSlides = ROOM_CAROUSEL.map((src) => {
+        const caption = roomCaptionFor(src);
+        return { src, caption, alt: caption };
+      });
       buildCarousel(document.getElementById('carousel-rooms'), roomSlides);
     })();
 
