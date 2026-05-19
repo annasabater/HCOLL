@@ -1418,6 +1418,101 @@
       border: 0;
       filter: grayscale(0.4) sepia(0.05);
     }
+    .map-placeholder {
+      width: 100%;
+      min-height: 540px;
+      background: linear-gradient(135deg, #efe9dc, #e3d9c4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      text-align: center;
+    }
+    .map-placeholder-inner { max-width: 420px; }
+    .map-placeholder p {
+      font-size: 0.95rem;
+      color: var(--ink-soft);
+      margin: 0 0 20px;
+      line-height: 1.6;
+    }
+    .map-placeholder button {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 11px 22px;
+      border: 1px solid var(--granate);
+      background: var(--granate);
+      color: var(--cream);
+      cursor: pointer;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .map-placeholder button:hover { background: var(--granate-deep); border-color: var(--granate-deep); }
+
+    /* ─── Cookie banner ─── */
+    .cookie-banner {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: #ffffff;
+      border-top: 1px solid var(--line);
+      box-shadow: 0 -10px 32px rgba(0,0,0,0.08);
+      z-index: 250;
+      transform: translateY(120%);
+      transition: transform 0.4s var(--ease);
+    }
+    .cookie-banner.open { transform: translateY(0); }
+    .cookie-banner-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 18px 28px;
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+    .cookie-banner p {
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+      margin: 0;
+      flex: 1 1 320px;
+      line-height: 1.55;
+    }
+    .cookie-banner-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .cookie-banner a.cookie-link {
+      font-size: 0.78rem;
+      color: var(--granate);
+      text-decoration: underline;
+    }
+    .btn-cookie {
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      border: 1px solid var(--granate);
+      background: var(--granate);
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+    }
+    .btn-cookie.reject {
+      background: transparent;
+      color: var(--granate);
+    }
+    .btn-cookie:hover { background: var(--granate-deep); color: #fff; border-color: var(--granate-deep); }
+    @media (max-width: 560px) {
+      .cookie-banner-inner { padding: 14px 18px; gap: 12px; }
+      .cookie-banner p { flex-basis: 100%; font-size: 0.8rem; }
+      .cookie-banner-actions { width: 100%; justify-content: flex-end; }
+      .btn-cookie { padding: 9px 16px; font-size: 0.66rem; }
+    }
 
 
     /* ─────────────────────────────────────────────────
@@ -2395,13 +2490,13 @@
           </ul>
         </div>
 
-        <div class="map-frame reveal" data-delay="2">
-          <iframe
-            src="https://www.google.com/maps?cid=14509530728993783317&output=embed&z=17"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            title="Mapa de Hostal Coll en Calella"></iframe>
-
+        <div class="map-frame reveal" data-delay="2" id="map-frame">
+          <div class="map-placeholder" id="map-placeholder">
+            <div class="map-placeholder-inner">
+              <p data-i18n="map.placeholder">Para mostrar el mapa de Google necesitamos cookies de terceros. No usamos cookies de análisis ni publicidad.</p>
+              <button type="button" id="map-accept-btn" data-i18n="map.accept">Aceptar y ver el mapa</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -2530,6 +2625,18 @@
     </div>
   </footer>
 
+  <!-- ─── COOKIE BANNER ─────────────────────────── -->
+  <div class="cookie-banner" id="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookies">
+    <div class="cookie-banner-inner">
+      <p data-i18n="cookie.text">Usamos cookies de Google Maps para mostrar nuestra ubicación. No usamos cookies de análisis ni publicidad. Puedes aceptarlas o rechazarlas.</p>
+      <div class="cookie-banner-actions">
+        <a href="cookies.html" class="cookie-link" data-i18n="cookie.more">Más información</a>
+        <button type="button" class="btn-cookie reject" id="cookie-reject" data-i18n="cookie.reject">Rechazar</button>
+        <button type="button" class="btn-cookie" id="cookie-accept" data-i18n="cookie.accept">Aceptar</button>
+      </div>
+    </div>
+  </div>
+
   <!-- ─── SCRIPTS ─────────────────────────────────── -->
   <script>
     // Booking strip: fechas por defecto (hoy / mañana)
@@ -2581,7 +2688,13 @@
         'r11.text':'Pasamos un mes en este acogedor hostal y realmente nos sentimos como si estuviéramos alojados con una gran familia en vez de los típicos hoteles impersonales. Elisabet es la mejor anfitriona de todas, siempre atenta.','r11.when':'2023 · Local Guide',
         'r12.text':'Excelente atención de Elizabeth. Un lugar muy limpio y acogedor. Estuvimos un mes y nos encantó. Está muy bien situado. ¡Seguro volveremos!','r12.when':'2023',
         'r13.text':'Hostal familiar, cómodo, limpio, tranquilo y con un trato excelente por parte de los propietarios, que te ayudan en todo para que puedas disfrutar al máximo de tu estancia en Calella.','r13.when':'2022',
-        'foot.since':'Desde · 1950','foot.h.hostal':'Hostal','foot.about':'Sobre nosotros','foot.h.contact':'Contacto','foot.h.legal':'Legal','foot.legal1':'Aviso legal','foot.legal2':'Política de privacidad','foot.legal3':'Política de cookies','foot.rights':'© 2026 Hostal Coll · Todos los derechos reservados','foot.tagline':'Hecho con calma en Calella'
+        'foot.since':'Desde · 1950','foot.h.hostal':'Hostal','foot.about':'Sobre nosotros','foot.h.contact':'Contacto','foot.h.legal':'Legal','foot.legal1':'Aviso legal','foot.legal2':'Política de privacidad','foot.legal3':'Política de cookies','foot.rights':'© 2026 Hostal Coll · Todos los derechos reservados','foot.tagline':'Hecho con calma en Calella',
+        'cookie.text':'Usamos cookies de Google Maps para mostrar nuestra ubicación. No usamos cookies de análisis ni publicidad. Puedes aceptarlas o rechazarlas.',
+        'cookie.accept':'Aceptar',
+        'cookie.reject':'Rechazar',
+        'cookie.more':'Más información',
+        'map.placeholder':'Para mostrar el mapa de Google necesitamos cookies de terceros. No usamos cookies de análisis ni publicidad.',
+        'map.accept':'Aceptar y ver el mapa'
       },
       ca: {
         'nav.hostal':"L'hostal",'nav.rooms':'Habitacions','nav.services':'Serveis','nav.reviews':'Ressenyes','nav.location':'Ubicació','nav.faq':'FAQ','nav.book':'Reservar',
@@ -2610,7 +2723,13 @@
         'r11.text':"Hem passat un mes en aquest acollidor hostal i realment ens hem sentit com si estiguéssim allotjats amb una gran família en lloc dels típics hotels impersonals. L'Elisabet és la millor amfitriona de totes, sempre atenta.",'r11.when':'2023 · Local Guide',
         'r12.text':"Excel·lent atenció de l'Elizabeth. Un lloc molt net i acollidor. Vam estar un mes i ens va encantar. Està molt ben situat. Segur que hi tornarem!",'r12.when':'2023',
         'r13.text':"Hostal familiar, còmode, net, tranquil i amb un tracte excel·lent per part dels propietaris, que t'ajuden en tot perquè puguis gaudir al màxim de la teva estada a Calella.",'r13.when':'2022',
-        'foot.since':'Des de · 1950','foot.h.hostal':'Hostal','foot.about':'Sobre nosaltres','foot.h.contact':'Contacte','foot.h.legal':'Legal','foot.legal1':'Avís legal','foot.legal2':'Política de privacitat','foot.legal3':'Política de cookies','foot.rights':'© 2026 Hostal Coll · Tots els drets reservats','foot.tagline':'Fet amb calma a Calella'
+        'foot.since':'Des de · 1950','foot.h.hostal':'Hostal','foot.about':'Sobre nosaltres','foot.h.contact':'Contacte','foot.h.legal':'Legal','foot.legal1':'Avís legal','foot.legal2':'Política de privacitat','foot.legal3':'Política de cookies','foot.rights':'© 2026 Hostal Coll · Tots els drets reservats','foot.tagline':'Fet amb calma a Calella',
+        'cookie.text':'Fem servir cookies de Google Maps per mostrar la nostra ubicació. No fem servir cookies d\'anàlisi ni publicitat. Pots acceptar-les o rebutjar-les.',
+        'cookie.accept':'Acceptar',
+        'cookie.reject':'Rebutjar',
+        'cookie.more':'Més informació',
+        'map.placeholder':'Per mostrar el mapa de Google necessitem cookies de tercers. No fem servir cookies d\'anàlisi ni publicitat.',
+        'map.accept':'Acceptar i veure el mapa'
       },
       en: {
         'nav.hostal':'The hostal','nav.rooms':'Rooms','nav.services':'Services','nav.reviews':'Reviews','nav.location':'Location','nav.faq':'FAQ','nav.book':'Book now',
@@ -2639,7 +2758,13 @@
         'r11.text':'We spent a month at this cosy hostal and truly felt as if we were staying with a big family rather than in a typical impersonal hotel. Elisabet is the best host of all, always attentive.','r11.when':'2023 · Local Guide',
         'r12.text':'Excellent service from Elizabeth. A very clean and welcoming place. We stayed for a month and loved it. Perfectly located. We\'ll definitely be back!','r12.when':'2023',
         'r13.text':'Family hostal, comfortable, clean, quiet and with excellent service from the owners, who help you with everything so you can make the most of your stay in Calella.','r13.when':'2022',
-        'foot.since':'Since · 1950','foot.h.hostal':'Hostal','foot.about':'About us','foot.h.contact':'Contact','foot.h.legal':'Legal','foot.legal1':'Legal notice','foot.legal2':'Privacy policy','foot.legal3':'Cookie policy','foot.rights':'© 2026 Hostal Coll · All rights reserved','foot.tagline':'Made with calm in Calella'
+        'foot.since':'Since · 1950','foot.h.hostal':'Hostal','foot.about':'About us','foot.h.contact':'Contact','foot.h.legal':'Legal','foot.legal1':'Legal notice','foot.legal2':'Privacy policy','foot.legal3':'Cookie policy','foot.rights':'© 2026 Hostal Coll · All rights reserved','foot.tagline':'Made with calm in Calella',
+        'cookie.text':'We use Google Maps cookies to show our location. We don\'t use analytics or advertising cookies. You can accept or reject them.',
+        'cookie.accept':'Accept',
+        'cookie.reject':'Reject',
+        'cookie.more':'More info',
+        'map.placeholder':'Showing the Google map requires third-party cookies. We don\'t use analytics or advertising cookies.',
+        'map.accept':'Accept and show map'
       },
       fr: {
         'nav.hostal':"L'hostal",'nav.rooms':'Chambres','nav.services':'Services','nav.reviews':'Avis','nav.location':'Situation','nav.faq':'FAQ','nav.book':'Réserver',
@@ -2668,7 +2793,13 @@
         'r11.text':"Nous avons passé un mois dans cet hostal accueillant et nous nous sommes vraiment sentis comme si nous séjournions avec une grande famille plutôt que dans les hôtels impersonnels habituels. Elisabet est la meilleure hôtesse de toutes, toujours attentive.",'r11.when':'2023 · Local Guide',
         'r12.text':"Excellent accueil d'Elizabeth. Un endroit très propre et accueillant. Nous y avons séjourné un mois et nous avons adoré. Très bien situé. Nous reviendrons c'est sûr !",'r12.when':'2023',
         'r13.text':"Hostal familial, confortable, propre, calme et avec un excellent accueil de la part des propriétaires, qui vous aident en tout pour que vous puissiez profiter au maximum de votre séjour à Calella.",'r13.when':'2022',
-        'foot.since':'Depuis · 1950','foot.h.hostal':'Hostal','foot.about':'À propos','foot.h.contact':'Contact','foot.h.legal':'Mentions légales','foot.legal1':'Mentions légales','foot.legal2':'Politique de confidentialité','foot.legal3':'Politique de cookies','foot.rights':'© 2026 Hostal Coll · Tous droits réservés','foot.tagline':'Fait avec calme à Calella'
+        'foot.since':'Depuis · 1950','foot.h.hostal':'Hostal','foot.about':'À propos','foot.h.contact':'Contact','foot.h.legal':'Mentions légales','foot.legal1':'Mentions légales','foot.legal2':'Politique de confidentialité','foot.legal3':'Politique de cookies','foot.rights':'© 2026 Hostal Coll · Tous droits réservés','foot.tagline':'Fait avec calme à Calella',
+        'cookie.text':'Nous utilisons les cookies Google Maps pour afficher notre emplacement. Nous n\'utilisons pas de cookies d\'analyse ni de publicité. Vous pouvez les accepter ou les refuser.',
+        'cookie.accept':'Accepter',
+        'cookie.reject':'Refuser',
+        'cookie.more':'Plus d\'informations',
+        'map.placeholder':'L\'affichage de la carte Google nécessite des cookies tiers. Nous n\'utilisons pas de cookies d\'analyse ni de publicité.',
+        'map.accept':'Accepter et voir la carte'
       }
     };
 
@@ -3134,6 +3265,57 @@
           }
         });
       });
+    })();
+
+    // ───────── Cookie consent + Google Maps lazy-load ─────────
+    // Google Maps iframe drops third-party cookies (NID, SOCS) on load, so we
+    // don't inject it until the visitor accepts. On first visit we show the
+    // banner; on subsequent visits we honour the saved choice silently.
+    (function initCookieConsent() {
+      const KEY = 'cookie-consent';
+      const MAP_SRC = 'https://www.google.com/maps?cid=14509530728993783317&output=embed&z=17';
+      const banner   = document.getElementById('cookie-banner');
+      const accept   = document.getElementById('cookie-accept');
+      const reject   = document.getElementById('cookie-reject');
+      const mapAccept = document.getElementById('map-accept-btn');
+      const mapFrame = document.getElementById('map-frame');
+
+      function read()  { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+      function write(v){ try { localStorage.setItem(KEY, v); }   catch (e) {} }
+
+      function showBanner() { if (banner) banner.classList.add('open'); }
+      function hideBanner() { if (banner) banner.classList.remove('open'); }
+
+      function loadMap() {
+        const placeholder = document.getElementById('map-placeholder');
+        if (!placeholder || !mapFrame) return;
+        const iframe = document.createElement('iframe');
+        iframe.src = MAP_SRC;
+        iframe.loading = 'lazy';
+        iframe.referrerPolicy = 'no-referrer-when-downgrade';
+        iframe.title = 'Mapa de Hostal Coll en Calella';
+        mapFrame.replaceChild(iframe, placeholder);
+      }
+
+      function grant()  { write('accepted'); hideBanner(); loadMap(); }
+      function deny()   { write('rejected'); hideBanner(); }
+
+      if (accept)    accept.addEventListener('click', grant);
+      if (reject)    reject.addEventListener('click', deny);
+      if (mapAccept) mapAccept.addEventListener('click', grant);
+
+      // Re-open banner from cookies.html via ?cookies=reset (e.g. "change preferences" button there).
+      const params = new URLSearchParams(location.search);
+      if (params.get('cookies') === 'reset') {
+        write('');
+        // Clean the URL so it doesn't stick.
+        history.replaceState(null, '', location.pathname);
+      }
+
+      const current = read();
+      if (current === 'accepted') loadMap();
+      else if (!current) showBanner();
+      // 'rejected' → keep placeholder, no banner. They can re-open from cookies.html.
     })();
   </script>
 

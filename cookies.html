@@ -42,6 +42,21 @@
     th { background: #fff; border: 1px solid var(--line); padding: 10px 14px; text-align: left; font-weight: 600; color: var(--ink); }
     td { border: 1px solid var(--line); padding: 10px 14px; color: var(--ink-soft); vertical-align: top; }
     tr:nth-child(even) td { background: #fff; }
+    .prefs-btn {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 11px 22px;
+      border: 1px solid var(--granate);
+      background: var(--granate);
+      color: #fff !important;
+      text-decoration: none !important;
+      margin-top: 8px;
+      transition: background 0.3s;
+    }
+    .prefs-btn:hover { background: #5d1521; }
     footer-note { display: block; margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 0.78rem; color: var(--ink-soft); text-align: center; }
     @media (max-width: 560px) {
       header a.back { font-size: 0.72rem; }
@@ -96,6 +111,13 @@
           <td data-i18n="r2.purpose">Recordar el idioma seleccionado por el visitante (español, catalán, inglés o francés)</td>
           <td data-i18n="r2.duration">Persistente (localStorage)</td>
         </tr>
+        <tr>
+          <td>cookie-consent</td>
+          <td>hostalcoll.com</td>
+          <td data-i18n="r3.type">Propia · Funcional</td>
+          <td data-i18n="r3.purpose">Recordar si el visitante ha aceptado o rechazado las cookies de Google Maps, para no volver a mostrar el banner en cada visita</td>
+          <td data-i18n="r3.duration">Persistente (localStorage)</td>
+        </tr>
       </tbody>
     </table>
 
@@ -117,6 +139,10 @@
 
     <h2 data-i18n="s5.h">5. Actualización de esta política</h2>
     <p data-i18n="s5.p">Podemos actualizar esta política en cualquier momento. La fecha de última actualización figura al inicio de la página.</p>
+
+    <h2 data-i18n="s6.h">6. Cambiar tus preferencias</h2>
+    <p data-i18n="s6.p">Si quieres revisar tu decisión sobre las cookies (aceptarlas o rechazarlas), pulsa el botón siguiente. Te llevará al inicio con el banner de nuevo visible.</p>
+    <p><a href="index.html?cookies=reset" class="prefs-btn" data-i18n="s6.btn">Cambiar mis preferencias de cookies</a></p>
 
     <footer-note data-i18n="foot">© 2026 Hostal Coll · <a href="aviso-legal.html">Aviso legal</a> · <a href="privacidad.html">Política de privacidad</a></footer-note>
   </main>
@@ -143,6 +169,9 @@
         'r2.type': 'Pròpia · Funcional',
         'r2.purpose': 'Recordar l\'idioma seleccionat pel visitant (espanyol, català, anglès o francès)',
         'r2.duration': 'Persistent (localStorage)',
+        'r3.type': 'Pròpia · Funcional',
+        'r3.purpose': 'Recordar si el visitant ha acceptat o rebutjat les cookies de Google Maps, per no tornar a mostrar el banner en cada visita',
+        'r3.duration': 'Persistent (localStorage)',
         's2.p2': 'Aquest lloc web <strong>no utilitza</strong> cookies d\'analítica, publicitat ni rastreig.',
         's3.h': '3. Cookies de Google Maps',
         's3.p1': 'El mapa de localització de l\'hostal està integrat mitjançant un iframe de Google Maps. En carregar el mapa, Google pot instal·lar les seves pròpies cookies al teu dispositiu per al correcte funcionament del servei. Hostal Coll no té accés ni control sobre aquestes cookies.',
@@ -153,6 +182,9 @@
         's4.p2': 'Tingues en compte que deshabilitar les cookies pot afectar el funcionament d\'algunes parts del lloc web, com el mapa de localització.',
         's5.h': '5. Actualització d\'aquesta política',
         's5.p': 'Podem actualitzar aquesta política en qualsevol moment. La data d\'última actualització figura a l\'inici de la pàgina.',
+        's6.h': '6. Canviar les teves preferències',
+        's6.p': 'Si vols revisar la teva decisió sobre les cookies (acceptar-les o rebutjar-les), prem el botó següent. Et portarà a l\'inici amb el banner novament visible.',
+        's6.btn': 'Canviar les meves preferències de cookies',
         'foot': '© 2026 Hostal Coll · <a href="aviso-legal.html">Avís legal</a> · <a href="privacidad.html">Política de privacitat</a>'
       },
       en: {
@@ -176,6 +208,9 @@
         'r2.type': 'Own · Functional',
         'r2.purpose': 'Remember the language selected by the visitor (Spanish, Catalan, English or French)',
         'r2.duration': 'Persistent (localStorage)',
+        'r3.type': 'Own · Functional',
+        'r3.purpose': 'Remember whether the visitor has accepted or rejected Google Maps cookies, so the banner is not shown on every visit',
+        'r3.duration': 'Persistent (localStorage)',
         's2.p2': 'This website <strong>does not use</strong> analytics, advertising or tracking cookies.',
         's3.h': '3. Google Maps cookies',
         's3.p1': 'The hostal\'s location map is embedded via a Google Maps iframe. When the map loads, Google may install its own cookies on your device for the proper operation of the service. Hostal Coll has no access to or control over these cookies.',
@@ -186,6 +221,9 @@
         's4.p2': 'Note that disabling cookies may affect the functioning of certain parts of the website, such as the location map.',
         's5.h': '5. Updates to this policy',
         's5.p': 'We may update this policy at any time. The date of the latest update appears at the beginning of the page.',
+        's6.h': '6. Change your preferences',
+        's6.p': 'If you want to review your cookie decision (accept or reject), click the button below. It will take you back to the home page with the banner visible again.',
+        's6.btn': 'Change my cookie preferences',
         'foot': '© 2026 Hostal Coll · <a href="aviso-legal.html">Legal notice</a> · <a href="privacidad.html">Privacy policy</a>'
       },
       fr: {
@@ -209,6 +247,9 @@
         'r2.type': 'Propre · Fonctionnel',
         'r2.purpose': 'Mémoriser la langue sélectionnée par le visiteur (espagnol, catalan, anglais ou français)',
         'r2.duration': 'Persistant (localStorage)',
+        'r3.type': 'Propre · Fonctionnel',
+        'r3.purpose': 'Mémoriser si le visiteur a accepté ou refusé les cookies Google Maps, afin de ne pas afficher la bannière à chaque visite',
+        'r3.duration': 'Persistant (localStorage)',
         's2.p2': 'Ce site web <strong>n\'utilise pas</strong> de cookies d\'analyse, de publicité ni de suivi.',
         's3.h': '3. Cookies Google Maps',
         's3.p1': 'La carte de localisation de l\'hôtel est intégrée via un iframe Google Maps. Lors du chargement de la carte, Google peut installer ses propres cookies sur votre appareil pour le bon fonctionnement du service. Hostal Coll n\'a ni accès ni contrôle sur ces cookies.',
@@ -219,6 +260,9 @@
         's4.p2': 'Notez que la désactivation des cookies peut affecter le fonctionnement de certaines parties du site web, comme la carte de localisation.',
         's5.h': '5. Mises à jour de cette politique',
         's5.p': 'Nous pouvons mettre à jour cette politique à tout moment. La date de la dernière mise à jour figure au début de la page.',
+        's6.h': '6. Modifier vos préférences',
+        's6.p': 'Si vous souhaitez revoir votre décision concernant les cookies (les accepter ou les refuser), cliquez sur le bouton ci-dessous. Il vous ramènera à l\'accueil avec la bannière à nouveau visible.',
+        's6.btn': 'Modifier mes préférences de cookies',
         'foot': '© 2026 Hostal Coll · <a href="aviso-legal.html">Mentions légales</a> · <a href="privacidad.html">Politique de confidentialité</a>'
       }
     };
