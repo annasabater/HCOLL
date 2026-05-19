@@ -2754,20 +2754,27 @@
       backdrop.addEventListener('click', close);
       // Event delegation on the menu container — more robust than attaching
       // to each <a>, and works even if the link nodes get re-rendered later.
+      function flash(color) {
+        const prev = document.body.style.background;
+        document.body.style.background = color;
+        setTimeout(() => { document.body.style.background = prev; }, 250);
+      }
       menu.addEventListener('click', (e) => {
         const a = e.target.closest('a');
-        console.log('[drawer] menu click', { target: e.target, anchor: a, navOpen: document.body.classList.contains('nav-open') });
+        console.warn('[drawer] menu click', { target: e.target, anchor: a, navOpen: document.body.classList.contains('nav-open') });
+        flash('#ff00ff');
         if (!a || !menu.contains(a)) return;
         const href = a.getAttribute('href') || '';
         if (!href.startsWith('#') || href.length < 2) return;
         const target = document.querySelector(href);
-        console.log('[drawer] resolved', { href, target });
+        console.warn('[drawer] resolved', { href, target });
+        flash('#00ff00');
         if (!target) return;
         e.preventDefault();
         close();
         const navH = (nav && nav.offsetHeight) || 80;
         const targetY = target.getBoundingClientRect().top + window.pageYOffset - navH - 8;
-        console.log('[drawer] scrolling to', targetY);
+        console.warn('[drawer] scrolling to', targetY);
         requestAnimationFrame(() => {
           try { window.scrollTo({ top: targetY, behavior: 'smooth' }); }
           catch (_) { window.scrollTo(0, targetY); }
