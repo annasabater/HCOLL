@@ -32,17 +32,6 @@
     header .brand-name { font-family: var(--serif); font-size: 1.1rem; letter-spacing: 0.12em; color: var(--ink); font-weight: 400; }
     header a.back { font-size: 0.8rem; color: var(--granate); text-decoration: none; letter-spacing: 0.06em; white-space: nowrap; }
     header a.back:hover { text-decoration: underline; }
-    .header-actions { display: flex; align-items: center; gap: 14px; }
-    .lang-selector { display: flex; gap: 2px; }
-    .lang-btn {
-      background: none; border: 1px solid transparent;
-      padding: 4px 5px; cursor: pointer; border-radius: 3px;
-      opacity: 0.5; transition: opacity 0.2s, border-color 0.2s;
-      display: inline-flex; align-items: center;
-    }
-    .lang-btn:hover { opacity: 0.9; }
-    .lang-btn.active { opacity: 1; border-color: var(--line); }
-    .lang-btn svg { display: block; }
     main { max-width: 760px; margin: 0 auto; padding: 56px 24px 80px; }
     h1 { font-family: var(--serif); font-size: 2.2rem; font-weight: 400; margin-bottom: 8px; }
     .updated { font-size: 0.78rem; color: var(--ink-soft); margin-bottom: 48px; }
@@ -55,9 +44,7 @@
     .highlight p { margin: 0; font-size: 0.88rem; }
     footer-note { display: block; margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 0.78rem; color: var(--ink-soft); text-align: center; }
     @media (max-width: 560px) {
-      header .inner { flex-wrap: wrap; row-gap: 12px; }
       header a.back { font-size: 0.72rem; }
-      .header-actions { gap: 10px; }
       .brand-name { font-size: 1rem; }
     }
   </style>
@@ -69,23 +56,7 @@
         <img src="img/logo/logobreusinfondo.png" alt="Hostal Coll" width="46" height="46" style="object-fit:contain"/>
         <span class="brand-name">HOSTAL COLL</span>
       </a>
-      <div class="header-actions">
-        <div class="lang-selector" id="lang-selector">
-          <button class="lang-btn" data-lang="es" aria-label="Castellano" title="Castellano">
-            <svg viewBox="0 0 20 14" width="22" height="15"><rect width="20" height="14" fill="#AA151B"/><rect y="3.5" width="20" height="7" fill="#F1BF00"/></svg>
-          </button>
-          <button class="lang-btn" data-lang="ca" aria-label="Català" title="Català">
-            <svg viewBox="0 0 20 14" width="22" height="15"><rect width="20" height="14" fill="#FCDD09"/><rect y="0" width="20" height="1.55" fill="#DA121A"/><rect y="3.11" width="20" height="1.55" fill="#DA121A"/><rect y="6.22" width="20" height="1.55" fill="#DA121A"/><rect y="9.33" width="20" height="1.55" fill="#DA121A"/><rect y="12.44" width="20" height="1.55" fill="#DA121A"/></svg>
-          </button>
-          <button class="lang-btn" data-lang="en" aria-label="English" title="English">
-            <svg viewBox="0 0 20 14" width="22" height="15"><rect width="20" height="14" fill="#012169"/><path d="M0 0 L20 14 M20 0 L0 14" stroke="#fff" stroke-width="3.5"/><path d="M0 0 L20 14 M20 0 L0 14" stroke="#C8102E" stroke-width="2"/><rect x="8.5" width="3" height="14" fill="#fff"/><rect y="5.5" width="20" height="3" fill="#fff"/><rect x="9" width="2" height="14" fill="#C8102E"/><rect y="6" width="20" height="2" fill="#C8102E"/></svg>
-          </button>
-          <button class="lang-btn" data-lang="fr" aria-label="Français" title="Français">
-            <svg viewBox="0 0 20 14" width="22" height="15"><rect width="20" height="14" fill="#fff"/><rect width="6.67" height="14" fill="#002395"/><rect x="13.33" width="6.67" height="14" fill="#ED2939"/></svg>
-          </button>
-        </div>
-        <a href="index.html" class="back" data-i18n="back">← Volver al inicio</a>
-      </div>
+      <a href="index.html" class="back" data-i18n="back">← Volver al inicio</a>
     </div>
   </header>
   <main>
@@ -252,16 +223,10 @@
         });
       }
       document.documentElement.lang = lang;
-      try { localStorage.setItem('lang', lang); } catch (e) {}
-      document.querySelectorAll('.lang-btn').forEach((b) => {
-        b.classList.toggle('active', b.dataset.lang === lang);
-      });
     }
 
-    document.querySelectorAll('.lang-btn').forEach((b) => {
-      b.addEventListener('click', () => applyLang(b.dataset.lang));
-    });
-
+    // No selector here on purpose: legal pages just follow whatever the
+    // visitor picked on the home (shared localStorage key 'lang').
     let initialLang = 'es';
     try { initialLang = localStorage.getItem('lang') || initialLang; } catch (e) {}
     if (!T[initialLang] && initialLang !== 'es') {
