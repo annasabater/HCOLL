@@ -966,7 +966,14 @@
     function cleanParam(v){ return v ? v.toString().trim().slice(0, 60) : ''; }
     // El enlace que envías puede venir personalizado: ?g=Nombre y ?r=Habitación.
     // Así el feedback ya te llega con el nombre y/o la habitación del huésped.
-    const GUEST = { name: cleanParam(_params.get('g')), room: cleanParam(_params.get('r')) };
+    const GUEST = {
+      name: cleanParam(_params.get('g')),
+      room: cleanParam(_params.get('r')),
+      estanciaId: cleanParam(_params.get('e'))
+    };
+    // La valoració s'envia al panell de gestió (gestio.hostalcoll.com), que la
+    // guarda lligada a l'hoste. La pàgina és sempre genèrica: g/r/e van ocults.
+    const FEEDBACK_ENDPOINT = 'https://gestio.hostalcoll.com/api/public/valoracions';
 
     let _storedLang; try { _storedLang = localStorage.getItem('lang'); } catch(e) {}
     // Per defecte, castellà (si no arriba ?lang ni n'hi ha de desat).
@@ -1058,15 +1065,16 @@
       sendLabel.textContent = t['wlc.fb.sending'];
       sendBtn.setAttribute('aria-disabled', 'true');
       try {
-        const r = await fetch('/api/feedback', {
+        const r = await fetch(FEEDBACK_ENDPOINT, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            rating: rating,
-            comment: (commentEl.value || '').trim(),
-            name: GUEST.name,
-            room: GUEST.room,
-            lang: currentLang
+            puntuacio: rating,
+            comentari: (commentEl.value || '').trim(),
+            nom: GUEST.name,
+            habitacio: GUEST.room,
+            idioma: currentLang,
+            estanciaId: GUEST.estanciaId
           })
         });
         if (!r.ok) throw new Error('bad_status');
