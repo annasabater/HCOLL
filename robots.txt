@@ -1,7 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /benvinguda.html
-Disallow: /generador.html
 Disallow: /api/
 
 Sitemap: https://hostalcoll.com/sitemap.xml
