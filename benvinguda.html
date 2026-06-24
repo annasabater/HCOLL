@@ -969,8 +969,9 @@
     const GUEST = { name: cleanParam(_params.get('g')), room: cleanParam(_params.get('r')) };
 
     let _storedLang; try { _storedLang = localStorage.getItem('lang'); } catch(e) {}
-    let currentLang = _params.get('lang') || _storedLang || (navigator.language || 'en').slice(0,2);
-    if (!TRANSLATIONS[currentLang]) currentLang = 'en';
+    // Per defecte, castellà (si no arriba ?lang ni n'hi ha de desat).
+    let currentLang = _params.get('lang') || _storedLang || 'es';
+    if (!TRANSLATIONS[currentLang]) currentLang = 'es';
 
     function applyLang(lang) {
       const t = TRANSLATIONS[lang];
