@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hostal Coll · Bienvenida</title>
+  <meta name="description" content="Bienvenida a Hostal Coll. Cuéntanos cómo has dormido y descubre qué ver y hacer en Calella de la Costa y alrededores." />
+  <!-- Página privada que enviamos al huésped por WhatsApp: fuera de buscadores -->
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/png" href="img/logo/logobreusinfondo.png" />
+  <link rel="apple-touch-icon" href="img/logo/logobreusinfondo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --granate:        #7A1F2B;
+      --granate-deep:   #5C1620;
+      --granate-soft:   #9C3540;
+      --cream:          #FFFFFF;
+      --cream-warm:     #F4F4F4;
+      --bone:           #EEEEEE;
+      --ink:            #1A1A1A;
+      --ink-soft:       #444444;
+      --mute:           #888888;
+      --mute-light:     #BBBBBB;
+      --line:           #E0E0E0;
+      --line-soft:      #EBEBEB;
+      --white-warm:     #F8F8F8;
+
+      --serif:  "Cormorant Garamond", "Cormorant", Georgia, serif;
+      --sans:   "Manrope", system-ui, sans-serif;
+
+      --ease:   cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+      overflow-x: hidden;
+      width: 100%;
+    }
+    body {
+      font-family: var(--sans);
+      font-weight: 400;
+      color: var(--ink);
+      background: var(--cream);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      width: 100%;
+      position: relative;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    ::selection { background: var(--granate); color: var(--cream); }
+
+    .wrap { width: min(1280px, 92vw); margin: 0 auto; }
+    .wrap-narrow { width: min(900px, 90vw); margin: 0 auto; }
+
+    /* ─────────────────────────────────────────────────
+       LANG SELECTOR (dropdown)
+    ───────────────────────────────────────────────── */
+    .lang-selector { position: relative; }
+    .lang-trigger {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 3px 7px 3px 4px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      line-height: 0;
+      border-radius: 3px;
+      transition: background 0.2s;
+    }
+    .lang-trigger:hover { background: var(--cream-warm); }
+    .lang-chevron { opacity: 0.6; transition: transform 0.2s var(--ease); color: var(--ink); flex-shrink: 0; }
+    .lang-selector.open .lang-chevron { transform: rotate(180deg); }
+    .lang-dropdown {
+      display: none;
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      background: var(--cream);
+      border: 1px solid var(--line);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.1);
+      padding: 6px;
+      min-width: 148px;
+      z-index: 300;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .lang-selector.open .lang-dropdown { display: flex; }
+    .lang-opt {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: 0.04em;
+      border-radius: 2px;
+      transition: background 0.15s;
+      width: 100%;
+      text-align: left;
+      line-height: 0;
+    }
+    .lang-opt span { line-height: 1.4; }
+    .lang-opt:hover { background: var(--cream-warm); }
+    .lang-opt.active { color: var(--granate); font-weight: 600; }
+
+    /* ─────────────────────────────────────────────────
+       NAV (versión reducida para la página de bienvenida)
+    ───────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      padding: 14px 0;
+      background: rgba(248, 248, 248, 0.97);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line-soft);
+    }
+    nav .inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .brand-mark { width: 44px; height: 44px; object-fit: contain; display: block; }
+    .brand-name {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      color: var(--ink);
+      letter-spacing: 0.12em;
+      font-weight: 400;
+    }
+    .nav-right { display: flex; align-items: center; gap: 18px; }
+    .nav-link {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      transition: color 0.3s;
+    }
+    .nav-link:hover { color: var(--granate); }
+    @media (max-width: 560px) {
+      .nav-link { display: none; }
+      .brand-name { font-size: 1rem; letter-spacing: 0.1em; }
+      .brand-mark { width: 38px; height: 38px; }
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 26px;
+      font-family: var(--sans);
+      font-size: 0.73rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      border: 1px solid var(--granate);
+      background: var(--granate);
+      color: var(--cream);
+      cursor: pointer;
+      transition: all 0.35s var(--ease);
+    }
+    .btn:hover { background: var(--granate-deep); border-color: var(--granate-deep); }
+    .btn--ghost { background: transparent; color: var(--granate); border-color: var(--granate); }
+    .btn--ghost:hover { background: var(--granate); color: var(--cream); }
+
+    /* ─────────────────────────────────────────────────
+       HERO
+    ───────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      height: 52vh;
+      min-height: 420px;
+      max-height: 620px;
+      overflow: hidden;
+      color: var(--cream);
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      /* Cambia la imagen aquí si quieres otra portada */
+      background-image:
+        linear-gradient(rgba(20, 12, 10, 0.22), rgba(20, 12, 10, 0.46)),
+        url("img/calella/calella.png");
+      background-size: cover;
+      background-position: center 25%;
+      transform: scale(1.08);
+      animation: heroZoom 18s var(--ease) forwards;
+    }
+    @keyframes heroZoom { to { transform: scale(1); } }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 80px 20px 0;
+    }
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 0.72rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+      text-shadow: 0 1px 8px rgba(20, 12, 10, 0.6);
+      opacity: 0;
+      animation: fadeUp 1.2s var(--ease) 0.4s forwards;
+    }
+    .hero-eyebrow .line { width: 40px; height: 1px; background: var(--cream); opacity: 0.7; }
+    .hero h1 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(2.2rem, 5.2vw, 4rem);
+      line-height: 1.06;
+      letter-spacing: -0.01em;
+      max-width: 22ch;
+      margin-bottom: 24px;
+      text-shadow: 0 2px 18px rgba(20, 12, 10, 0.55), 0 1px 3px rgba(20, 12, 10, 0.4);
+      opacity: 0;
+      animation: fadeUp 1.2s var(--ease) 0.7s forwards;
+    }
+    .hero h1 em { font-style: italic; color: var(--cream); font-weight: 300; }
+    .hero-sub {
+      font-size: 1.05rem;
+      max-width: 480px;
+      color: rgba(245, 239, 230, 0.9);
+      opacity: 0;
+      animation: fadeUp 1.2s var(--ease) 1s forwards;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─────────────────────────────────────────────────
+       SECCIONES
+    ───────────────────────────────────────────────── */
+    section { padding: 84px 0; position: relative; }
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      gap: 20px;
+      font-size: 0.72rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--granate);
+      margin-bottom: 32px;
+      font-weight: 500;
+    }
+    .section-head .num {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 0.95rem;
+      letter-spacing: 0;
+      color: var(--mute);
+    }
+    .section-head .line { flex: 1; height: 1px; background: var(--line); }
+
+    h2.display {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(2rem, 4.6vw, 3.6rem);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      max-width: 28ch;
+      margin-bottom: 24px;
+      color: var(--ink);
+    }
+    h2.display em { font-style: italic; color: var(--granate); font-weight: 400; }
+    .lead {
+      font-size: 1.05rem;
+      color: var(--ink-soft);
+      max-width: 72ch;
+      line-height: 1.7;
+    }
+
+    /* Reveal on scroll */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 1s var(--ease), transform 1s var(--ease); animation: revealFallback 0s 3.5s forwards; }
+    .reveal.in { opacity: 1; transform: translateY(0); animation: none; }
+    @keyframes revealFallback { to { opacity: 1; transform: translateY(0); } }
+    .reveal[data-delay="1"] { transition-delay: 0.12s; }
+    .reveal[data-delay="2"] { transition-delay: 0.24s; }
+    .reveal[data-delay="3"] { transition-delay: 0.36s; }
+
+    /* ─────────────────────────────────────────────────
+       FEEDBACK · ¿Cómo has dormido?
+    ───────────────────────────────────────────────── */
+    #feedback { background: var(--cream-warm); }
+    .fb-card {
+      background: var(--cream);
+      border: 1px solid var(--line);
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 48px 44px;
+      text-align: center;
+      box-shadow: 0 18px 50px rgba(20, 12, 10, 0.06);
+    }
+    .fb-card h2 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      line-height: 1.12;
+      color: var(--ink);
+      margin-bottom: 14px;
+    }
+    .fb-card h2 em { font-style: italic; color: var(--granate); }
+    .fb-lead {
+      color: var(--ink-soft);
+      font-size: 1rem;
+      line-height: 1.65;
+      max-width: 46ch;
+      margin: 0 auto 30px;
+    }
+    .fb-stars {
+      display: inline-flex;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .fb-star {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 2.6rem;
+      line-height: 1;
+      color: var(--mute-light);
+      transition: color 0.15s var(--ease), transform 0.15s var(--ease);
+      padding: 2px;
+    }
+    .fb-star:hover { transform: translateY(-2px); }
+    .fb-star.on { color: #E8B500; }
+    .fb-starhint {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mute);
+      font-weight: 600;
+      margin-bottom: 30px;
+      min-height: 1em;
+    }
+    .fb-field { text-align: left; margin-bottom: 26px; }
+    .fb-field label {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--granate);
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .fb-field textarea {
+      width: 100%;
+      min-height: 96px;
+      resize: vertical;
+      font-family: var(--sans);
+      font-size: 0.98rem;
+      color: var(--ink);
+      line-height: 1.55;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      background: var(--white-warm);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .fb-field textarea:focus { border-color: var(--granate); }
+    .fb-send {
+      width: 100%;
+      justify-content: center;
+      font-size: 0.78rem;
+    }
+    .fb-send[aria-disabled="true"] { opacity: 0.45; cursor: not-allowed; }
+    .fb-send svg { width: 18px; height: 18px; }
+    .fb-note {
+      margin-top: 16px;
+      font-size: 0.82rem;
+      color: var(--mute);
+    }
+    /* Estado de agradecimiento tras enviar */
+    .fb-done { padding: 8px 0; }
+    .fb-done-ico {
+      width: 64px; height: 64px;
+      margin: 0 auto 22px;
+      border-radius: 50%;
+      background: var(--granate);
+      color: #fff;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .fb-done-ico svg { width: 28px; height: 28px; }
+    .fb-done h2 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(1.9rem, 4vw, 2.6rem);
+      color: var(--ink);
+      margin-bottom: 12px;
+    }
+    @media (max-width: 560px) {
+      .fb-card { padding: 36px 22px; }
+      .fb-star { font-size: 2.2rem; }
+    }
+
+    /* ─────────────────────────────────────────────────
+       GUÍA DE CALELLA (tarjetas, reutiliza estilo home)
+    ───────────────────────────────────────────────── */
+    .calella-header { margin-bottom: 56px; }
+    .calella-mag {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 56px 34px;
+    }
+    .cm-card { display: flex; flex-direction: column; }
+    .cm-img {
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .cm-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 1.4s var(--ease);
+    }
+    .cm-card:hover .cm-img img { transform: scale(1.04); }
+    .cm-cat {
+      font-size: 0.7rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--granate);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .cm-title {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 1.55rem;
+      line-height: 1.2;
+      color: var(--ink);
+      margin: 0 0 14px;
+      letter-spacing: -0.005em;
+    }
+    .cm-text {
+      color: var(--ink-soft);
+      font-size: 0.96rem;
+      line-height: 1.6;
+      margin: 0 0 14px;
+    }
+    .cm-dist {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mute);
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .cm-dist::before { content: ""; width: 18px; height: 1px; background: var(--granate); }
+    @media (max-width: 980px) {
+      .calella-mag { grid-template-columns: repeat(2, 1fr); gap: 48px 28px; }
+    }
+    @media (max-width: 640px) {
+      .calella-mag { grid-template-columns: 1fr; gap: 50px; }
+      .calella-header { margin-bottom: 44px; }
+    }
+
+    /* ─────────────────────────────────────────────────
+       ENLACES ÚTILES
+    ───────────────────────────────────────────────── */
+    #enlaces { background: var(--cream-warm); }
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .link-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--cream);
+      border: 1px solid var(--line);
+      padding: 32px 30px;
+      transition: border-color 0.25s var(--ease), transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+    }
+    .link-card:hover {
+      border-color: var(--granate);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(20, 12, 10, 0.07);
+    }
+    .link-ico {
+      width: 44px; height: 44px;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      margin-bottom: 22px;
+      color: var(--granate);
+    }
+    .link-ico svg { width: 22px; height: 22px; }
+    .link-cat {
+      font-size: 0.68rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--granate);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .link-title {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 1.4rem;
+      line-height: 1.2;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+    .link-text {
+      color: var(--ink-soft);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      flex: 1;
+    }
+    .link-cta {
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--granate);
+    }
+    @media (max-width: 880px) {
+      .links-grid { grid-template-columns: 1fr; gap: 18px; }
+    }
+
+    /* ─────────────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────────────── */
+    footer {
+      background: var(--cream);
+      border-top: 1px solid var(--line);
+      padding: 70px 0 38px;
+      color: var(--ink-soft);
+      font-size: 0.92rem;
+    }
+    .foot-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 50px;
+      margin-bottom: 56px;
+    }
+    .foot-brand .name {
+      font-family: var(--serif);
+      font-size: 2rem;
+      letter-spacing: 0.06em;
+      color: var(--ink);
+      margin-bottom: 12px;
+    }
+    .foot-brand .tag {
+      font-size: 0.72rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--granate);
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+    .foot-col h5 {
+      font-size: 0.72rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--granate);
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+    .foot-col ul { list-style: none; }
+    .foot-col li { margin-bottom: 10px; }
+    .foot-col a { transition: color 0.3s; }
+    .foot-col a:hover { color: var(--granate); }
+    .foot-contact-list li { margin-bottom: 6px; }
+    .foot-contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 0;
+      color: var(--ink-soft) !important;
+      font-size: 0.82rem;
+      transition: color 0.2s !important;
+    }
+    .foot-contact-link:hover { color: var(--ink) !important; }
+    .foot-contact-link svg { flex-shrink: 0; }
+    .foot-email svg { color: #EA4335; }
+    .foot-wa svg { color: #25D366; }
+    .foot-bottom {
+      border-top: 1px solid var(--line);
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+      font-size: 0.78rem;
+      color: var(--mute);
+    }
+    @media (max-width: 980px) {
+      .foot-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+      section { padding: 64px 0; }
+    }
+    @media (max-width: 560px) {
+      .foot-grid { grid-template-columns: 1fr; gap: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAV ─────────────────────────────────────── -->
+  <nav id="nav">
+    <div class="wrap inner">
+      <a href="index.html" class="brand" aria-label="Hostal Coll">
+        <img src="img/logo/logobreusinfondo.png" alt="Hostal Coll" class="brand-mark" />
+        <span class="brand-name">HOSTAL COLL</span>
+      </a>
+      <div class="nav-right">
+        <a href="index.html" class="nav-link" data-i18n="wlc.back">La web →</a>
+        <div class="lang-selector" id="lang-selector">
+          <button class="lang-trigger" id="lang-trigger" aria-haspopup="true" aria-expanded="false" title="Idioma / Language">
+            <svg viewBox="0 0 20 14" width="20" height="14"><rect width="20" height="14" fill="#AA151B"/><rect y="3.5" width="20" height="7" fill="#F1BF00"/></svg>
+            <svg class="lang-chevron" viewBox="0 0 10 6" width="8" height="5" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+          <div class="lang-dropdown" id="lang-dropdown">
+            <button class="lang-opt active" data-lang="es">
+              <svg viewBox="0 0 20 14" width="20" height="14"><rect width="20" height="14" fill="#AA151B"/><rect y="3.5" width="20" height="7" fill="#F1BF00"/></svg>
+              <span>Castellano</span>
+            </button>
+            <button class="lang-opt" data-lang="ca">
+              <svg viewBox="0 0 20 14" width="20" height="14"><rect width="20" height="14" fill="#FCDD09"/><rect y="0" width="20" height="1.55" fill="#DA121A"/><rect y="3.11" width="20" height="1.55" fill="#DA121A"/><rect y="6.22" width="20" height="1.55" fill="#DA121A"/><rect y="9.33" width="20" height="1.55" fill="#DA121A"/><rect y="12.44" width="20" height="1.55" fill="#DA121A"/></svg>
+              <span>Català</span>
+            </button>
+            <button class="lang-opt" data-lang="en">
+              <svg viewBox="0 0 20 14" width="20" height="14"><rect width="20" height="14" fill="#012169"/><path d="M0 0 L20 14 M20 0 L0 14" stroke="#fff" stroke-width="3.5"/><path d="M0 0 L20 14 M20 0 L0 14" stroke="#C8102E" stroke-width="2"/><rect x="8.5" width="3" height="14" fill="#fff"/><rect y="5.5" width="20" height="3" fill="#fff"/><rect x="9" width="2" height="14" fill="#C8102E"/><rect y="6" width="20" height="2" fill="#C8102E"/></svg>
+              <span>English</span>
+            </button>
+            <button class="lang-opt" data-lang="fr">
+              <svg viewBox="0 0 20 14" width="20" height="14"><rect width="20" height="14" fill="#fff"/><rect width="6.67" height="14" fill="#002395"/><rect x="13.33" width="6.67" height="14" fill="#ED2939"/></svg>
+              <span>Français</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ─── HERO ────────────────────────────────────── -->
+  <header class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span class="line"></span>
+        <span data-i18n="wlc.hero.eyebrow">Buenos días · Hostal Coll</span>
+        <span class="line"></span>
+      </div>
+      <h1 data-i18n="wlc.hero.title">Esperamos que hayas <em>dormido bien</em>.</h1>
+      <p class="hero-sub" data-i18n="wlc.hero.sub">Bienvenido a Calella. Cuéntanos cómo ha ido la primera noche y, de paso, te dejamos algunas ideas para disfrutar del pueblo.</p>
+    </div>
+  </header>
+
+  <!-- ─── FEEDBACK ────────────────────────────────── -->
+  <section id="feedback">
+    <div class="wrap">
+      <div class="fb-card reveal">
+        <div id="fb-form">
+        <h2 data-i18n="wlc.fb.title">¿Cómo has <em>dormido</em>?</h2>
+        <p class="fb-lead" data-i18n="wlc.fb.lead">Toca las estrellas y, si quieres, déjanos un comentario. Se abrirá tu WhatsApp con el mensaje listo: solo tienes que enviarlo.</p>
+
+        <div class="fb-stars" id="fb-stars" role="radiogroup" aria-label="Valoración">
+          <button type="button" class="fb-star" data-val="1" aria-label="1">★</button>
+          <button type="button" class="fb-star" data-val="2" aria-label="2">★</button>
+          <button type="button" class="fb-star" data-val="3" aria-label="3">★</button>
+          <button type="button" class="fb-star" data-val="4" aria-label="4">★</button>
+          <button type="button" class="fb-star" data-val="5" aria-label="5">★</button>
+        </div>
+        <div class="fb-starhint" id="fb-starhint" data-i18n="wlc.fb.starhint">Toca para puntuar</div>
+
+        <div class="fb-field">
+          <label for="fb-comment" data-i18n="wlc.fb.comment">¿Quieres añadir algo? (opcional)</label>
+          <textarea id="fb-comment" data-i18n-ph="wlc.fb.commentph" placeholder="La cama, el silencio, la temperatura..."></textarea>
+        </div>
+
+        <button type="button" class="btn fb-send" id="fb-send" aria-disabled="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+          <span data-i18n="wlc.fb.send">Enviar valoración</span>
+        </button>
+        <p class="fb-note" data-i18n="wlc.fb.note">Nos llega directamente a recepción. ¡Gracias! 🙏</p>
+        </div><!-- /#fb-form -->
+
+        <div id="fb-done" hidden>
+          <div class="fb-done-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h2 data-i18n="wlc.fb.ok.title">¡Gracias! 🙏</h2>
+          <p class="fb-lead" data-i18n="wlc.fb.ok.text">Hemos recibido tu valoración. ¡Que tengas un buen día en Calella!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── GUÍA DE CALELLA ─────────────────────────── -->
+  <section id="calella">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span data-i18n="s05.label">Calella · Guía</span>
+        <span class="line"></span>
+      </div>
+      <div class="calella-header reveal">
+        <h2 class="display" data-i18n="s05.title">Todo lo que <em>te espera fuera</em></h2>
+        <p class="lead" data-i18n="s05.lead">El Mediterráneo a un lado, las montañas del Maresme al otro y un casco antiguo entre los dos. Aquí tienes algunos de los imprescindibles, todos a pocos minutos del hostal.</p>
+      </div>
+
+      <div class="calella-mag">
+        <article class="cm-card reveal" data-delay="1">
+          <div class="cm-img"><img src="img/calella/platjagran.png" alt="Playa Gran de Calella" loading="lazy" /></div>
+          <div class="cm-cat" data-i18n="platja.cat">Playa</div>
+          <h3 class="cm-title">Platja Gran</h3>
+          <p class="cm-text" data-i18n="platja.text">La playa principal del pueblo: amplia, con paseo marítimo justo detrás.</p>
+          <span class="cm-dist" data-i18n="dist.4walk">4 min · a pie</span>
+        </article>
+
+        <article class="cm-card reveal" data-delay="2">
+          <div class="cm-img"><img src="img/calella/passeig.png" alt="Paseo marítimo de Calella" loading="lazy" /></div>
+          <div class="cm-cat" data-i18n="passeig.cat">Paseo</div>
+          <h3 class="cm-title">Passeig Marítim</h3>
+          <p class="cm-text" data-i18n="passeig.text">Recorre toda la fachada marítima del pueblo, con palmeras, terrazas y vistas al Mediterráneo de un extremo al otro.</p>
+          <span class="cm-dist" data-i18n="dist.4walk">4 min · a pie</span>
+        </article>
+
+        <article class="cm-card reveal" data-delay="3">
+          <div class="cm-img"><img src="img/calella/iglesia.png" alt="Iglesia de Santa Maria i Sant Nicolau" loading="lazy" /></div>
+          <div class="cm-cat" data-i18n="iglesia.cat">Cultura</div>
+          <h3 class="cm-title">Església de Santa Maria</h3>
+          <p class="cm-text" data-i18n="iglesia.text">El corazón del casco antiguo. Una iglesia neoclásica que preside la plaza más céntrica de Calella.</p>
+          <span class="cm-dist" data-i18n="dist.4walk">4 min · a pie</span>
+        </article>
+
+        <article class="cm-card reveal" data-delay="1">
+          <div class="cm-img"><img src="img/calella/roca grossa.png" alt="Roca Grossa de Calella" loading="lazy" /></div>
+          <div class="cm-cat" data-i18n="roca.cat">Costa</div>
+          <h3 class="cm-title">Roca Grossa</h3>
+          <p class="cm-text" data-i18n="roca.text">Roca emblemática, con calas y miradores por el trayecto.</p>
+          <span class="cm-dist" data-i18n="dist.25walk">25 min · a pie</span>
+        </article>
+
+        <article class="cm-card reveal" data-delay="2">
+          <div class="cm-img"><img src="img/calella/torretes.png" alt="Les Torretes de Calella" loading="lazy" /></div>
+          <div class="cm-cat" data-i18n="torretes.cat">Mirador</div>
+          <h3 class="cm-title">Les Torretes</h3>
+          <p class="cm-text" data-i18n="torretes.text">La subida es bonita y, arriba, una de las mejores panorámicas de toda la costa.</p>
+          <span class="cm-dist" data-i18n="dist.30walk">30 min · a pie</span>
+        </article>
+
+        <article class="cm-card reveal" data-delay="3">
+          <div class="cm-img"><img src="img/calella/plaçadjuntament.png" alt="Plaça de l'Ajuntament de Calella" loading="lazy" /></div>
+          <div class="cm-cat" data-i18n="placa.cat">Centro</div>
+          <h3 class="cm-title">Plaça de l'Ajuntament</h3>
+          <p class="cm-text" data-i18n="placa.text">La plaza del pueblo, con el edificio del ayuntamiento, terrazas y el bullicio del día a día de Calella.</p>
+          <span class="cm-dist" data-i18n="dist.3walk">3 min · a pie</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── ENLACES ÚTILES ──────────────────────────── -->
+  <section id="enlaces">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span data-i18n="wlc.links.label">Antes de salir</span>
+        <span class="line"></span>
+      </div>
+      <div class="calella-header reveal">
+        <h2 class="display" data-i18n="wlc.links.title">Tres <em>enlaces útiles</em>.</h2>
+        <p class="lead" data-i18n="wlc.links.lead">Para moverte por el pueblo y los alrededores sin complicaciones.</p>
+      </div>
+
+      <div class="links-grid">
+        <!-- Agenda de Calella · cambia el enlace si lo prefieres -->
+        <a class="link-card reveal" data-delay="1" href="https://www.calellabarcelona.com/" target="_blank" rel="noopener">
+          <span class="link-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="17" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/></svg></span>
+          <div class="link-cat" data-i18n="wlc.link.agenda.cat">Agenda</div>
+          <div class="link-title" data-i18n="wlc.link.agenda.title">Qué pasa en Calella</div>
+          <p class="link-text" data-i18n="wlc.link.agenda.text">Ferias, fiestas, mercados y conciertos del pueblo. Mira qué hay estos días.</p>
+          <span class="link-cta" data-i18n="wlc.link.agenda.cta">Ver la agenda →</span>
+        </a>
+
+        <!-- Zona azul / parquímetre de Calella (operador Gestvia / app mowiz) -->
+        <a class="link-card reveal" data-delay="2" href="https://www.gestvia.cat/cat/zona_blava_app.html" target="_blank" rel="noopener">
+          <span class="link-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 17h14M6 17l1.5-5h9L18 17M7 12l1-4h8l1 4"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="16.5" cy="17.5" r="1.5"/></svg></span>
+          <div class="link-cat" data-i18n="wlc.link.parking.cat">Coche</div>
+          <div class="link-title" data-i18n="wlc.link.parking.title">Zona azul y parquímetro</div>
+          <p class="link-text" data-i18n="wlc.link.parking.text">Si has venido en coche, puedes pagar el aparcamiento desde el móvil con la app de Calella.</p>
+          <span class="link-cta" data-i18n="wlc.link.parking.cta">Cómo aparcar →</span>
+        </a>
+
+        <!-- Rodalies R1 · horarios de tren -->
+        <a class="link-card reveal" data-delay="3" href="https://rodalies.gencat.cat/" target="_blank" rel="noopener">
+          <span class="link-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="3" width="14" height="14" rx="2"/><line x1="5" y1="11" x2="19" y2="11"/><circle cx="8.5" cy="14" r="0.6" fill="currentColor"/><circle cx="15.5" cy="14" r="0.6" fill="currentColor"/><path d="M7 21l2-2M17 21l-2-2"/></svg></span>
+          <div class="link-cat" data-i18n="wlc.link.transport.cat">Transporte</div>
+          <div class="link-title" data-i18n="wlc.link.transport.title">Tren y Rodalies (R1)</div>
+          <p class="link-text" data-i18n="wlc.link.transport.text">La línea R1 conecta Calella con Barcelona y la costa. Consulta horarios para hacer excursiones.</p>
+          <span class="link-cta" data-i18n="wlc.link.transport.cta">Ver horarios →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ──────────────────────────────────── -->
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <div class="tag" data-i18n="foot.since">Desde · 1950</div>
+          <div class="name">Hostal Coll</div>
+          <p>Carrer de Sant Isidre, 54<br/>08370 Calella · Maresme · Barcelona</p>
+        </div>
+        <div class="foot-col">
+          <h5 data-i18n="foot.h.hostal">Hostal</h5>
+          <ul>
+            <li><a href="index.html" data-i18n="wlc.back">La web →</a></li>
+            <li><a href="index.html#habitaciones" data-i18n="nav.rooms">Habitaciones</a></li>
+            <li><a href="index.html#servicios" data-i18n="nav.services">Servicios</a></li>
+          </ul>
+        </div>
+        <div class="foot-col">
+          <h5 data-i18n="foot.h.contact">Contacto</h5>
+          <ul class="foot-contact-list">
+            <li>
+              <a href="tel:+34687558248" class="foot-contact-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="15" height="15"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7 12.8 12.8 0 0 0 .7 2.8 2 2 0 0 1-.4 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4 12.8 12.8 0 0 0 2.8.7A2 2 0 0 1 22 16.9z"/></svg>
+                +34 687 55 82 48
+              </a>
+            </li>
+            <li>
+              <a href="mailto:hostalcoll@gmail.com" class="foot-contact-link foot-email">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="15" height="15"><rect x="3" y="5" width="18" height="14" rx="1"/><polyline points="3 7 12 13 21 7"/></svg>
+                hostalcoll@gmail.com
+              </a>
+            </li>
+            <li>
+              <a href="https://wa.me/34687558248" class="foot-contact-link foot-wa" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.8 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.6c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.6-1.5-.8-2-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2 0 1.3.9 2.5 1 2.7.1.2 1.8 2.8 4.5 3.9.6.3 1.1.4 1.5.6.6.2 1.2.2 1.6.1.5-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3zm-5.6 7.6h-.1c-1.9 0-3.7-.5-5.3-1.5l-.4-.2-3.9 1 1-3.8-.2-.4c-1.1-1.7-1.6-3.7-1.6-5.7C1.4 6 6.1 1.4 11.9 1.4c2.8 0 5.4 1.1 7.4 3.1 2 2 3.1 4.6 3.1 7.4-.1 5.8-4.8 10.5-10.5 10.5z"/></svg>
+                WhatsApp
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="foot-col">
+          <h5 data-i18n="foot.h.legal">Legal</h5>
+          <ul>
+            <li><a href="aviso-legal.html" data-i18n="foot.legal1">Aviso legal</a></li>
+            <li><a href="privacidad.html" data-i18n="foot.legal2">Política de privacidad</a></li>
+            <li><a href="cookies.html" data-i18n="foot.legal3">Política de cookies</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span data-i18n="foot.rights">© 2026 Hostal Coll · Todos los derechos reservados</span>
+        <span data-i18n="foot.tagline">Hecho con calma en Calella</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ─── SCRIPTS ─────────────────────────────────── -->
+  <script>
+    // ───────── i18n ─────────
+    const TRANSLATIONS = {
+      es: {
+        'nav.rooms':'Habitaciones','nav.services':'Servicios',
+        'wlc.back':'La web →',
+        'wlc.hero.eyebrow':'Buenos días · Hostal Coll','wlc.hero.title':'Esperamos que hayas <em>dormido bien</em>.','wlc.hero.sub':'Bienvenido a Calella. Cuéntanos cómo ha ido la primera noche y, de paso, te dejamos algunas ideas para disfrutar del pueblo.',
+        'wlc.fb.title':'¿Cómo has <em>dormido</em>?','wlc.fb.lead':'Toca las estrellas y, si quieres, déjanos un comentario. Y listo: nosotros nos encargamos del resto.','wlc.fb.starhint':'Toca para puntuar','wlc.fb.comment':'¿Quieres añadir algo? (opcional)','wlc.fb.commentph':'La cama, el silencio, la temperatura...','wlc.fb.send':'Enviar valoración','wlc.fb.sending':'Enviando…','wlc.fb.note':'Nos llega directamente a recepción. ¡Gracias! 🙏','wlc.fb.error':'No se ha podido enviar. Inténtalo de nuevo, por favor.','wlc.fb.ok.title':'¡Gracias! 🙏','wlc.fb.ok.text':'Hemos recibido tu valoración. ¡Que tengas un buen día en Calella!',
+        'wlc.fb.rate.1':'Vaya, lo sentimos','wlc.fb.rate.2':'Podemos mejorar','wlc.fb.rate.3':'Estuvo bien','wlc.fb.rate.4':'¡Muy bien!','wlc.fb.rate.5':'¡Genial! 😍',
+        's05.label':'Calella · Guía','s05.title':'Todo lo que <em>te espera fuera</em>','s05.lead':'El Mediterráneo a un lado, las montañas del Maresme al otro y un casco antiguo entre los dos. Aquí tienes algunos de los imprescindibles, todos a pocos minutos del hostal.',
+        'platja.cat':'Playa','platja.text':'La playa principal del pueblo: amplia, con paseo marítimo justo detrás.','passeig.cat':'Paseo','passeig.text':'Recorre toda la fachada marítima del pueblo, con palmeras, terrazas y vistas al Mediterráneo de un extremo al otro.','iglesia.cat':'Cultura','iglesia.text':'El corazón del casco antiguo. Una iglesia neoclásica que preside la plaza más céntrica de Calella.','roca.cat':'Costa','roca.text':'Roca emblemática, con calas y miradores por el trayecto.','torretes.cat':'Mirador','torretes.text':'La subida es bonita y, arriba, una de las mejores panorámicas de toda la costa.','placa.cat':'Centro','placa.text':'La plaza del pueblo, con el edificio del ayuntamiento, terrazas y el bullicio del día a día de Calella.',
+        'dist.3walk':'3 min · a pie','dist.4walk':'4 min · a pie','dist.25walk':'25 min · a pie','dist.30walk':'30 min · a pie',
+        'wlc.links.label':'Antes de salir','wlc.links.title':'Tres <em>enlaces útiles</em>.','wlc.links.lead':'Para moverte por el pueblo y los alrededores sin complicaciones.',
+        'wlc.link.agenda.cat':'Agenda','wlc.link.agenda.title':'Qué pasa en Calella','wlc.link.agenda.text':'Ferias, fiestas, mercados y conciertos del pueblo. Mira qué hay estos días.','wlc.link.agenda.cta':'Ver la agenda →',
+        'wlc.link.parking.cat':'Coche','wlc.link.parking.title':'Zona azul y parquímetro','wlc.link.parking.text':'Si has venido en coche, puedes pagar el aparcamiento desde el móvil con la app de Calella.','wlc.link.parking.cta':'Cómo aparcar →',
+        'wlc.link.transport.cat':'Transporte','wlc.link.transport.title':'Tren y Rodalies (R1)','wlc.link.transport.text':'La línea R1 conecta Calella con Barcelona y la costa. Consulta horarios para hacer excursiones.','wlc.link.transport.cta':'Ver horarios →',
+        'foot.since':'Desde · 1950','foot.h.hostal':'Hostal','foot.h.contact':'Contacto','foot.h.legal':'Legal','foot.legal1':'Aviso legal','foot.legal2':'Política de privacidad','foot.legal3':'Política de cookies','foot.rights':'© 2026 Hostal Coll · Todos los derechos reservados','foot.tagline':'Hecho con calma en Calella'
+      },
+      ca: {
+        'nav.rooms':'Habitacions','nav.services':'Serveis',
+        'wlc.back':'La web →',
+        'wlc.hero.eyebrow':'Bon dia · Hostal Coll','wlc.hero.title':'Esperem que hagis <em>dormit bé</em>.','wlc.hero.sub':"Benvingut/da a Calella. Explica'ns com ha anat la primera nit i, de pas, et deixem algunes idees per gaudir del poble.",
+        'wlc.fb.title':'Com has <em>dormit</em>?','wlc.fb.lead':"Toca les estrelles i, si vols, deixa'ns un comentari. I llestos: de la resta ja ens n'encarreguem nosaltres.",'wlc.fb.starhint':'Toca per puntuar','wlc.fb.comment':'Vols afegir alguna cosa? (opcional)','wlc.fb.commentph':'El llit, el silenci, la temperatura...','wlc.fb.send':'Enviar valoració','wlc.fb.sending':'Enviant…','wlc.fb.note':'Ens arriba directament a recepció. Gràcies! 🙏','wlc.fb.error':"No s'ha pogut enviar. Torna-ho a provar, si us plau.",'wlc.fb.ok.title':'Gràcies! 🙏','wlc.fb.ok.text':'Hem rebut la teva valoració. Que tinguis un bon dia a Calella!',
+        'wlc.fb.rate.1':'Ai, ho sentim','wlc.fb.rate.2':'Podem millorar','wlc.fb.rate.3':'Ha estat bé','wlc.fb.rate.4':'Molt bé!','wlc.fb.rate.5':'Genial! 😍',
+        's05.label':'Calella · Guia','s05.title':"Tot el que <em>t'espera fora</em>",'s05.lead':"La Mediterrània a un costat, les muntanyes del Maresme a l'altre i un casc antic entre els dos. Aquí tens alguns dels imprescindibles, tots a pocs minuts de l'hostal.",
+        'platja.cat':'Platja','platja.text':'La platja principal del poble: àmplia, amb passeig marítim just darrere.','passeig.cat':'Passeig','passeig.text':"Recorre tota la façana marítima del poble, amb palmeres, terrasses i vistes a la Mediterrània d'un extrem a l'altre.",'iglesia.cat':'Cultura','iglesia.text':'El cor del casc antic. Una església neoclàssica que presideix la plaça més cèntrica de Calella.','roca.cat':'Costa','roca.text':'Roca emblemàtica, amb cales i miradors pel trajecte.','torretes.cat':'Mirador','torretes.text':'La pujada és bonica i, dalt, una de les millors panoràmiques de tota la costa.','placa.cat':'Centre','placa.text':"La plaça del poble, amb l'edifici de l'ajuntament, terrasses i el bullici del dia a dia de Calella.",
+        'dist.3walk':'3 min · a peu','dist.4walk':'4 min · a peu','dist.25walk':'25 min · a peu','dist.30walk':'30 min · a peu',
+        'wlc.links.label':'Abans de sortir','wlc.links.title':'Tres <em>enllaços útils</em>.','wlc.links.lead':'Per moure\'t pel poble i pels voltants sense complicacions.',
+        'wlc.link.agenda.cat':'Agenda','wlc.link.agenda.title':'Què passa a Calella','wlc.link.agenda.text':'Fires, festes, mercats i concerts del poble. Mira què hi ha aquests dies.','wlc.link.agenda.cta':"Veure l'agenda →",
+        'wlc.link.parking.cat':'Cotxe','wlc.link.parking.title':'Zona blava i parquímetre','wlc.link.parking.text':"Si has vingut amb cotxe, pots pagar l'aparcament des del mòbil amb l'app de Calella.",'wlc.link.parking.cta':'Com aparcar →',
+        'wlc.link.transport.cat':'Transport','wlc.link.transport.title':'Tren i Rodalies (R1)','wlc.link.transport.text':'La línia R1 connecta Calella amb Barcelona i la costa. Consulta horaris per fer excursions.','wlc.link.transport.cta':'Veure horaris →',
+        'foot.since':'Des de · 1950','foot.h.hostal':'Hostal','foot.h.contact':'Contacte','foot.h.legal':'Legal','foot.legal1':'Avís legal','foot.legal2':'Política de privacitat','foot.legal3':'Política de cookies','foot.rights':'© 2026 Hostal Coll · Tots els drets reservats','foot.tagline':'Fet amb calma a Calella'
+      },
+      en: {
+        'nav.rooms':'Rooms','nav.services':'Services',
+        'wlc.back':'The website →',
+        'wlc.hero.eyebrow':'Good morning · Hostal Coll','wlc.hero.title':'We hope you <em>slept well</em>.','wlc.hero.sub':'Welcome to Calella. Tell us how your first night went and, while you\'re at it, here are a few ideas to enjoy the town.',
+        'wlc.fb.title':'How did you <em>sleep</em>?','wlc.fb.lead':'Tap the stars and, if you like, leave us a comment. That\'s it — we\'ll take care of the rest.','wlc.fb.starhint':'Tap to rate','wlc.fb.comment':'Want to add anything? (optional)','wlc.fb.commentph':'The bed, the quiet, the temperature...','wlc.fb.send':'Send feedback','wlc.fb.sending':'Sending…','wlc.fb.note':'It comes straight to reception. Thank you! 🙏','wlc.fb.error':'Couldn\'t send. Please try again.','wlc.fb.ok.title':'Thank you! 🙏','wlc.fb.ok.text':'We\'ve received your feedback. Enjoy your day in Calella!',
+        'wlc.fb.rate.1':'Oh, we\'re sorry','wlc.fb.rate.2':'We can do better','wlc.fb.rate.3':'It was fine','wlc.fb.rate.4':'Very good!','wlc.fb.rate.5':'Great! 😍',
+        's05.label':'Calella · Guide','s05.title':'Everything <em>waiting for you outside</em>','s05.lead':'The Mediterranean on one side, the Maresme mountains on the other and an old town in between. Here are some must-sees, all just minutes from the hostal.',
+        'platja.cat':'Beach','platja.text':'The village\'s main beach: wide, with a promenade right behind.','passeig.cat':'Promenade','passeig.text':'It runs the full length of the village\'s seafront, with palm trees, terraces and Mediterranean views from end to end.','iglesia.cat':'Culture','iglesia.text':'The heart of the old town. A neoclassical church presiding over Calella\'s most central square.','roca.cat':'Coast','roca.text':'An iconic rock, with coves and viewpoints along the way.','torretes.cat':'Viewpoint','torretes.text':'A lovely climb and, at the top, one of the best panoramas on the coast.','placa.cat':'Town centre','placa.text':'The village square, with the town hall, terrace cafés and the everyday bustle of Calella.',
+        'dist.3walk':'3 min · on foot','dist.4walk':'4 min · on foot','dist.25walk':'25 min · on foot','dist.30walk':'30 min · on foot',
+        'wlc.links.label':'Before you head out','wlc.links.title':'Three <em>useful links</em>.','wlc.links.lead':'To get around the town and the surroundings with ease.',
+        'wlc.link.agenda.cat':'What\'s on','wlc.link.agenda.title':'What\'s happening in Calella','wlc.link.agenda.text':'Fairs, festivals, markets and concerts in town. See what\'s on these days.','wlc.link.agenda.cta':'See the agenda →',
+        'wlc.link.parking.cat':'Car','wlc.link.parking.title':'Paid parking & meters','wlc.link.parking.text':'If you came by car, you can pay for parking from your phone with Calella\'s app.','wlc.link.parking.cta':'How to park →',
+        'wlc.link.transport.cat':'Transport','wlc.link.transport.title':'Train & Rodalies (R1)','wlc.link.transport.text':'The R1 line connects Calella with Barcelona and the coast. Check timetables for day trips.','wlc.link.transport.cta':'See timetables →',
+        'foot.since':'Since · 1950','foot.h.hostal':'Hostal','foot.h.contact':'Contact','foot.h.legal':'Legal','foot.legal1':'Legal notice','foot.legal2':'Privacy policy','foot.legal3':'Cookie policy','foot.rights':'© 2026 Hostal Coll · All rights reserved','foot.tagline':'Made calmly in Calella'
+      },
+      fr: {
+        'nav.rooms':'Chambres','nav.services':'Services',
+        'wlc.back':'Le site →',
+        'wlc.hero.eyebrow':'Bonjour · Hostal Coll','wlc.hero.title':'Nous espérons que vous avez <em>bien dormi</em>.','wlc.hero.sub':'Bienvenue à Calella. Dites-nous comment s\'est passée votre première nuit et, au passage, voici quelques idées pour profiter du village.',
+        'wlc.fb.title':'Comment avez-vous <em>dormi</em> ?','wlc.fb.lead':'Touchez les étoiles et, si vous le souhaitez, laissez-nous un commentaire. C\'est tout : on s\'occupe du reste.','wlc.fb.starhint':'Touchez pour noter','wlc.fb.comment':'Vous voulez ajouter quelque chose ? (facultatif)','wlc.fb.commentph':'Le lit, le calme, la température...','wlc.fb.send':'Envoyer l\'avis','wlc.fb.sending':'Envoi…','wlc.fb.note':'Cela nous arrive directement à la réception. Merci ! 🙏','wlc.fb.error':'L\'envoi a échoué. Veuillez réessayer.','wlc.fb.ok.title':'Merci ! 🙏','wlc.fb.ok.text':'Nous avons bien reçu votre avis. Bonne journée à Calella !',
+        'wlc.fb.rate.1':'Oh, nous sommes désolés','wlc.fb.rate.2':'Nous pouvons mieux faire','wlc.fb.rate.3':'C\'était bien','wlc.fb.rate.4':'Très bien !','wlc.fb.rate.5':'Génial ! 😍',
+        's05.label':'Calella · Guide','s05.title':'Tout ce qui <em>vous attend dehors</em>','s05.lead':'La Méditerranée d\'un côté, les montagnes du Maresme de l\'autre et un vieux centre entre les deux. Voici quelques incontournables, tous à quelques minutes de l\'hostal.',
+        'platja.cat':'Plage','platja.text':'La plage principale du village : large, avec une promenade maritime juste derrière.','passeig.cat':'Promenade','passeig.text':'Elle longe toute la façade maritime du village, avec des palmiers, des terrasses et des vues sur la Méditerranée d\'un bout à l\'autre.','iglesia.cat':'Culture','iglesia.text':'Le cœur du vieux centre. Une église néoclassique qui préside la place la plus centrale de Calella.','roca.cat':'Côte','roca.text':'Rocher emblématique, avec des criques et des belvédères sur le trajet.','torretes.cat':'Belvédère','torretes.text':'La montée est belle et la vue, l\'une des plus belles de la côte.','placa.cat':'Centre','placa.text':'La place du village, avec la mairie, des terrasses et l\'animation quotidienne de Calella.',
+        'dist.3walk':'3 min · à pied','dist.4walk':'4 min · à pied','dist.25walk':'25 min · à pied','dist.30walk':'30 min · à pied',
+        'wlc.links.label':'Avant de sortir','wlc.links.title':'Trois <em>liens utiles</em>.','wlc.links.lead':'Pour vous déplacer dans le village et les alentours sans souci.',
+        'wlc.link.agenda.cat':'Agenda','wlc.link.agenda.title':'Que se passe-t-il à Calella','wlc.link.agenda.text':'Foires, fêtes, marchés et concerts du village. Regardez ce qu\'il y a ces jours-ci.','wlc.link.agenda.cta':'Voir l\'agenda →',
+        'wlc.link.parking.cat':'Voiture','wlc.link.parking.title':'Zone payante & horodateurs','wlc.link.parking.text':'Si vous êtes venu en voiture, vous pouvez payer le stationnement depuis votre mobile avec l\'app de Calella.','wlc.link.parking.cta':'Comment se garer →',
+        'wlc.link.transport.cat':'Transport','wlc.link.transport.title':'Train & Rodalies (R1)','wlc.link.transport.text':'La ligne R1 relie Calella à Barcelone et à la côte. Consultez les horaires pour vos excursions.','wlc.link.transport.cta':'Voir les horaires →',
+        'foot.since':'Depuis · 1950','foot.h.hostal':'Hostal','foot.h.contact':'Contact','foot.h.legal':'Mentions légales','foot.legal1':'Mentions légales','foot.legal2':'Politique de confidentialité','foot.legal3':'Politique de cookies','foot.rights':'© 2026 Hostal Coll · Tous droits réservés','foot.tagline':'Fait avec calme à Calella'
+      }
+    };
+
+    // Idioma: prioridad al parámetro ?lang= (para enviar el enlace ya traducido),
+    // luego lo guardado, luego el idioma del navegador. Locales no soportados → inglés.
+    const FLAG_SVGS = {
+      es: '<svg viewBox="0 0 20 14" width="20" height="14"><rect width="20" height="14" fill="#AA151B"/><rect y="3.5" width="20" height="7" fill="#F1BF00"/></svg>',
+      ca: '<svg viewBox="0 0 20 14" width="20" height="14"><rect width="20" height="14" fill="#FCDD09"/><rect y="0" width="20" height="1.55" fill="#DA121A"/><rect y="3.11" width="20" height="1.55" fill="#DA121A"/><rect y="6.22" width="20" height="1.55" fill="#DA121A"/><rect y="9.33" width="20" height="1.55" fill="#DA121A"/><rect y="12.44" width="20" height="1.55" fill="#DA121A"/></svg>',
+      en: '<svg viewBox="0 0 20 14" width="20" height="14"><rect width="20" height="14" fill="#012169"/><path d="M0 0 L20 14 M20 0 L0 14" stroke="#fff" stroke-width="3.5"/><path d="M0 0 L20 14 M20 0 L0 14" stroke="#C8102E" stroke-width="2"/><rect x="8.5" width="3" height="14" fill="#fff"/><rect y="5.5" width="20" height="3" fill="#fff"/><rect x="9" width="2" height="14" fill="#C8102E"/><rect y="6" width="20" height="2" fill="#C8102E"/></svg>',
+      fr: '<svg viewBox="0 0 20 14" width="20" height="14"><rect width="20" height="14" fill="#fff"/><rect width="6.67" height="14" fill="#002395"/><rect x="13.33" width="6.67" height="14" fill="#ED2939"/></svg>'
+    };
+    const CHEVRON_SVG = '<svg class="lang-chevron" viewBox="0 0 10 6" width="8" height="5" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
+
+    let _params; try { _params = new URLSearchParams(location.search); } catch(e) { _params = new URLSearchParams(''); }
+    function cleanParam(v){ return v ? v.toString().trim().slice(0, 60) : ''; }
+    // El enlace que envías puede venir personalizado: ?g=Nombre y ?r=Habitación.
+    // Así el feedback ya te llega con el nombre y/o la habitación del huésped.
+    const GUEST = { name: cleanParam(_params.get('g')), room: cleanParam(_params.get('r')) };
+
+    let _storedLang; try { _storedLang = localStorage.getItem('lang'); } catch(e) {}
+    let currentLang = _params.get('lang') || _storedLang || (navigator.language || 'en').slice(0,2);
+    if (!TRANSLATIONS[currentLang]) currentLang = 'en';
+
+    function applyLang(lang) {
+      const t = TRANSLATIONS[lang];
+      if (!t) return;
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key] !== undefined) el.innerHTML = t[key];
+      });
+      document.querySelectorAll('[data-i18n-ph]').forEach((el) => {
+        const key = el.getAttribute('data-i18n-ph');
+        if (t[key] !== undefined) el.setAttribute('placeholder', t[key]);
+      });
+      // La página es siempre genérica: el nombre/habitación NO se muestran aquí,
+      // solo viajan ocultos hacia /api/feedback cuando el huésped valora.
+      const trigger = document.getElementById('lang-trigger');
+      if (trigger) trigger.innerHTML = FLAG_SVGS[lang] + CHEVRON_SVG;
+      document.querySelectorAll('.lang-opt').forEach((btn) => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+      document.documentElement.lang = lang;
+      try { localStorage.setItem('lang', lang); } catch(e) {}
+      currentLang = lang;
+      renderStars();   // el texto de la valoración depende del idioma
+    }
+
+    // Dropdown de idioma
+    const langSelector = document.getElementById('lang-selector');
+    const langTrigger  = document.getElementById('lang-trigger');
+    langTrigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = langSelector.classList.toggle('open');
+      langTrigger.setAttribute('aria-expanded', open);
+    });
+    document.addEventListener('click', () => {
+      langSelector.classList.remove('open');
+      langTrigger.setAttribute('aria-expanded', 'false');
+    });
+    document.querySelectorAll('.lang-opt').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        applyLang(btn.dataset.lang);
+        langSelector.classList.remove('open');
+        langTrigger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // ───────── Valoración por estrellas + envío ─────────
+    let rating = 0;
+    let sending = false;
+    const starsBox  = document.getElementById('fb-stars');
+    const stars     = Array.from(starsBox.querySelectorAll('.fb-star'));
+    const starHint  = document.getElementById('fb-starhint');
+    const commentEl = document.getElementById('fb-comment');
+    const sendBtn   = document.getElementById('fb-send');
+    const sendLabel = sendBtn.querySelector('span');
+    const formBox   = document.getElementById('fb-form');
+    const doneBox   = document.getElementById('fb-done');
+
+    function renderStars() {
+      stars.forEach((s) => s.classList.toggle('on', Number(s.dataset.val) <= rating));
+      const t = TRANSLATIONS[currentLang];
+      starHint.textContent = rating > 0 ? (t['wlc.fb.rate.' + rating] || '') : (t['wlc.fb.starhint'] || '');
+      if (!sending) sendBtn.setAttribute('aria-disabled', rating === 0 ? 'true' : 'false');
+    }
+
+    stars.forEach((s) => {
+      s.addEventListener('click', () => { rating = Number(s.dataset.val); renderStars(); });
+    });
+
+    function shakeStars() {
+      starsBox.animate(
+        [{ transform: 'translateX(0)' }, { transform: 'translateX(-6px)' }, { transform: 'translateX(6px)' }, { transform: 'translateX(0)' }],
+        { duration: 260 }
+      );
+    }
+
+    // Envía la valoración a /api/feedback (que te la reenvía por WhatsApp).
+    // El nombre/habitación viajan ocultos desde el enlace (?g=, ?r=).
+    async function submitFeedback() {
+      if (sending) return;
+      if (rating === 0) { shakeStars(); return; }
+      sending = true;
+      const t = TRANSLATIONS[currentLang];
+      sendLabel.textContent = t['wlc.fb.sending'];
+      sendBtn.setAttribute('aria-disabled', 'true');
+      try {
+        const r = await fetch('/api/feedback', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            rating: rating,
+            comment: (commentEl.value || '').trim(),
+            name: GUEST.name,
+            room: GUEST.room,
+            lang: currentLang
+          })
+        });
+        if (!r.ok) throw new Error('bad_status');
+        formBox.hidden = true;
+        doneBox.hidden = false;
+      } catch (e) {
+        sending = false;
+        sendLabel.textContent = t['wlc.fb.send'];
+        sendBtn.setAttribute('aria-disabled', 'false');
+        starHint.textContent = t['wlc.fb.error'];
+      }
+    }
+    sendBtn.addEventListener('click', submitFeedback);
+
+    applyLang(currentLang);
+
+    // ───────── Reveal on scroll ─────────
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+  </script>
+
+</body>
+</html>

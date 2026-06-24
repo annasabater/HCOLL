@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Generador d'enllaços · Hostal Coll</title>
+  <!-- Eina interna privada: fora de buscadors -->
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/png" href="img/logo/logobreusinfondo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --granate:#7A1F2B; --granate-deep:#5C1620;
+      --cream:#FFFFFF; --cream-warm:#F4F4F4; --white-warm:#F8F8F8;
+      --ink:#1A1A1A; --ink-soft:#444444; --mute:#888888;
+      --line:#E0E0E0;
+      --serif:"Cormorant Garamond",Georgia,serif;
+      --sans:"Manrope",system-ui,sans-serif;
+      --ease:cubic-bezier(0.22,1,0.36,1);
+    }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body {
+      font-family:var(--sans); color:var(--ink); background:var(--cream-warm);
+      line-height:1.55; -webkit-font-smoothing:antialiased;
+      min-height:100vh; padding:40px 18px;
+      display:flex; flex-direction:column; align-items:center;
+    }
+    a { color:inherit; }
+    ::selection { background:var(--granate); color:var(--cream); }
+
+    .head { text-align:center; margin-bottom:28px; max-width:560px; }
+    .head .brand {
+      display:inline-flex; align-items:center; gap:10px; margin-bottom:18px;
+    }
+    .head .brand img { width:42px; height:42px; object-fit:contain; }
+    .head .brand span {
+      font-family:var(--serif); font-size:1.05rem; letter-spacing:0.12em; color:var(--ink);
+    }
+    .head h1 {
+      font-family:var(--serif); font-weight:400; font-size:2rem; line-height:1.15;
+      color:var(--ink); margin-bottom:8px;
+    }
+    .head h1 em { font-style:italic; color:var(--granate); }
+    .head p { color:var(--ink-soft); font-size:0.95rem; }
+
+    .card {
+      background:var(--cream); border:1px solid var(--line);
+      width:min(560px,100%); padding:34px 30px;
+      box-shadow:0 18px 50px rgba(20,12,10,0.06);
+    }
+    .field { margin-bottom:20px; }
+    .field label {
+      display:block; font-size:0.7rem; letter-spacing:0.18em; text-transform:uppercase;
+      color:var(--granate); font-weight:600; margin-bottom:8px;
+    }
+    .field input, .field select {
+      width:100%; font-family:var(--sans); font-size:1rem; color:var(--ink);
+      padding:12px 14px; border:1px solid var(--line); background:var(--white-warm);
+      outline:none; transition:border-color 0.2s;
+    }
+    .field input:focus, .field select:focus { border-color:var(--granate); }
+    .row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    @media (max-width:460px){ .row { grid-template-columns:1fr; } }
+
+    .out-label {
+      font-size:0.7rem; letter-spacing:0.18em; text-transform:uppercase;
+      color:var(--granate); font-weight:600; margin:26px 0 8px;
+      display:flex; align-items:center; gap:8px;
+    }
+    .out-label .line { flex:1; height:1px; background:var(--line); }
+    .out-box {
+      display:flex; gap:8px; align-items:stretch;
+    }
+    .out-box input, .out-box textarea {
+      flex:1; font-family:var(--sans); font-size:0.9rem; color:var(--ink-soft);
+      padding:12px 14px; border:1px solid var(--line); background:var(--white-warm);
+      outline:none; resize:vertical;
+    }
+    .out-box textarea { min-height:104px; line-height:1.5; }
+    .btn {
+      flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      padding:0 18px; min-width:104px;
+      font-family:var(--sans); font-size:0.7rem; font-weight:600; letter-spacing:0.16em; text-transform:uppercase;
+      border:1px solid var(--granate); background:var(--granate); color:var(--cream);
+      cursor:pointer; transition:all 0.25s var(--ease);
+    }
+    .btn:hover { background:var(--granate-deep); border-color:var(--granate-deep); }
+    .btn.copied { background:#1f8f44; border-color:#1f8f44; }
+    .btn-wa {
+      width:100%; margin-top:18px; padding:14px; min-width:0;
+      background:#25D366; border-color:#25D366;
+    }
+    .btn-wa:hover { background:#1fb858; border-color:#1fb858; }
+    .btn-wa[aria-disabled="true"] { opacity:0.4; cursor:not-allowed; }
+    .btn-wa svg { width:18px; height:18px; }
+
+    .hint { font-size:0.8rem; color:var(--mute); margin-top:8px; }
+    .foot { margin-top:22px; font-size:0.78rem; color:var(--mute); text-align:center; }
+    .foot a { color:var(--granate); }
+  </style>
+</head>
+<body>
+
+  <div class="head">
+    <span class="brand">
+      <img src="img/logo/logobreusinfondo.png" alt="Hostal Coll" />
+      <span>HOSTAL COLL</span>
+    </span>
+    <h1>Generador <em>d'enllaços</em></h1>
+    <p>Omple les dades de l'hoste i copia l'enllaç (o el missatge) per enviar-lo l'endemà de la primera nit.</p>
+  </div>
+
+  <div class="card">
+    <div class="field">
+      <label for="g-name">Nom de l'hoste</label>
+      <input type="text" id="g-name" placeholder="Joan García" autocomplete="off" />
+    </div>
+    <div class="row">
+      <div class="field">
+        <label for="g-room">Habitació</label>
+        <input type="text" id="g-room" placeholder="4" autocomplete="off" />
+      </div>
+      <div class="field">
+        <label for="g-lang">Idioma de l'hoste</label>
+        <select id="g-lang">
+          <option value="ca">Català</option>
+          <option value="es">Castellano</option>
+          <option value="en">English</option>
+          <option value="fr">Français</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label for="g-phone">Telèfon de l'hoste (opcional)</label>
+      <input type="tel" id="g-phone" placeholder="+34 600 00 00 00" autocomplete="off" />
+      <div class="hint">Només cal si vols obrir el WhatsApp directament des d'aquí.</div>
+    </div>
+
+    <div class="out-label"><span>Enllaç</span><span class="line"></span></div>
+    <div class="out-box">
+      <input type="text" id="out-link" readonly />
+      <button type="button" class="btn" id="copy-link" data-target="out-link">Copiar</button>
+    </div>
+
+    <div class="out-label"><span>Missatge per enviar</span><span class="line"></span></div>
+    <div class="out-box">
+      <textarea id="out-msg" readonly></textarea>
+      <button type="button" class="btn" id="copy-msg" data-target="out-msg">Copiar</button>
+    </div>
+
+    <a class="btn btn-wa" id="open-wa" aria-disabled="true">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.8 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.6c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.6-1.5-.8-2-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2 0 1.3.9 2.5 1 2.7.1.2 1.8 2.8 4.5 3.9.6.3 1.1.4 1.5.6.6.2 1.2.2 1.6.1.5-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3zm-5.6 7.6h-.1c-1.9 0-3.7-.5-5.3-1.5l-.4-.2-3.9 1 1-3.8-.2-.4c-1.1-1.7-1.6-3.7-1.6-5.7C1.4 6 6.1 1.4 11.9 1.4c2.8 0 5.4 1.1 7.4 3.1 2 2 3.1 4.6 3.1 7.4-.1 5.8-4.8 10.5-10.5 10.5z"/></svg>
+      Obrir WhatsApp de l'hoste
+    </a>
+  </div>
+
+  <div class="foot">
+    Pàgina privada · <a href="benvinguda.html" target="_blank" rel="noopener">veure la pàgina de benvinguda</a>
+  </div>
+
+  <script>
+    // Origen del enlace: en producción será https://hostalcoll.com; si se abre en
+    // local (file://) usamos el dominio real para que el enlace siga siendo válido.
+    const ORIGIN = (location.origin && location.origin.indexOf('http') === 0)
+      ? location.origin : 'https://hostalcoll.com';
+
+    // Plantilla del mensaje que envías al huésped, según su idioma.
+    const TEMPLATES = {
+      ca: "Bon dia! 🌞 Esperem que hagis passat una bona primera nit a l'Hostal Coll. Ens encantaria saber com has dormit; només et robarà 10 segons:\n{link}",
+      es: "¡Buenos días! 🌞 Esperamos que hayas pasado una buena primera noche en el Hostal Coll. Nos encantaría saber cómo has dormido; solo te llevará 10 segundos:\n{link}",
+      en: "Good morning! 🌞 We hope you had a good first night at Hostal Coll. We'd love to know how you slept; it'll only take 10 seconds:\n{link}",
+      fr: "Bonjour ! 🌞 Nous espérons que vous avez passé une bonne première nuit à l'Hostal Coll. Nous aimerions savoir comment vous avez dormi ; cela ne prendra que 10 secondes :\n{link}"
+    };
+
+    const nameEl  = document.getElementById('g-name');
+    const roomEl  = document.getElementById('g-room');
+    const langEl  = document.getElementById('g-lang');
+    const phoneEl = document.getElementById('g-phone');
+    const outLink = document.getElementById('out-link');
+    const outMsg  = document.getElementById('out-msg');
+    const waBtn   = document.getElementById('open-wa');
+
+    function buildLink() {
+      const lang = langEl.value;
+      const name = nameEl.value.trim();
+      const room = roomEl.value.trim();
+      let url = ORIGIN + '/benvinguda.html?lang=' + encodeURIComponent(lang);
+      if (name) url += '&g=' + encodeURIComponent(name);
+      if (room) url += '&r=' + encodeURIComponent(room);
+      return url;
+    }
+
+    function refresh() {
+      const link = buildLink();
+      outLink.value = link;
+      outMsg.value = (TEMPLATES[langEl.value] || TEMPLATES.ca).replace('{link}', link);
+
+      const phone = phoneEl.value.replace(/[^0-9]/g, '');
+      if (phone.length >= 8) {
+        waBtn.setAttribute('aria-disabled', 'false');
+        waBtn.href = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(outMsg.value);
+      } else {
+        waBtn.setAttribute('aria-disabled', 'true');
+        waBtn.removeAttribute('href');
+      }
+    }
+
+    [nameEl, roomEl, langEl, phoneEl].forEach((el) => {
+      el.addEventListener('input', refresh);
+      el.addEventListener('change', refresh);
+    });
+
+    // Copiar al portapapeles
+    function copyFrom(targetId, btn) {
+      const el = document.getElementById(targetId);
+      const text = el.value;
+      const done = () => {
+        const original = btn.textContent;
+        btn.textContent = 'Copiat!';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = original; btn.classList.remove('copied'); }, 1400);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done).catch(() => { el.select(); document.execCommand('copy'); done(); });
+      } else {
+        el.select(); document.execCommand('copy'); done();
+      }
+    }
+    document.getElementById('copy-link').addEventListener('click', (e) => copyFrom('out-link', e.currentTarget));
+    document.getElementById('copy-msg').addEventListener('click', (e) => copyFrom('out-msg', e.currentTarget));
+
+    waBtn.addEventListener('click', (e) => {
+      if (waBtn.getAttribute('aria-disabled') === 'true') e.preventDefault();
+    });
+
+    refresh();
+  </script>
+
+</body>
+</html>
